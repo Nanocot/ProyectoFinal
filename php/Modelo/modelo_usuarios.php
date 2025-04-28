@@ -31,8 +31,32 @@
 
 
         //Función para registro de usuario
-        public function register(){
-            
+        public function register($nombre, $apellido1, $apellido2 = null, $email, $password, $phoneNumber, $estado = true, $newsletter){
+            try{
+                //Nos aseguramos que los datos necesarios existen para evitar insercciones con los datos insuficientes
+                if($nombre != null && $apellido1 != null && $email != null && $password != null && $phoneNumber != null && $newsletter!= null){    
+                    //Preparamos el sql de insercción
+                    $sql = "insert into usuarios (Email, Nombre, Apellido1, Apellido2, Password, Telefono, Estado, NewsLetter) values (?, ?, ?, ?, ?, ?, ?, ?);";
+                    
+                    //Ciframos la contraseña
+                    $cifpass = password_hash($password, PASSWORD_DEFAULT);
+                    
+                    $stmt = $this->conex->prepare($sql);
+                    
+                    if($stmt->execute([$email, $nombre, $apellido1, $apellido2, $cifpass, $phoneNumber, $estado, $newsletter])){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }else{
+                    return false;
+                }
+            }catch(PDOException $e){
+                if($e->getCode() == 23000){
+                    return "Este correo ya está registrado";
+                }
+
+            }
         }
 
     }

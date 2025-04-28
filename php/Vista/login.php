@@ -7,7 +7,7 @@
     <title>Farko</title>
 </head>
 <body>
-<header>
+    <header>
         <a href="index.php?action=home">
             <img src="../imagenes/Farko-logo-pequenio.png" alt="logo de farko">
         </a>

@@ -15,6 +15,21 @@ header{
     justify-content: space-between;
 }
 
+nav{
+    width: 50%;
+}
+
+nav ul{
+    display: flex;
+    justify-content: right;
+}
+
+nav ul li{
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
 .productos{
     display: flex;
     flex-direction: row;
