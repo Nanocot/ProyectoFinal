@@ -37,11 +37,13 @@
     <div class="productos">
         <!-- Generamos los productos -->
         <?php foreach($productos as $producto):?>
-            <div class="producto">    
-                <img src="" alt="" width=250px height=250px class="imagenProd">
-                <div class="nombreProd"><?php echo $producto['Nombre'] ?></div>
-                <div class="precioProd"><?php echo $producto['Precio'] ?></div>
-            </div>
+            <a href="index.php?action=producto?id=<?php echo $producto["Id"]?>">        
+                <div class="producto">
+                    <img src="" alt="" width=250px height=250px class="imagenProd">
+                    <div class="nombreProd"><?php echo $producto['Nombre'] ?></div>
+                    <div class="precioProd"><?php echo $producto['Precio'] ?></div>
+                </div>
+            </a>    
         <?php endforeach?>
     </div>
     
