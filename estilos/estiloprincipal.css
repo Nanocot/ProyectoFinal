@@ -1,0 +1,30 @@
+:root{
+    --colorFondo: brown;
+    --colorFondoProductos: white; 
+}
+
+
+body{
+    background-color: var(--colorFondo);
+}
+
+header{
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.productos{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.producto{
+    background-color: var(--colorFondoProductos);
+    width: 350px;
+    height: 350px;
+    margin: 10px;
+}
