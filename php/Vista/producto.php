@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos/estiloprincipal.css">
     <title>Farko</title>
+    <!-- <style>
+        body{
+            color:white;
+        }
+    </style> -->
 </head>
 <body>
     
@@ -22,16 +27,18 @@
         </nav>
     </header>
 
+    <div id="resultado" style="white-space: pre-wrap; font-family: monospace"></div>
+
 
     <div class="producto">
-        <img src="" alt="" class="imagenProd">
-        <div class="nombreProd"></div>
-        <div class="precioProd"></div>
-        <div class="descpProd"></div>
-        <div class="coloresProd"></div>
-        <div class="tallasProd"></div>
+        <img src="" alt="Imagen del producto" id="imagenProd">
+        <div id="nombreProd"></div>
+        <div id="precioProd"></div>
+        <div id="descpProd"></div>
+        <div id="coloresProd"></div>
+        <div id="tallasProd"></div>
     </div>
 
-
+    <script src="../../javascript/script-filtro-producto.js"></script>
 </body>
 </html>

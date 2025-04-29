@@ -44,6 +44,85 @@
             require_once "php/Vista/register.php";
         }
 
+
+        public function producto(){
+                        // //Creamos el objeto modelo
+                        // $modeloProducto = new ModeloProductos();
+            
+                        // //Recuperamos el id del producto
+                        // $idProd = $_GET["id"];
+            
+                        // $detallesProd = $modeloProducto->generarJSON($idProd);
+
+
+                        // print_r($detallesProd);
+
+
+            //Declaramos las variables
+            // $filtro = [];
+            // $talla = "";
+            // $tallaColor = [];
+
+            // print_r($tallaColor);
+
+            //Creamos el objeto modelo
+            // $modeloProducto = new ModeloProductos();
+            
+            //Recuperamos el id del producto
+            // $idProd = $_GET["id"];
+
+            // $detallesProd = $modeloProducto->mostrarProducto($idProd);
+
+            //Mostrar los detalles
+            // foreach($detallesProd as $producto){
+            //     print_r($producto);
+            //     echo "<br>";
+            // }
+
+            //Guardar los colores disponibles por talla
+            // foreach($detallesProd as $producto){
+            //     //Comprobamos que la talla es distinta
+            //     if($talla != $producto["Tallas"]){
+            //         $talla = $producto["Tallas"];
+            //     }
+            //     //Sacamos los colores del producto
+            //     $colores = [$producto["ColorPatron"], $producto["ColorBase"]];
+            //     //Comprobamos si la talla existe dentro del array 
+            //     if(!isset($tallaColor[$talla])){
+            //         //Guardamos los colores dentro la talla
+            //         $tallaColor += [$talla => $colores];
+            //         // echo "a<br>";
+            //     }else{
+            //         //Cuando la talla ya está creada añadimos los colores a la talla
+            //         //Los pares son colorPatron y los impares ColorBase
+            //         array_push($tallaColor[$talla], $colores[0], $colores[1]);
+            //         print_r($tallaColor[$talla]);
+            //         echo "<br>";
+            //     }
+            // }
+
+            // print_r($tallaColor);
+
+            require_once "php/Vista/producto.php";
+            
+        }
+
+
+        public function volcarApi(){
+            //Creamos el objeto modelo
+            $modeloProducto = new ModeloProductos();
+            
+            //Recuperamos el id del producto
+            $idProd = $_GET["id"];
+
+            $detallesProd = $modeloProducto->generarJSON($idProd);
+            header("Content-Type: application/json");
+
+            echo $detallesProd;
+        }
+
+
+
     }
 
 ?>
