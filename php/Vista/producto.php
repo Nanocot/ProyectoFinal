@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos/estiloprincipal.css">
     <title>Farko</title>
-    <!-- <style>
-        body{
-            color:white;
-        }
-    </style> -->
 </head>
 <body>
     
@@ -35,8 +30,22 @@
         <div id="nombreProd"></div>
         <div id="precioProd"></div>
         <div id="descpProd"></div>
-        <div id="coloresProd"></div>
-        <div id="tallasProd"></div>
+        <div id="coloresProd">
+            <label for="colores">COLOR</label>
+            <select name="colores" id="colores">
+            </select>
+        </div>
+        <div id="tallasProd">
+            <label for="tallas">TALLAS</label>
+            <select name="tallas" id="tallas">
+            </select>
+        </div>
+        <div id="cantidadProd">
+            <label for="cantidad">Unidades</label>
+            <input type="number" id="cantidad" name="cantidad">
+        </div>
+
+        <button onclick="addToCart()">Añadir al carrito</button>
     </div>
 
     <script src="../../javascript/script-filtro-producto.js"></script>

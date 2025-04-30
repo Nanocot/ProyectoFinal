@@ -136,10 +136,10 @@ CREATE TABLE Opiniones (
 -- Tabla Imágenes
 CREATE TABLE Imagenes (
     Id INT PRIMARY KEY AUTO_INCREMENT,
-    FotoAnverso VARCHAR(255),
-    FotoReverso VARCHAR(255),
-    IDVARIACION INT NOT NULL,
-    FOREIGN KEY (IDVARIACION) REFERENCES VariacionesProductos(Id)
+    Tipo ENUM('anverso', 'reverso') DEFAULT ('anverso'),
+    Ruta VARCHAR(255),
+    IDPRODUCTO INT NOT NULL,
+    FOREIGN KEY (IDPRODUCTO) REFERENCES Productos(Id)
 );
 
 -- Tabla Reclamaciones

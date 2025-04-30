@@ -1,0 +1,63 @@
+{
+    "Nombre": "Camiseta basica algodon",
+    "Descripcion": "Camiseta de algodon suave",
+    "Precio": "19.99",
+    "Informacion": {
+        "S": [
+            {
+                "ColorPatron": "Negro",
+                "ColorBase": "Gris"
+            },
+            {
+                "ColorPatron": "Amarillo",
+                "ColorBase": "Negro"
+            },
+            {
+                "ColorPatron": "Azul Marino",
+                "ColorBase": "Celeste"
+            }
+        ],
+        "M": [
+            {
+                "ColorPatron": "Magenta",
+                "ColorBase": "Gris"
+            },
+            {
+                "ColorPatron": "Blanco",
+                "ColorBase": "Negro"
+            },
+            {
+                "ColorPatron": "Azul Marino",
+                "ColorBase": "Celeste"
+            }
+        ],
+        "L": [
+            {
+                "ColorPatron": "HEXADECIMAL",
+                "ColorBase": "Gris"
+            },
+            {
+                "ColorPatron": "Blanco",
+                "ColorBase": "Negro"
+            },
+            {
+                "ColorPatron": "Azul Marino",
+                "ColorBase": "Celeste"
+            }
+        ],
+        "XL": [
+            {
+                "ColorPatron": "EJEMPLO",
+                "ColorBase": "Gris"
+            },
+            {
+                "ColorPatron": "Blanco",
+                "ColorBase": "Negro"
+            },
+            {
+                "ColorPatron": "Azul Marino",
+                "ColorBase": "Celeste"
+            }
+        ]
+    }
+}

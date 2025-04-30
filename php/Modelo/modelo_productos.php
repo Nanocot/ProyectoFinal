@@ -29,6 +29,20 @@
         }
 
 
+        //Funcion de prueba para distintos colores por tallas
+        // public function generarJSON($id){
+        //     $ruta = "javascript/productos-diferentes.json";
+        //     if(file_exists($ruta)){
+        //         $contenido = file_get_contents($ruta);
+        //         if($contenido !== false){
+        //             return $contenido;
+        //         }
+
+        //     }
+        // }
+
+
+        //Función para generar un JSON de los datos recogidos de la base de datos
         public function generarJSON($id){
             //Declaración de variables para la construcción del JSON
             $tallas = [];
@@ -38,13 +52,12 @@
 
             try{
                 //Generamos el sql para sacar los datos del producto en especifico
-                $sql = "select p.nombre as Nombre, p.precio as Precio, p.descripcion as Descripcion, t.talla as Tallas, cp.nombre as ColorPatron, cb.Nombre as ColorBase
+                $sql = "select p.nombre as Nombre, p.precio as Precio, p.descripcion as Descripcion, t.nombre as Tallas, c.ColorPatron as ColorPatron, c.ColorBase as ColorBase
                         from productos p 
                         join variacionesproductos v on p.id = v.idproducto 
                         join tallasproductos tp on v.id = tp.IDVARIACION
                         join tallas t on tp.IDTALLA = t.id
-                        join colores cb on v.idcolorbase = cb.id
-                        join colores cp on v.IDCOLORPATRON = cp.id
+                        join colores c on v.IDCOLOR = c.id
                         where p.id = ?";
 
                 $stmt = $this->conex->prepare($sql);
@@ -72,14 +85,17 @@
                         //Comprobamos que la talla no existe dentro del array
                         if(!isset($tallas[$talla])){
                             //Si no existe la guardamos, junto a los primeros colores
-                            $tallas += [$talla =>["ColorPatron{$contadores[$talla]}" => $colorPatron, "ColorBase{$contadores[$talla]}" => $colorBase]];
+                            $tallas += [$talla =>[["ColorPatron" => $colorPatron, "ColorBase" => $colorBase]]];
+                            // $tallas += [$talla =>["ColorPatron{$contadores[$talla]}" => $colorPatron, "ColorBase{$contadores[$talla]}" => $colorBase]];
                         }else{
                             //Si existe añadimos los colores
-                            $tallas[$talla] += ["ColorPatron{$contadores[$talla]}" => $colorPatron, "ColorBase{$contadores[$talla]}" => $colorBase];
+                            array_push($tallas[$talla], ["ColorPatron" => $colorPatron, "ColorBase" => $colorBase]);
+                            // $tallas[$talla] += ["ColorPatron{$contadores[$talla]}" => $colorPatron, "ColorBase{$contadores[$talla]}" => $colorBase];
                         }
 
                         $contadores[$talla] ++;
                     }
+
 
                     //Generamos un array asociativo con la información del producto
                     $productoFinal = ["Nombre" => $producto[0]["Nombre"],
@@ -87,7 +103,6 @@
                         "Precio" => $producto[0]["Precio"],
                         "Informacion" => $tallas
                     ];
-
                     //Convertimos el array a JSON y lo devolvemos
                     $prodJSON = json_encode($productoFinal);
                     return $prodJSON;
