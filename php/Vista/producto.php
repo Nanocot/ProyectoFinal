@@ -22,7 +22,8 @@
         </nav>
     </header>
 
-    <div id="resultado" style="white-space: pre-wrap; font-family: monospace"></div>
+    <div id="resultado" style="white-space: pre-wrap; font-family: monospace">
+    </div>
 
 
     <div class="producto">
@@ -33,13 +34,17 @@
         <div id="coloresProd">
             <label for="colores">COLOR</label>
             <select name="colores" id="colores">
+                <option  disabled selected>Elija una</option>
             </select>
         </div>
+    <?php if($_GET["categoria"] != "Accesorios"):?>
         <div id="tallasProd">
             <label for="tallas">TALLAS</label>
             <select name="tallas" id="tallas">
+                <option  disabled selected>Elija una</option>
             </select>
         </div>
+    <?php endif?>
         <div id="cantidadProd">
             <label for="cantidad">Unidades</label>
             <input type="number" id="cantidad" name="cantidad">
@@ -47,7 +52,14 @@
 
         <button onclick="addToCart()">Añadir al carrito</button>
     </div>
+    
 
-    <script src="../../javascript/script-filtro-producto.js"></script>
+    <?php if($_GET["categoria"] != "Accesorios"):?>
+        <script src="../../javascript/script-filtro-producto.js"></script>
+    <?php else: ?>
+            <script src="../../javascript/script-filtro-accesorios.js"></script>        
+    <?php endif ?>
+
+
 </body>
 </html>

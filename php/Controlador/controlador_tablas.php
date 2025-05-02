@@ -103,6 +103,16 @@
 
             // print_r($tallaColor);
 
+            // $modeloProducto = new ModeloProductos();
+            
+            // //Recuperamos el id del producto
+            // $idProd = $_GET["id"];
+            // $categoriaProd = $_GET["categoria"];
+
+            // $detallesProd = $modeloProducto->generarJSON($idProd, $categoriaProd);
+
+            // $detallesProd = json_decode($detallesProd);
+            
             require_once "php/Vista/producto.php";
             
         }
@@ -114,11 +124,14 @@
             
             //Recuperamos el id del producto
             $idProd = $_GET["id"];
+            $categoriaProd = $_GET["categoria"];
 
-            $detallesProd = $modeloProducto->generarJSON($idProd);
+            $detallesProd = $modeloProducto->generarJSON($idProd, $categoriaProd);
+               
             header("Content-Type: application/json");
-
+            
             echo $detallesProd;
+        
         }
 
 

@@ -37,7 +37,7 @@
     <div class="productos">
         <!-- Generamos los productos -->
         <?php foreach($productos as $producto):?>
-            <a href="index.php?action=producto&id=<?php echo $producto["Id"]?>">        
+            <a href="index.php?action=producto&id=<?php echo $producto["Id"]?>&categoria=<?php echo $producto["Categoria"]?>">        
                 <div class="producto">
                     <img src="" alt="" width=250px height=250px class="imagenProd">
                     <div class="nombreProd"><?php echo $producto['Nombre'] ?></div>
