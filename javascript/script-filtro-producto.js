@@ -6,15 +6,17 @@ const colores = document.getElementById("colores");
 const tallas = document.getElementById("tallas");
 const imagen = document.getElementById("imagenProd");
 
+const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get('id');
+const productCategoria = urlParams.get('categoria');
+
 let jsonFINAL;
 let arrayINFO;
-let tallaSELECT = "";
-let colorSELECT = "";
-const arrayTallas = [];
+let arrayIDTALLAS;
+
+const arrayTallasColores = [];
 const arrayColores = [];
-
-
-
+const arrayTallas = [];
 
 //Función para mostrar JSON en la página
 function mostrarEnPagina(mensaje) {
@@ -26,9 +28,6 @@ function mostrarEnPagina(mensaje) {
 //Función para rellenar los datos del producto
 async function rellenarProducto() {
     //Declaración de variables
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('id');
-    const productCategoria = urlParams.get('categoria');
     const url = `index.php?action=volcarApi&id=${productId}&categoria=${productCategoria}`;
     const datos = await fetch(url);
 
@@ -42,16 +41,32 @@ async function rellenarProducto() {
     descp.textContent = jsonFINAL["Descripcion"];
 
     arrayINFO = jsonFINAL["Informacion"];
+    arrayIDTALLAS = jsonFINAL["IdTallas"];
 
     //Generamos un array de las tallas disponibles del producto 
     Object.entries(arrayINFO).forEach((talla, value1) => {
+        arrayTallasColores.push(talla);
+    });
+
+    Object.entries(arrayIDTALLAS).forEach((talla, value1) => {
         arrayTallas.push(talla);
     });
 
+    //Llamamos a la función de generar los selects
+    generarSelects();
+
+}
+
+
+//Función para generar los selects desde 0
+function generarSelects(){
+    tallas.innerHTML = "<option disabled selected>Elija una</option>";
+    colores.innerHTML = "<option disabled selected>Elija una</option>";
+
     // Generamos los selects del producto
-    for (let talla of arrayTallas) {
+    for (let talla of arrayTallasColores) {
         //Añadimos la opción con la talla correspondiente
-        tallas.innerHTML += `<option value='${talla[0]}'>${talla[0]}</option>`;
+        tallas.innerHTML += `<option value='${  talla[0]}'>${talla[0]}</option>`;
             //Recorremos los colores de las tallas del producto
             for (let i = 0; i < talla[1].length; i++) {
                 //Generamos la opción del color con la forma que queremos que se muestre al usuario
@@ -63,10 +78,10 @@ async function rellenarProducto() {
                     arrayColores.push(opcion);
                 }
             }
-        
-
     }
 
+    //Vaciamos el array de colores para que el botón de limpiar funcione
+    arrayColores.length = 0;
 }
 
 
@@ -74,12 +89,12 @@ async function rellenarProducto() {
 //Función para cambiar los colores disponibles según la talla
 function cambiarCOLORES(talla) {
     //Añadimos la opción de elija una, para que no se borre
-    colores.innerHTML = "<option  disabled>Elija una</option>";
+    colores.innerHTML = "<option disabled>Elija una</option>";
     //Guardamos la talla para que no se cambie constantemente
     tallaSELECT = talla;
 
     //Recorremos el array de las tallas con los colores disponbles de cada talla
-    for(let celda of arrayTallas) {
+    for(let celda of arrayTallasColores) {
         //Cuando encontramos la talla dentro del array  añadimos los colores disponibles de la misma
         if (celda[0] == talla) {
             for (let i = 0; i < celda[1].length; i++) {
@@ -96,19 +111,22 @@ function cambiarCOLORES(talla) {
         //Por defecto dejamos seleccionada la opción de Elija una
         colores.value = "Elija una";
     }
+
+    //Al final añadimos el botón para limpiar los filtros
+    producto.appendChild(btnLimpiar);
 }
 
 
 //Función para cambiar las tallas disponibles según el color
 function cambiarTALLAS(color) {
     //Añadimos la opción de elija una, para que no se borre
-    tallas.innerHTML = "<option  disabled>Elija una</option>";
+    tallas.innerHTML = "<option disabled>Elija una</option>";
     //Dividimos los colores en un array para tener separado el color del patrón y de la base
     let colorinchis = color.split(" y ");
     //Guardamos el color para que no se cambie constantemente
     colorSELECT = color;
     //Recorremos todas las tallas disponibles con los colores de cada una
-    for(let celda of arrayTallas) {
+    for(let celda of arrayTallasColores) {
         //Dentro de cada talla comprobamos los colores
         for (let i = 0; i < celda[1].length; i++) {
             //Si la talla tiene el color seleccionado, añadimos la talla al select
@@ -126,23 +144,23 @@ function cambiarTALLAS(color) {
         //Por defecto dejamos seleccionada la opción de Elija una
         tallas.value = "Elija una";
     }
+
+    //Al final añadimos el botón para limpiar el filtro
+    producto.appendChild(btnLimpiar);
 }
 
 
-//Función para añadir al carrito
-function addToCart() {
-    //Comprobamos que tenemos seleccionado el color y la talla
-    if(tallas.value != "Elija una" && colores.value  != "Ejina una" && tallas.value != "" && colores.value != ""){
-        console.log("carrito actualizado");
-    }
 
-}
+
+
+
 
 
 //Evento para cambiar los colores disponibles según la talla
 tallas.addEventListener("change", (event) => {
     let seleccionado = event.target.value;
     cambiarCOLORES(seleccionado);
+
 });
 
 //Evento para cambiar las tallas disponibles según el color

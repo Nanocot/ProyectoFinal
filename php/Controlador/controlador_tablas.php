@@ -2,6 +2,7 @@
 
     require_once "php/Modelo/modelo_productos.php";
     require_once "php/Modelo/modelo_usuarios.php";
+    require_once "php/Modelo/modelo_carrito.php";
 
     class ControladorTablas {
 
@@ -127,7 +128,7 @@
             $categoriaProd = $_GET["categoria"];
 
             $detallesProd = $modeloProducto->generarJSON($idProd, $categoriaProd);
-               
+
             header("Content-Type: application/json");
             
             echo $detallesProd;
@@ -135,6 +136,9 @@
         }
 
 
+        
+
+        
 
     }
 

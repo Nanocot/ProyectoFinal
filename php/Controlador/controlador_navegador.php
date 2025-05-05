@@ -15,4 +15,10 @@
         public function err404(){
             require_once "php/Vista/err404.php";
         }
+
+        public function carrito(){
+            require_once "php/Vista/carrito.php";
+        }
+
+
     }

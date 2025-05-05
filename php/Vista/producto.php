@@ -34,20 +34,18 @@
         <div id="coloresProd">
             <label for="colores">COLOR</label>
             <select name="colores" id="colores">
-                <option  disabled selected>Elija una</option>
             </select>
         </div>
     <?php if($_GET["categoria"] != "Accesorios"):?>
         <div id="tallasProd">
             <label for="tallas">TALLAS</label>
             <select name="tallas" id="tallas">
-                <option  disabled selected>Elija una</option>
             </select>
         </div>
     <?php endif?>
         <div id="cantidadProd">
             <label for="cantidad">Unidades</label>
-            <input type="number" id="cantidad" name="cantidad">
+            <input type="number" id="cantidad" name="cantidad" value=1 min="1">
         </div>
 
         <button onclick="addToCart()">Añadir al carrito</button>
@@ -55,11 +53,11 @@
     
 
     <?php if($_GET["categoria"] != "Accesorios"):?>
-        <script src="../../javascript/script-filtro-producto.js"></script>
+        <script src="../../javascript/script-filtro-producto.js" type="text/javascript"></script>
     <?php else: ?>
-            <script src="../../javascript/script-filtro-accesorios.js"></script>        
+            <script src="../../javascript/script-filtro-accesorios.js" type="text/javascript"></script>        
     <?php endif ?>
-
+        <script src="../../javascript/script-funciones-genericas.js" type="text/javascript"></script>
 
 </body>
 </html>
