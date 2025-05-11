@@ -118,7 +118,6 @@
             
         }
 
-
         public function volcarApi(){
             //Creamos el objeto modelo
             $modeloProducto = new ModeloProductos();
@@ -135,8 +134,18 @@
         
         }
 
+        public function  generarCarrito(){
+            $modeloCarrito = new ModeloCarrito();
+            $json = file_get_contents('php://input');
+            $data = json_decode($json, true);
 
-        
+
+            $html = $modeloCarrito->mostrarCarrito($data);
+
+
+
+            echo $html;
+        }
 
         
 

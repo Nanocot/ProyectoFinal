@@ -17,7 +17,10 @@
 
 
     //Comprobamos la acción que va a realizar el usuario
-    $action = isset($_GET["action"]) ? $_GET["action"] : "home";
+    // $action = isset($_GET["action"]) ? $_GET["action"] : "home";
+    $action = $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["action"]) ? $_POST["action"] : (isset($_GET["action"]) ? $_GET["action"] : "home");
+
+    echo $action;
 
 
     //Comprobamos a que controlador pertenece la acción

@@ -20,7 +20,6 @@ function addToCart() {
     if(productCategoria != "Accesorios"){
         //Transformamos el JSON del carrito a un array para poder añadir nuevos productos
         productos = JSON.parse(almLocal.getItem("carrito"));    
-
         //Comprobamos que tenemos seleccionado el color y la talla
         if(tallas.value != "Elija una" && colores.value != "Elija una" && tallas.value != "" && colores.value != ""){
             //Generamos el objeto prenda con la información que necesitamos guardar dentro del carrito

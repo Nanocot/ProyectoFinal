@@ -26,8 +26,15 @@
     </div>
 
     
-
+    <button id="enviar" type="submit">PULSA</button>
+    
     <script src="../../javascript/script-carrito.js" type="text/javascript"></script>
+    <?php
+        if($_SERVER["REQUEST_METHOD"] != "POST"){
+            echo $_SERVER["REQUEST_METHOD"];
+        }
+    
+    ?>
 
 </body>
 </html>
