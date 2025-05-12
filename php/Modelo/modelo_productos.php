@@ -33,17 +33,105 @@
 
 
         //Funcion de prueba para distintos colores por tallas
-        // public function generarJSON($id){
-        //     $ruta = "javascript/productos-diferentes.json";
-        //     if(file_exists($ruta)){
-        //         $contenido = file_get_contents($ruta);
-        //         if($contenido !== false){
-        //             return $contenido;
-        //         }
+        public function generarJSONp($id, $categoria){
+            //Declaración de variables para la construcción del JSON
+            $tallasColores = [];
+            $tallas = [];
+            $talla = "";
+            $contadores = [];
+            $cont = 0;
 
-        //     }
-        // }
+            try{
 
+                //Comprobamos que la categoría no es de accesorios, ya que estos no tendrán tallas 
+                if($categoria !== "Accesorios"){
+                        //Generamos el sql para sacar los datos del producto en especifico
+                        $sql = "select v.id as VARIACION, p.nombre as Nombre, p.precio as Precio, p.descripcion as Descripcion, GROUP_CONCAT(DISTINCT t.nombre ORDER BY t.nombre SEPARATOR ', ') AS Tallas, t.id as IDTalla, c.ColorPatron as ColorPatron, c.ColorBase as ColorBase, s.stock, i.ruta as Foto
+                        from productos p 
+                        join variacionesproductos v on p.id = v.idproducto 
+                        join tallasproductos tp on v.id = tp.IDVARIACION
+                        join tallas t on tp.IDTALLA = t.id
+                        join colores c on v.IDCOLOR = c.id
+                        join stock s on v.ID = s.IDVARIACION
+                        join imagenes i on p.id = i.IDPRODUCTO
+                        where p.id = ? and  i.tipo = 'anverso'
+                        GROUP by  v.id, p.nombre, p.precio, p.descripcion, c.ColorPatron, c.ColorBase;";
+
+                        
+                        
+                        $stmt = $this->conex->prepare($sql);
+                        
+                        //Comprobamos que la consulta funcione
+                        if($stmt->execute([$id]) && $stmt->rowCount() > 0){
+                            //Guardamos el producto en una variable y la devolvemos
+                            $producto = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            
+                            //Empezamos a construir los colores por tallas
+                            foreach($producto as $unidad){
+                                
+                                $tallas = explode("," ,$unidad["Tallas"]);
+                                //Guardamos los colores
+                                [$colorPatron, $colorBase] = [$unidad["ColorPatron"], $unidad["ColorBase"]];
+                                
+                            }
+                            
+                            
+                            //Generamos un array asociativo con la información del producto
+                            $productoFinal = ["Nombre" => $producto[0]["Nombre"],
+                            "Descripcion" => $producto[0]["Descripcion"],
+                            "Precio" => $producto[0]["Precio"],
+                            "IdTallas" => $tallas,
+                            "Informacion" => $tallasColores,
+                            "Foto" => $producto[0]["Foto"],
+                            "Stock" => $producto[0]["stock"]
+                            ];
+                            //Convertimos el array a JSON y lo devolvemos
+                            $prodJSON = json_encode($productoFinal, true);
+                            return $prodJSON;
+                        }else{
+                            //En caso de que la consulta no funcione devolvemos false
+                            return false;
+                        }
+                }else{
+                    $colores = [];
+                    //Generamos el sql para sacar los accesorios
+                    $sql = "select p.nombre as Nombre, p.precio as Precio, p.descripcion as Descripcion, c.ColorPatron as ColorPatron, c.ColorBase as ColorBase, s.stock
+                        from productos p 
+                        join variacionesproductos v on p.id = v.idproducto 
+                        join colores c on v.IDCOLOR = c.id
+                        join stock s on v.ID = s.IDVARIACION
+                        where p.id = ?";
+
+                    $stmt = $this->conex->prepare($sql);
+
+                    if($stmt->execute([$id])){
+                        $producto = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach($producto as $unidad){
+                            [$colorPatron, $colorBase] = [$unidad["ColorPatron"], $unidad["ColorBase"]];
+
+                            array_push($colores, ["ColorPatron" => $colorPatron, "ColorBase" => $colorBase]);
+                        }
+
+                        //Generamos un array asociativo con la información del producto
+                        $productoFinal = ["Nombre" => $producto[0]["Nombre"],
+                        "Descripcion" => $producto[0]["Descripcion"],
+                        "Precio" => $producto[0]["Precio"],
+                        "Colores" => $colores,
+                        "Stock" => $producto[0]["stock"]
+                        ];
+                        //Convertimos el array a JSON y lo devolvemos
+                        $prodJSON = json_encode($productoFinal, true);
+                        return $prodJSON;
+                    }else{
+                        return false;
+                    }
+
+                }
+            }catch(PDOException $e){
+                return  $e->getMessage();
+            }
+        }
 
         //Función para generar un JSON de los datos recogidos de la base de datos
         public function generarJSON($id, $categoria){
@@ -59,13 +147,16 @@
                 //Comprobamos que la categoría no es de accesorios, ya que estos no tendrán tallas 
                 if($categoria !== "Accesorios"){
                         //Generamos el sql para sacar los datos del producto en especifico
-                        $sql = "select p.nombre as Nombre, p.precio as Precio, p.descripcion as Descripcion, t.nombre as Tallas, t.id as IDTalla, c.ColorPatron as ColorPatron, c.ColorBase as ColorBase
+                        $sql = "select p.nombre as Nombre, p.precio as Precio, p.descripcion as Descripcion, t.nombre as Tallas, t.id as IDTalla, c.ColorPatron as ColorPatron, c.ColorBase as ColorBase, s.stock
                         from productos p 
                         join variacionesproductos v on p.id = v.idproducto 
                         join tallasproductos tp on v.id = tp.IDVARIACION
                         join tallas t on tp.IDTALLA = t.id
                         join colores c on v.IDCOLOR = c.id
+                        join stock s on v.ID = s.IDVARIACION
                         where p.id = ?";
+
+                        
                         
                         $stmt = $this->conex->prepare($sql);
                         
@@ -111,7 +202,9 @@
                             "Descripcion" => $producto[0]["Descripcion"],
                             "Precio" => $producto[0]["Precio"],
                             "IdTallas" => $tallas,
-                            "Informacion" => $tallasColores
+                            "Informacion" => $tallasColores,
+                            "Foto" => $producto[0]["Foto"],
+                            "Stock" => $producto[0]["stock"]
                             ];
                             //Convertimos el array a JSON y lo devolvemos
                             $prodJSON = json_encode($productoFinal, true);
@@ -123,10 +216,11 @@
                 }else{
                     $colores = [];
                     //Generamos el sql para sacar los accesorios
-                    $sql = "select p.nombre as Nombre, p.precio as Precio, p.descripcion as Descripcion, c.ColorPatron as ColorPatron, c.ColorBase as ColorBase
+                    $sql = "select p.nombre as Nombre, p.precio as Precio, p.descripcion as Descripcion, c.ColorPatron as ColorPatron, c.ColorBase as ColorBase, s.stock
                         from productos p 
                         join variacionesproductos v on p.id = v.idproducto 
                         join colores c on v.IDCOLOR = c.id
+                        join stock s on v.ID = s.IDVARIACION
                         where p.id = ?";
 
                     $stmt = $this->conex->prepare($sql);
@@ -144,7 +238,8 @@
                         $productoFinal = ["Nombre" => $producto[0]["Nombre"],
                         "Descripcion" => $producto[0]["Descripcion"],
                         "Precio" => $producto[0]["Precio"],
-                        "Colores" => $colores
+                        "Colores" => $colores,
+                        "Stock" => $producto[0]["stock"]
                         ];
                         //Convertimos el array a JSON y lo devolvemos
                         $prodJSON = json_encode($productoFinal, true);

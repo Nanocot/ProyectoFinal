@@ -1,8 +1,8 @@
 //Declaración de variables 
 const producto = document.getElementsByClassName("producto")[0];
+const almLocal = window.localStorage
 let tallaSELECT = "";
 let colorSELECT = "";
-const almLocal = window.localStorage;
 let productos = [];
 
 //Creamos el botón para limpiar las opciones del formulario
@@ -14,77 +14,156 @@ btnLimpiar.textContent = "LIMPIAR";
 //Función para añadir al carrito
 function addToCart() {
     //Recuperamos la cantidad del producto
-    let cantidad = document.getElementById("cantidad").value;
-    
-    //Comprobamos la categoria del producto
-    if(productCategoria != "Accesorios"){
-        //Transformamos el JSON del carrito a un array para poder añadir nuevos productos
-        productos = JSON.parse(almLocal.getItem("carrito"));    
-        //Comprobamos que tenemos seleccionado el color y la talla
-        if(tallas.value != "Elija una" && colores.value != "Elija una" && tallas.value != "" && colores.value != ""){
-            //Generamos el objeto prenda con la información que necesitamos guardar dentro del carrito
-            const prenda = {
-                "ID": parseInt(productId, 10), 
-                "Categoria" : productCategoria,
-                "Nombre" : nombre.textContent,  
-                "Precio" : parseFloat(precio.textContent), 
-                "Foto" : imagen.getAttribute("src"),
-                "Cantidad" : parseInt(cantidad, 10),
-                "Colores": colores.value,
-                "Talla": tallas.value,
-                "IDTalla": arrayIDTALLAS[tallas.value] 
-            };
+    let cantidad = parseInt(document.getElementById("cantidad").value);
 
-            //Añadimos al array de productos la prenda
-            productos = [...productos, prenda];
+    //Comprobamos que la cantidad que quiere añadir, no supera el stock disponible
+    if (cantidad <= unidades) {
 
-            //Actualizamos el carrito
-            almLocal.setItem("carrito", JSON.stringify(productos));
+        
+
+        //Comprobamos que si el  carrito ya está creado
+        if (almLocal.getItem("carrito")) {
+            //Transformamos el JSON del carrito a un array para poder añadir nuevos productos
+            productos = JSON.parse(almLocal.getItem("carrito"));
+        }
+
+        //Comprobamos la categoria del producto
+        if (productCategoria != "Accesorios") {
+            //Comprobamos que tenemos seleccionado el color y la talla
+            if (tallas.value != "Elija una" && colores.value != "Elija una" && tallas.value != "" && colores.value != "") {
+                //Generamos el objeto prenda con la información que necesitamos guardar dentro del carrito
+                const prenda = {
+                    "ID": parseInt(productId, 10),
+                    "Categoria": productCategoria,
+                    "Nombre": nombre.textContent,
+                    "Precio": parseFloat(precio.textContent),
+                    "Foto": imagen.getAttribute("src"),
+                    "Cantidad": parseInt(cantidad, 10),
+                    "Colores": colores.value,
+                    "Talla": tallas.value,
+                    "IDTalla": arrayIDTALLAS[tallas.value]
+                };
+
+                if(comprobacionArticulo(productos, prenda)){
+                    generarAlerta("Producto duplicado");
+                }else{
+                    //Añadimos al array de productos la prenda
+                    productos = [...productos, prenda];
+                    
+                    //Actualizamos el carrito
+                    almLocal.setItem("carrito", JSON.stringify(productos));
+                    generarAlerta("Carrito Actualizado");
+                }
+            }else{
+                generarAlerta("Por favor compruebe las opciones");
+            }
+        } else {
+            //Comprobamos que haya elejido una opción de los colores disponibles 
+            if (colores.value != "Elija una" && colores.value != "") {
+
+                //Generamos el objeto accesorio con los datos que necesitamos guardar
+                const accesorio = {
+                    "ID": parseInt(productId, 10),
+                    "Categoria": productCategoria,
+                    "Nombre": nombre.textContent,
+                    "Precio": parseFloat(precio.textContent),
+                    "Foto": imagen.getAttribute("src"),
+                    "Cantidad": parseInt(cantidad, 10),
+                    "Colores": colores.value
+                };
+
+                if(comprobacionArticulo(productos, accesorio)){
+                    generarAlerta("Producto duplicado");
+                }else{
+                    //Añadimos al array de productos la prenda
+                    productos = [...productos, accesorio];
+                    
+                    //Actualizamos el carrito
+                    almLocal.setItem("carrito", JSON.stringify(productos));
+                    generarAlerta("Carrito Actualizado");
+                }
+            }else{
+                generarAlerta("Por favor seleccione una opción");
+            }
         }
     }else{
-        //Comprobamos que haya elejido una opción de los colores disponibles 
-        if(colores.value != "Elija una" && colores.value != ""){
-
-            //Generamos el objeto accesorio con los datos que necesitamos guardar
-            const accesorio = {
-                "ID": parseInt(productId, 10),
-                "Categoria" : productCategoria, 
-                "Nombre" : nombre.textContent,  
-                "Precio" : parseFloat(precio.textContent), 
-                "Foto" : imagen.getAttribute("src"),
-                "Cantidad" : parseInt(cantidad, 10),
-                "Colores": colores.value
-            };
-            
-            //Añadimos al array de productos el accesorio
-            productos = [...productos, accesorio];
-
-            //Actualizamos el carrito
-            almLocal.setItem("carrito", JSON.stringify(productos));
-
-        }
+        generarAlerta("No hay stock suficiente");
     }
 
 }
 
 
 //Función para limpiar los filtros 
-function limpiar(){
+function limpiar() {
     //Comprobamos si se ha seleccionado un color
-    if(colorSELECT != "" && colorSELECT != "Elija una"){
+    if (colorSELECT != "" && colorSELECT != "Elija una") {
         colorSELECT = "";
         colores.value = "Elija una";
     }
     //Comprobamos si se ha seleccionado una talla 
-    if(tallaSELECT != "" && tallaSELECT != "Elija una"){
+    if (tallaSELECT != "" && tallaSELECT != "Elija una") {
         tallaSELECT = "";
         tallas.value = "Elija una";
     }
 
     //Borramos el botón
     producto.removeChild(btnLimpiar);
-    if(productCategoria != "Accesorios"){
+    if (productCategoria != "Accesorios") {
         //Generamos los selects por defecto solo cuando no es un accesorio
         generarSelects();
     }
+}
+
+function sacarStock() {
+    unidades = stock.innerHTML.split(":")[1];
+    return unidades;
+}
+
+//Función para generar alerta
+function generarAlerta(mensaje){
+    //Guardamos el div de alerta anterior, para evitar alertas multiples
+    let alertaRepetida = document.querySelector(".alerta");
+
+    //En caso de que exista, borramos el div
+    if(alertaRepetida){
+        alertaRepetida.remove();
+    }
+    //Creamos el div de la alerta y lo añadimos al body
+    let div = document.createElement("div");
+    div.classList.add("alerta");
+    div.textContent = mensaje;
+    document.body.appendChild(div);
+
+    //Ponemos un tiempo de espera para que el usuario lea el mensaje y desaparezca
+    setTimeout(() =>{
+        div.remove();
+    }
+    , 5000);
+}
+
+
+//Función para comprobar la existencia de un articulo dentro del carrito y evitar duplicados
+function comprobacionArticulo(productos, articulo){
+
+    //Los primero que hacemos es comparar la categoría del articulo que vamos a añadir, para no tener que compararlo en cada iteración del bucle,
+    //además dependiendo de la categoría buscaremos características distintas
+    if(articulo["Categoria"] != "Accesorios"){    
+        for(objeto of productos){
+            console.log(objeto);
+            //Comprobamos que el id, los colores y la talla sean iguales, eso quiere decir que la prenda está repetido en el carrito
+            if(articulo["ID"] === objeto["ID"] && articulo["Colores"] === objeto["Colores"] && articulo["Talla"] === objeto["Talla"]){
+                return true;
+            }
+        }
+    }else{
+        for(objeto of productos){
+            //Comprobamos que el id y los colores sean iguales, eso quiere decir que el accesorio está repetido en el carrito
+            if(articulo["ID"] === objeto["ID"] && articulo["Colores"] === objeto["Colores"]){
+                return true;
+            }
+        }
+    }
+
+    //Por defecto devolvemos false
+    return false;
 }

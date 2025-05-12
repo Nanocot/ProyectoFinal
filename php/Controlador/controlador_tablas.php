@@ -45,105 +45,45 @@
             require_once "php/Vista/register.php";
         }
 
-
-        public function producto(){
-                        // //Creamos el objeto modelo
-                        // $modeloProducto = new ModeloProductos();
-            
-                        // //Recuperamos el id del producto
-                        // $idProd = $_GET["id"];
-            
-                        // $detallesProd = $modeloProducto->generarJSON($idProd);
-
-
-                        // print_r($detallesProd);
-
-
-            //Declaramos las variables
-            // $filtro = [];
-            // $talla = "";
-            // $tallaColor = [];
-
-            // print_r($tallaColor);
-
-            //Creamos el objeto modelo
-            // $modeloProducto = new ModeloProductos();
-            
-            //Recuperamos el id del producto
-            // $idProd = $_GET["id"];
-
-            // $detallesProd = $modeloProducto->mostrarProducto($idProd);
-
-            //Mostrar los detalles
-            // foreach($detallesProd as $producto){
-            //     print_r($producto);
-            //     echo "<br>";
-            // }
-
-            //Guardar los colores disponibles por talla
-            // foreach($detallesProd as $producto){
-            //     //Comprobamos que la talla es distinta
-            //     if($talla != $producto["Tallas"]){
-            //         $talla = $producto["Tallas"];
-            //     }
-            //     //Sacamos los colores del producto
-            //     $colores = [$producto["ColorPatron"], $producto["ColorBase"]];
-            //     //Comprobamos si la talla existe dentro del array 
-            //     if(!isset($tallaColor[$talla])){
-            //         //Guardamos los colores dentro la talla
-            //         $tallaColor += [$talla => $colores];
-            //         // echo "a<br>";
-            //     }else{
-            //         //Cuando la talla ya está creada añadimos los colores a la talla
-            //         //Los pares son colorPatron y los impares ColorBase
-            //         array_push($tallaColor[$talla], $colores[0], $colores[1]);
-            //         print_r($tallaColor[$talla]);
-            //         echo "<br>";
-            //     }
-            // }
-
-            // print_r($tallaColor);
-
-            // $modeloProducto = new ModeloProductos();
-            
-            // //Recuperamos el id del producto
-            // $idProd = $_GET["id"];
-            // $categoriaProd = $_GET["categoria"];
-
-            // $detallesProd = $modeloProducto->generarJSON($idProd, $categoriaProd);
-
-            // $detallesProd = json_decode($detallesProd);
-            
-            require_once "php/Vista/producto.php";
-            
-        }
-
         public function volcarApi(){
             //Creamos el objeto modelo
             $modeloProducto = new ModeloProductos();
             
-            //Recuperamos el id del producto
+            //Recuperamos el id y la categoria del producto
             $idProd = $_GET["id"];
             $categoriaProd = $_GET["categoria"];
 
+            //Generamos el JSON con el producto indicado
             $detallesProd = $modeloProducto->generarJSON($idProd, $categoriaProd);
 
+            //Cambiamos la cabecera para indicar que vamos a mandar un JSON
             header("Content-Type: application/json");
             
+            //Mandamos el JSON generado
             echo $detallesProd;
         
         }
 
         public function  generarCarrito(){
+            //Creamos el modelo del carrito
             $modeloCarrito = new ModeloCarrito();
+
+            //Guardamos el fichero JSON que recibimos
             $json = file_get_contents('php://input');
+            //Convertimos el JSON a un array asociativo
             $data = json_decode($json, true);
 
+            //Limpiamos la cadena de caracteres especiales
+            $cadenaLimpia =  preg_replace(["/{/", "/}/", "/\[/", "/\]/", "/\"/"],  "", $data["carrito"]);
+            //Separamos los distintos atributos de los productos
+            $datos = explode(",", $cadenaLimpia);
 
-            $html = $modeloCarrito->mostrarCarrito($data);
+            //Llamamos a la función de mostrar Carrito
+            $html = $modeloCarrito->mostrarCarrito($datos);
 
 
 
+            // Mandamos el html al cliente para mostrarlo en la vista    
             echo $html;
         }
 

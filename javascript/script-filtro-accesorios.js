@@ -4,6 +4,8 @@ const precio = document.getElementById("precioProd");
 const descp = document.getElementById("descpProd");
 const colores = document.getElementById("colores");
 const imagen = document.getElementById("imagenProd");
+const stock = document.getElementById("stock");
+const candidad = document.getElementById("cantidad");
 
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id');
@@ -11,6 +13,7 @@ const productCategoria = urlParams.get('categoria');
 
 let jsonFINAL;
 let arrayINFO;
+let unidades;
 const arrayColores = [];
 
 
@@ -36,6 +39,8 @@ async function rellenarProducto() {
     nombre.innerHTML = jsonFINAL["Nombre"];
     precio.textContent = jsonFINAL["Precio"];
     descp.textContent = jsonFINAL["Descripcion"];
+    stock.textContent += jsonFINAL["Stock"];
+cantidad.setAttribute("max", jsonFINAL["Stock"]);
 
 
     //Guardamos los colores del accesorio en un array
@@ -50,6 +55,7 @@ async function rellenarProducto() {
         colores.innerHTML += `<option value=${opcion}> ${opcion} </option>`;
     }
 
+    unidades = sacarStock();
 
 }
 

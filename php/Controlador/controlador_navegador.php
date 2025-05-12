@@ -21,4 +21,9 @@
         }
 
 
+        public function producto(){
+            require_once "php/Vista/producto.php";
+        }
+
+
     }

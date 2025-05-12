@@ -5,6 +5,8 @@ const descp = document.getElementById("descpProd");
 const colores = document.getElementById("colores");
 const tallas = document.getElementById("tallas");
 const imagen = document.getElementById("imagenProd");
+const stock = document.getElementById("stock");
+const cantidad = document.getElementById("cantidad");
 
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id');
@@ -13,6 +15,7 @@ const productCategoria = urlParams.get('categoria');
 let jsonFINAL;
 let arrayINFO;
 let arrayIDTALLAS;
+let unidades;
 
 const arrayTallasColores = [];
 const arrayColores = [];
@@ -39,6 +42,8 @@ async function rellenarProducto() {
     nombre.innerHTML = jsonFINAL["Nombre"];
     precio.textContent = jsonFINAL["Precio"];
     descp.textContent = jsonFINAL["Descripcion"];
+    stock.textContent += jsonFINAL["Stock"];
+    cantidad.setAttribute("max", jsonFINAL["Stock"]);
 
     arrayINFO = jsonFINAL["Informacion"];
     arrayIDTALLAS = jsonFINAL["IdTallas"];
@@ -54,6 +59,9 @@ async function rellenarProducto() {
 
     //Llamamos a la función de generar los selects
     generarSelects();
+
+    unidades = sacarStock();
+
 
 }
 

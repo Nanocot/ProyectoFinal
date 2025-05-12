@@ -27,6 +27,7 @@
 
 
     <div class="producto">
+        
         <img src="" alt="Imagen del producto" id="imagenProd">
         <div id="nombreProd"></div>
         <div id="precioProd"></div>
@@ -47,7 +48,7 @@
             <label for="cantidad">Unidades</label>
             <input type="number" id="cantidad" name="cantidad" value=1 min="1">
         </div>
-
+        <div id="stock">Quedan: </div>
         <button onclick="addToCart()">Añadir al carrito</button>
     </div>
     
