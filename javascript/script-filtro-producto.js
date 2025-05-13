@@ -28,6 +28,7 @@ function mostrarEnPagina(mensaje) {
 }
 
 
+
 //Función para rellenar los datos del producto
 async function rellenarProducto() {
     //Declaración de variables
@@ -42,8 +43,8 @@ async function rellenarProducto() {
     nombre.innerHTML = jsonFINAL["Nombre"];
     precio.textContent = jsonFINAL["Precio"];
     descp.textContent = jsonFINAL["Descripcion"];
-    stock.textContent += jsonFINAL["Stock"];
     cantidad.setAttribute("max", jsonFINAL["Stock"]);
+    imagen.setAttribute("src", jsonFINAL["Foto"][0]);
 
     arrayINFO = jsonFINAL["Informacion"];
     arrayIDTALLAS = jsonFINAL["IdTallas"];
@@ -60,7 +61,7 @@ async function rellenarProducto() {
     //Llamamos a la función de generar los selects
     generarSelects();
 
-    unidades = sacarStock();
+    
 
 
 }
@@ -157,8 +158,16 @@ function cambiarTALLAS(color) {
     producto.appendChild(btnLimpiar);
 }
 
-
-
+//Función para cambiar las fotos de las prendas
+function cambiarFoto(color, fotos){
+    let base = color.toLowerCase().split(" y ");
+    for(let foto of fotos){
+        let parametros = foto.split("-");
+        if(parametros[1] === base[0] && parametros[2] === base[1]){
+            return  foto;
+        }
+    }
+}
 
 
 
@@ -175,6 +184,12 @@ tallas.addEventListener("change", (event) => {
 colores.addEventListener("change", (event) => {
     let seleccionado = event.target.value;
     cambiarTALLAS(seleccionado);
+    let ruta = cambiarFoto(seleccionado, jsonFINAL["Foto"]);
+    if(ruta){
+        imagen.setAttribute("src", ruta);
+    }
+    stock.textContent = `Quedan: ${jsonFINAL["Stock"][seleccionado]}`;
+    unidades = sacarStock();
 });
 
 

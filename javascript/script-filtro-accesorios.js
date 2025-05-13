@@ -39,9 +39,8 @@ async function rellenarProducto() {
     nombre.innerHTML = jsonFINAL["Nombre"];
     precio.textContent = jsonFINAL["Precio"];
     descp.textContent = jsonFINAL["Descripcion"];
-    stock.textContent += jsonFINAL["Stock"];
-cantidad.setAttribute("max", jsonFINAL["Stock"]);
-
+    cantidad.setAttribute("max", jsonFINAL["Stock"]);
+    imagen.setAttribute("src", jsonFINAL["Foto"][0]);
 
     //Guardamos los colores del accesorio en un array
     arrayINFO = jsonFINAL["Colores"];
@@ -55,14 +54,34 @@ cantidad.setAttribute("max", jsonFINAL["Stock"]);
         colores.innerHTML += `<option value=${opcion}> ${opcion} </option>`;
     }
 
-    unidades = sacarStock();
+    
 
 }
+
+function cambiarFoto(color, fotos){
+    let base = color.toLowerCase().split(" y ");
+    for(let foto of fotos){
+        let parametros = foto.split("-");
+        if(parametros[1] === base[0]){
+            return  foto;
+        }
+    }
+}
+
+
 
 //Añadimos listener para cuando seleccionamos el color, para generar el botón de limpiar los filtros 
 colores.addEventListener("change", (event) =>{
     colorSELECT = event.target.value;
     producto.appendChild(btnLimpiar);
+    let ruta = cambiarFoto(colorSELECT, jsonFINAL["Foto"]);
+    if(ruta){
+        imagen.setAttribute("src", ruta);
+    }
+
+    console.log(colorSELECT);
+    stock.textContent = `Quedan: ${jsonFINAL["Stock"][colorSELECT]}`;
+    unidades = sacarStock();
 });
 
 

@@ -1,7 +1,10 @@
 //Declaración de variables
 const carrito = localStorage.getItem("carrito");
 const precioTotal = document.getElementById("precioTotal");
-const btn = document.getElementById("enviar");
+const btnActualizar = document.getElementById("enviar");
+const btnBorrar = document.getElementById("borrar");
+const btnEliminar = document.getElementsByClassName("elmRop");
+const carritoDiv = document.querySelector(".carrito");
 
 
 
@@ -24,7 +27,7 @@ async function enviarDatos(){
         .then(response => response.text())
         .then(html => {
             // console.log("Respuesta HTML recibida:", html);
-            document.querySelector(".carrito").innerHTML = html;
+            carritoDiv.innerHTML = html;
             //Calculamos el total del carrito
             calcularTotal();
         });
@@ -32,26 +35,54 @@ async function enviarDatos(){
 
 function calcularTotal(){
     let preciofinal = 0;
-    const carrito = document.querySelectorAll(".producto");
+    const productos = document.querySelectorAll(".producto");
     
-    // console.log(carrito);
-    for(let i = 0; i < carrito.length; i++){
-        unidades = parseInt(carrito[i].querySelector("#unidades").value);
-        precio = parseFloat(carrito[i].querySelector("#precio").innerHTML);
+    // console.log(productos);
+    for(let i = 0; i < productos.length; i++){
+        unidades = parseInt(productos[i].querySelector("#unidades").value);
+        precio = parseFloat(productos[i].querySelector("#precio").innerHTML);
         preciofinal += parseFloat((unidades * precio))  ;
-        // console.log(typeof(unidades));
-        console.log((unidades * precio));
-        console.log(preciofinal);
     }
     preciofinal = preciofinal.toFixed(2)
-    console.log(preciofinal);
+    precioTotal.innerHTML = `${preciofinal}`;
+}
 
-    precioTotal.innerHTML = `Precio total: ${preciofinal} €`;
+
+function borrarCarrito(){
+    localStorage.removeItem("carrito");
+    carritoDiv.innerHTML = "";
+    generarAlerta("Carrito Borrado");
+}
+
+function actualizarCarrito(){
+    carritoTemporal = JSON.parse(carrito);
+    console.log(carritoTemporal);
+    const productos = document.querySelectorAll(".producto");
+
+    for(let i = 0; i < productos.length; i++){
+        unidades = productos[i].querySelector("#unidades").value;
+        carritoTemporal[i]["Cantidad"] = unidades;
+    }
+
+    localStorage.setItem("carrito", JSON.stringify(carritoTemporal));
+
+    calcularTotal();
+}
+
+function eliminarProducto(target){
+    
 }
 
 
 enviarDatos();
 
-btn.addEventListener("click", (event)=>{
-    calcularTotal();
+btnActualizar.addEventListener("click", (event)=>{
+    actualizarCarrito();
 });
+
+btnBorrar.addEventListener("click", (event) =>{
+    borrarCarrito();
+    window.refresh();
+});
+
+

@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos/estiloprincipal.css">
     <title>Farko</title>
+
+    <style>
+        #imagenProd{
+            width: 300px;
+            height: 150px;
+        }
+    </style>
 </head>
 <body>
     

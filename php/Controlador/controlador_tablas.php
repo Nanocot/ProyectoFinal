@@ -57,7 +57,7 @@
             $detallesProd = $modeloProducto->generarJSON($idProd, $categoriaProd);
 
             //Cambiamos la cabecera para indicar que vamos a mandar un JSON
-            header("Content-Type: application/json");
+            // header("Content-Type: application/json");
             
             //Mandamos el JSON generado
             echo $detallesProd;
@@ -73,18 +73,24 @@
             //Convertimos el JSON a un array asociativo
             $data = json_decode($json, true);
 
-            //Limpiamos la cadena de caracteres especiales
-            $cadenaLimpia =  preg_replace(["/{/", "/}/", "/\[/", "/\]/", "/\"/"],  "", $data["carrito"]);
-            //Separamos los distintos atributos de los productos
-            $datos = explode(",", $cadenaLimpia);
+            
+            if($data["carrito"] != ""){
 
-            //Llamamos a la función de mostrar Carrito
-            $html = $modeloCarrito->mostrarCarrito($datos);
-
-
-
-            // Mandamos el html al cliente para mostrarlo en la vista    
-            echo $html;
+                //Limpiamos la cadena de caracteres especiales
+                $cadenaLimpia =  preg_replace(["/{/", "/}/", "/\[/", "/\]/", "/\"/"],  "", $data["carrito"]);
+                
+                //Separamos los distintos atributos de los productos
+                $datos = explode(",", $cadenaLimpia);
+                
+                //Llamamos a la función de mostrar Carrito
+                $html = $modeloCarrito->mostrarCarrito($datos);
+                
+                
+                
+                // Mandamos el html al cliente para mostrarlo en la vista    
+                echo $html;
+            }
+            
         }
 
         

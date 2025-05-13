@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../estilos/estiloprincipal.css">
+    <link rel="stylesheet" href="../../estilos/estilocarrito.css">
     <title>FARKO</title>
 </head>
 <body>
@@ -26,9 +27,11 @@
 
     </div>
 
-    <div class="total">Precio total: <span id="precioTotal"></span></div>
-    <button id="enviar" type="submit">PULSA</button>
+    <div class="total">Precio total: <span id="precioTotal"></span> € </div>
+    <button id="enviar" type="submit">Actualizar Carrito</button>
+    <button id="borrar" type="submit">Borrar Carrito</button>
     
+    <script src="../../javascript/script-funciones-genericas.js" type="text/javascript"></script>
     <script src="../../javascript/script-carrito.js" type="text/javascript"></script>
 
 </body>

@@ -112,6 +112,14 @@ function limpiar() {
         //Generamos los selects por defecto solo cuando no es un accesorio
         generarSelects();
     }
+
+    let patron = /home/;
+
+    if(patron.test(jsonFINAL["Foto"][0])){
+        imagen.setAttribute("src", jsonFINAL["Foto"][0]);
+    }
+
+    stock.textContent = "Quedan: ";
 }
 
 function sacarStock() {
@@ -149,7 +157,6 @@ function comprobacionArticulo(productos, articulo){
     //además dependiendo de la categoría buscaremos características distintas
     if(articulo["Categoria"] != "Accesorios"){    
         for(objeto of productos){
-            console.log(objeto);
             //Comprobamos que el id, los colores y la talla sean iguales, eso quiere decir que la prenda está repetido en el carrito
             if(articulo["ID"] === objeto["ID"] && articulo["Colores"] === objeto["Colores"] && articulo["Talla"] === objeto["Talla"]){
                 return true;
@@ -167,3 +174,5 @@ function comprobacionArticulo(productos, articulo){
     //Por defecto devolvemos false
     return false;
 }
+
+
