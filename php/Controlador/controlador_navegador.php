@@ -26,4 +26,9 @@
         }
 
 
+        public function dashboard(){
+            require_once "php/Vista/dashboard.php";
+        }
+
+
     }

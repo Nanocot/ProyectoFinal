@@ -1,0 +1,21 @@
+
+.dashboard{
+    background-color: burlywood;
+    display: flex;
+    width: 90%;
+    height: 50vh;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: baseline;
+    padding: 20px;
+}
+
+.dashboard span{
+    width: 30%;
+    height: 5vh;
+    background-color: aquamarine;
+    text-align: center;
+    border: solid black 2px;
+    border-radius: 5px;
+}

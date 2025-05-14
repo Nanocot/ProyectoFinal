@@ -8,12 +8,27 @@
             
 
             if($modeloSeguridad->login()){
-                echo "Inicio de sesión correcto";
+                
+                if($_SESSION["usuario"] == "Administrador"){
+                    header("location: index.php?action=dashboard");
+                }else{
+                    header("location: index.php?action=paginausuario");
+                }
+
+
             }else{
-                echo "HAS FALLADO";
+                echo "Inicio de sesión incorrecto";
             }
             
             
+
+        }
+
+
+        public function cerrarSesion(){
+            $modeloSeguridad = new ModeloSeguridad();
+
+            $modeloSeguridad->cerrarSesion();
 
         }
     }

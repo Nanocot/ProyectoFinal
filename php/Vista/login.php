@@ -1,3 +1,10 @@
+<?php 
+    if(isset($_SESSION["usuario"]) && $_SESSION["usuario"] == "Administrador"){
+        header("Location: index.php?action=dashboard");
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

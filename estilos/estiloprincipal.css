@@ -8,10 +8,16 @@ body{
     background-color: var(--colorFondo);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header{
     background-color: black;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -23,12 +29,12 @@ nav{
 
 nav ul{
     display: flex;
-    justify-content: right;
+    justify-content: space-around;
+    align-items:end;
+    flex-direction: row;
 }
 
 nav ul li{
-    display: inline-flex;
-    justify-content: space-between;
     padding: 5px;
 }
 
@@ -36,25 +42,4 @@ nav a{
     color: white;
     text-decoration: none;
     font-size: 24px;
-}
-
-
-.productos{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.producto{
-    background-color: var(--colorFondoProductos);
-    width: 350px;
-    height: 350px;
-    margin: 10px;
-    text-align: center;
-}
-
-.producto img{
-    max-width: 100%;
-    max-height: 60%;
 }

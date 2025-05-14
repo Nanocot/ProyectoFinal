@@ -183,3 +183,30 @@ function comprobacionArticulo(productos, articulo){
 }
 
 
+async function  cerrarSesion (){
+    //Generamos un array con los datos que vamos a enviar
+    const dataToSend = {
+        action: "cerrarSesion",
+    };
+    try{
+
+        //Enviamos la petición al servidor con los datos necesarios
+        fetch("../index.php?action=cerrarSesion", {
+            method: "POST",
+            body: JSON.stringify(dataToSend),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            //Capturamos posibles errores en la respuesta del servidor
+            .catch((error) => console.error("Error:", error))
+            //Convertimos el objeto respuesta en texto, para poder leerlo
+            .then(respuesta => {
+                window.location.reload();
+            });
+        }catch(error){
+            console.error("Error antes del fetch", error);
+        }
+}
+    
+

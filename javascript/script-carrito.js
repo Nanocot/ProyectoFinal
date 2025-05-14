@@ -14,8 +14,9 @@ async function enviarDatos(){
         action: "generarCarrito",
         carrito: carrito
     };
+    try{
 
-    //Enviamos la petición al servidor con los datos necesarios
+        //Enviamos la petición al servidor con los datos necesarios
         fetch("../index.php?action=generarCarrito", {
             method: "POST",
             body: JSON.stringify(dataToSend),
@@ -34,7 +35,7 @@ async function enviarDatos(){
             calcularTotal();
             //Activamos los listeners
             activarListeners();
-
+            
             if(html){
                 let btnComprar = document.createElement("button");
                 btnComprar.setAttribute("type", "submit");
@@ -42,8 +43,13 @@ async function enviarDatos(){
                 btnComprar.innerText = "Comprar";
                 controles.appendChild(btnComprar);
             }
-
+            
         });
+    }catch(error){
+        console.error("Error antes del fetch", error);
+    }
+
+
 }
 
 

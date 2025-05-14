@@ -12,7 +12,9 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    margin: 50px;
     border-radius: 5px;
+    background-color: white;
 }
 
 .producto img {

@@ -21,19 +21,33 @@
 
                 //Comprobamos que tiene contraseña y que es la correcta
                 if($passControl != -1 && $passControl["password"] === $password){
+                    if($this->comprobarAdministrador($email)){
+                        $_SESSION["usuario"] = "Administrador";
+                        return true;
+                    }
+                    $_SESSION["usuario"] = "Usuario";
                     return true;
                 }else{
                     return false;
                 }
             }
-
-
-
             
         }
 
+        public function comprobarAdministrador($usuario){
+            $arrayAdministradores = ["admin@farko.es"];
+
+            if(in_array($usuario, $arrayAdministradores)){
+                return true;
+            }else{
+                return false;
+            }
+        }
 
 
+        public function cerrarSesion(){
+            session_destroy();
+        }
     }
 
 
