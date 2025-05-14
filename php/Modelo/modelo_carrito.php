@@ -29,7 +29,7 @@ class ModeloCarrito
             $celda = explode(":", $jsonDecode[$i]);
 
             //Comprobamos que la celda en la clave de la celda es ID y el contador es distinto de 0, para comprobar que cambiamos de producto
-            if ($celda[0] == "ID" && $i != 0) {
+            if ($celda[0] == "IdProd" && $i != 0) {
                 //Guardamos el producto dentro del array de productos
                 $arrayProductos += [$index => $producto];
                 //Vaciamos el producto
@@ -53,7 +53,7 @@ class ModeloCarrito
             if ($tarjeta["Categoria"] != "Accesorios") {
 
                 $html .= "
-                <div class='producto'>
+                <div class='producto' id='{$tarjeta["contador"]}'>
                     <span class='carrImg'><img src='{$tarjeta['Foto']}' alt='Foto del producto {$tarjeta["Nombre"]}'></span>
                     <span class='elmRop'>&times;</span>
                     <span class='tituloCarr'><h4>{$tarjeta["Nombre"]}</h4></span>
@@ -67,7 +67,7 @@ class ModeloCarrito
                 ";
             } else {
                 $html .= "
-                <div class='producto'>
+                <div class='producto' id='{$tarjeta["contador"]}'>
                     <span class='carrImg'><img src='{$tarjeta['Foto']}' alt='Foto del producto {$tarjeta["Nombre"]}'></span>
                     <span class='elmRop'>&times;</span>
                     <span class='tituloCarr'><h4>{$tarjeta["Nombre"]}</h4></span>

@@ -5,6 +5,8 @@ let tallaSELECT = "";
 let colorSELECT = "";
 let productos = [];
 
+
+
 //Creamos el botón para limpiar las opciones del formulario
 const btnLimpiar = document.createElement("button");
 btnLimpiar.setAttribute("onclick", "limpiar()");
@@ -15,7 +17,7 @@ btnLimpiar.textContent = "LIMPIAR";
 function addToCart() {
     //Recuperamos la cantidad del producto
     let cantidad = parseInt(document.getElementById("cantidad").value);
-
+    let contador = 0;
     //Comprobamos que la cantidad que quiere añadir, no supera el stock disponible
     if (cantidad <= unidades) {
 
@@ -25,6 +27,7 @@ function addToCart() {
         if (almLocal.getItem("carrito")) {
             //Transformamos el JSON del carrito a un array para poder añadir nuevos productos
             productos = JSON.parse(almLocal.getItem("carrito"));
+            contador = productos.length;
         }
 
         //Comprobamos la categoria del producto
@@ -33,7 +36,7 @@ function addToCart() {
             if (tallas.value != "Elija una" && colores.value != "Elija una" && tallas.value != "" && colores.value != "") {
                 //Generamos el objeto prenda con la información que necesitamos guardar dentro del carrito
                 const prenda = {
-                    "ID": parseInt(productId, 10),
+                    "IdProd": parseInt(productId, 10),
                     "Categoria": productCategoria,
                     "Nombre": nombre.textContent,
                     "Precio": parseFloat(precio.textContent),
@@ -41,7 +44,8 @@ function addToCart() {
                     "Cantidad": parseInt(cantidad, 10),
                     "Colores": colores.value,
                     "Talla": tallas.value,
-                    "IDTalla": arrayIDTALLAS[tallas.value]
+                    "IDTalla": arrayIDTALLAS[tallas.value],
+                    "contador" : contador
                 };
 
                 if(comprobacionArticulo(productos, prenda)){
@@ -52,6 +56,7 @@ function addToCart() {
                     
                     //Actualizamos el carrito
                     almLocal.setItem("carrito", JSON.stringify(productos));
+                    contador += 1;
                     generarAlerta("Carrito Actualizado");
                 }
             }else{
@@ -63,13 +68,14 @@ function addToCart() {
 
                 //Generamos el objeto accesorio con los datos que necesitamos guardar
                 const accesorio = {
-                    "ID": parseInt(productId, 10),
+                    "IdProd": parseInt(productId, 10),
                     "Categoria": productCategoria,
                     "Nombre": nombre.textContent,
                     "Precio": parseFloat(precio.textContent),
                     "Foto": imagen.getAttribute("src"),
                     "Cantidad": parseInt(cantidad, 10),
-                    "Colores": colores.value
+                    "Colores": colores.value,
+                    "contador" : contador
                 };
 
                 if(comprobacionArticulo(productos, accesorio)){
@@ -80,6 +86,7 @@ function addToCart() {
                     
                     //Actualizamos el carrito
                     almLocal.setItem("carrito", JSON.stringify(productos));
+                    contador += 1;
                     generarAlerta("Carrito Actualizado");
                 }
             }else{

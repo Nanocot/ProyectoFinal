@@ -254,7 +254,7 @@ INSERT INTO Productos (Nombre, Descripcion, Precio, CATEGORIAID, COLECCIONID, DE
 ('Pantalon corto chándal', 'Pantalón corto perfecto para Verano', 25.00, 1, 3, NULL),
 ('Sudadera con capucha', 'Sudadera comoda con capucha', 45.00, 5, 1, NULL),
 ('Agricultores', 'Camiseta de agricultores original de Farko', 30.00, 2, 1, NULL),
-('Diabla', 'Camiseta diabla original de Farko', 35.00, 1, 4, NULL),
+('Diabla', 'Camiseta diabla original de Farko', 35.00, 2, 4, NULL),
 ('Pegatina logo Farko', 'Pegatina con el logo de la marca', 1.99, 3, 3, NULL);
 
 -- Tabla Colores

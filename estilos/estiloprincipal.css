@@ -51,4 +51,10 @@ nav a{
     width: 350px;
     height: 350px;
     margin: 10px;
+    text-align: center;
+}
+
+.producto img{
+    max-width: 100%;
+    max-height: 60%;
 }

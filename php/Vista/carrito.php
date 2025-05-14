@@ -27,9 +27,11 @@
 
     </div>
 
-    <div class="total">Precio total: <span id="precioTotal"></span> € </div>
-    <button id="enviar" type="submit">Actualizar Carrito</button>
-    <button id="borrar" type="submit">Borrar Carrito</button>
+    <div class="controles">
+        <div class="total">Precio total: <span id="precioTotal"></span> € </div>
+        <button id="enviar" type="submit">Actualizar Carrito</button>
+        <button id="borrar" type="submit">Borrar Carrito</button>
+    </div>
     
     <script src="../../javascript/script-funciones-genericas.js" type="text/javascript"></script>
     <script src="../../javascript/script-carrito.js" type="text/javascript"></script>
