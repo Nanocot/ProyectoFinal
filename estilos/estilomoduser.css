@@ -1,0 +1,35 @@
+.usuario{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 80%;
+    height: 50%;
+    border-radius: 10px;
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+
+.datosUsuario, .direccionUsuario{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    border: 2px solid lightgrey;
+    border-radius: 10px;
+}
+
+.datosUsuario h2, .direccionUsuario h2{
+    width: 100%;
+    padding: 2%;
+}
+
+.datosUsuario p, .direccionUsuario p, .datosUsuario label{
+    width: 45%;
+    padding: 2%;
+    font-size: 15px;
+    background-color: lightgray;
+}
+

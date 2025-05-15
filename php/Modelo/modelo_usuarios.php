@@ -64,4 +64,95 @@
             }
         }
 
+        //Función para mostrar los usuarios dentro del dashboard
+        public function mostrarUsuarios(){
+            try{
+                //Generamos la sentencia sql con los datos que necesitamos
+                $sql = "select email, nombre, apellido1, apellido2, telefono, estado, newsletter
+                from usuarios;";
+
+                $stmt = $this->conex->prepare($sql);
+
+                $stmt->execute();
+
+                //Comprobamos que nos devuelve datos
+                if($stmt->rowCount() > 0){
+                    //En caso de que devuelva datos, volcamos los datos en un array
+                    $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    //Devolvemos el array de usuarios
+                    return $usuarios;
+                }else{
+                    return "No hay usuarios registrados";
+                }
+            }catch(PDOException $e){
+                return $e->getMessage();
+            }
+        }
+
+
+        //Función para sar un usuario en específico
+        public function sacarUsuario($email){
+            try{
+                //Generamos la consulta, con lo todos los datos del usuario que queremos buscar
+                $sql = "select u.nombre, u.apellido1, u.apellido2, u.telefono, u.estado, u.newsletter, d.numero, d.codpostal, d.calle, d.poblacion, d.puerta, d.planta
+                from usuarios u left join direcciones d on u.email = d.emailusuario 
+                where email = ?;";
+
+
+                $stmt = $this->conex->prepare($sql);
+
+                $stmt->bindParam(1, $email, PDO::PARAM_STR);
+
+                $stmt->execute();
+
+                if($stmt->rowCount() > 0){
+                    //Volcamos los datos en un array (En este caso uso solo fetch, ya que solo se espera una fila)
+                    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    return $resultado;
+                }else{
+                    return "Usuario no encontrado";
+                }
+
+
+
+            }catch(PDOException $e){
+                return $e->getMessage();
+            }
+        }
+
+
+        //Función para modificar el estado de un usuario
+        public function modificarEstado($email, $estado){
+
+            try{
+                //Generamos la sentencia sql
+                $sql = "update usuarios set estado = ? where email = ?";
+
+                $stmt = $this->conex->prepare($sql);
+                //Bindeamos los parametros a la sentencia
+                $stmt->bindParam(1, $estado, PDO::PARAM_BOOL);
+                $stmt->bindParam(2, $email, PDO::PARAM_STR);
+
+                if($stmt->execute()){
+                    //Al ser una actualización, si ejecuta significa que ha salido bien
+                    return true;
+                }else{
+                    return false;
+                }
+
+
+
+            }catch(PDOException $e){
+                return $e->getMessage();
+            }
+
+
+
+
+        }
+
+
+
+
     }

@@ -283,6 +283,45 @@
             }
         }
     
+
+        public function generarDatosTabla(){
+
+            try{
+
+                $sql = "select p.id as ID, p.nombre as Nombre, p.precio as Precio, p.descripcion as Descripcion, c.nombre as Coleccion,
+                        GROUP_CONCAT(DISTINCT t.nombre ORDER BY t.nombre SEPARATOR ', ') AS Tallas, 
+                        i.ruta as Foto
+                        from productos p 
+                        join variacionesproductos v on p.id = v.idproducto 
+                        left join tallasproductos tp on v.id = tp.IDVARIACION
+                        left join tallas t on tp.IDTALLA = t.id
+                        join imagenes i on p.id = i.IDPRODUCTO
+                        left join colecciones c on p.coleccionid = c.id 
+                        GROUP by p.id
+                        order by p.id;";
+
+
+                $stmt = $this->conex->prepare($sql);
+
+                $stmt->execute();
+
+                if($stmt->rowCount() > 0){
+                    $respuesta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    return $respuesta;
+                }else{
+                    return false;
+                }
+
+
+            }catch(PDOException $e){
+                return $e->getMessage();
+            }
+
+
+            
+
+
+        }
     
     }
 

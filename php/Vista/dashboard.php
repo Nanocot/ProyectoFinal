@@ -31,13 +31,13 @@
 
 
     <div class="dashboard">
-        <span class="gesUsuarios">Gestionar Usuarios</span>
-        <span class="gesProductos">Gestionar Productos</span>
-        <span class="gesColecciones">Gestionar Colecciones</span>
-        <span class="gesDescuentos">Gestionar Descuentos</span>
-        <span class="gesCategorias">Gestionar Categorías</span>
-        <span class="gesCompras">Gestionar Compras</span>
-        <span class="gesIncidencias">Gestionar Incidencias</span>
+        <span class="gesUsuarios"><a href="index.php?action=gestionarUsuarios">Gestionar Usuarios</a></span>
+        <span class="gesProductos"><a href="index.php?action=gestionarProductos">Gestionar Productos</a></span>
+        <span class="gesColecciones"><a href="index.php?action=gestionarColecciones">Gestionar Colecciones</a></span>
+        <span class="gesDescuentos"><a href="index.php?action=gestionarDescuentos">Gestionar Descuentos</a></span>
+        <span class="gesCategorias"><a href="index.php?action=gestionarCategorias">Gestionar Categorías</a></span>
+        <span class="gesCompras"><a href="index.php?action=gestionarCompras">Gestionar Compras</a></span>
+        <span class="gesIncidencias"><a href="index.php?action=gestionarIncidencias">Gestionar Incidencias</a></span>
     </div>
 
 

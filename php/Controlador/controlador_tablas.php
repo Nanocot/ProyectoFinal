@@ -6,6 +6,7 @@
 
     class ControladorTablas {
 
+        //Función para mostrar la página de home 
         public function home(){
 
             $modeloProd = new ModeloProductos();
@@ -16,10 +17,13 @@
         }
 
 
+
+        //Función para el registro de Usuarios
         public function register(){
             $modeloUsuarios = new ModeloUsuarios();
-
+            //Comprobamos que el método de envio sea post
             if($_SERVER["REQUEST_METHOD"] == "POST"){
+                //Cogemos los datos necesarios para el registro de usuario
                 $email = $_POST["email"];
                 $nombre = $_POST["nombre"];
                 $apellido1 = $_POST["apellido1"];
@@ -93,8 +97,145 @@
             
         }
 
-        
+        public function  gestionarUsuarios(){
+            require_once "php/Vista/gestionUsuarios.php";
 
+            $modeloUsuarios = new ModeloUsuarios();
+
+            $respuesta = $modeloUsuarios->mostrarUsuarios();
+
+            if(is_array($respuesta)){
+                echo "<table>
+                    <th>Email</th><th>Nombre</th><th>Apellidos</th><th>Teléfono</th><th>Estado</th><th>NewsLetter</th>
+                ";
+                    foreach($respuesta as $usuario){
+                        switch($usuario["newsletter"]){
+                            case "1":
+                                $newsletter = "Suscrito";
+                                break;
+                            case "0":
+                                $newsletter = "No Suscrito";
+                                break;
+                        }
+                        switch ($usuario["estado"]){
+                            case "1":
+                                    $estado = "Activo";
+                                break;
+                            case "0":
+                                    $estado = "Desactivado";
+                                break;
+                        }
+
+                        echo "
+                            <tr>
+                                <td>
+                                    <form action='index.php?action=gestionUsuario' method='post'>
+                                        <input type='hidden' name='usuario' id='usuario' value='{$usuario["email"]}'>
+                                        <button type='submit'>
+                                            {$usuario["email"]}
+                                        </button>
+                                    </form>
+                                </td>
+                                <td>{$usuario["nombre"]}</td>
+                                <td>{$usuario["apellido1"]} {$usuario["apellido2"]}</td>
+                                <td>{$usuario["telefono"]}</td>
+                                <td>{$estado}</td>
+                                <td>{$newsletter}</td>
+                            </tr>
+                        ";
+                    } 
+
+                echo "</table>";
+            }else{
+                echo "<div class='error'>{$respuesta}</div>";
+            }
+
+            
+
+
+        }
+
+
+        public function  gestionUsuario(){
+
+            $modeloUsuario = new ModeloUsuarios();
+
+            $email = $_POST["usuario"];
+
+            $datosUsuario = $modeloUsuario->sacarUsuario($email);
+
+            if(is_array($datosUsuario)){
+                switch($datosUsuario["newsletter"]){
+                    case "1":
+                        $newsletter = "Suscrito";
+                        break;
+                    case "0":
+                        $newsletter = "No Suscrito";
+                        break;
+                }
+                switch ($datosUsuario["estado"]){
+                    case "1":
+                        $estado = "Activo";
+                        break;
+                    case "0":
+                        $estado = "Desactivado";
+                        break;
+                }
+                require_once "php/Vista/modificarUsuario.php";
+
+            }else{
+                require_once "php/Vista/modificarUsuario.php";
+                echo "<div class='error'>{$datosUsuario}</div>";
+            }
+
+
+
+        }
+
+        public function cambiarEstado(){
+            $modeloUsuarios = new ModeloUsuarios();
+
+            //Guardamos el fichero JSON que recibimos
+            $json = file_get_contents('php://input');
+            //Convertimos el JSON a un array asociativo
+            $data = json_decode($json, true);
+
+            if($modeloUsuarios->modificarEstado($data["email"],$data["estado"])){
+                $mensaje = "Usuario modificado con exito";
+            }else{
+                $mensaje = "No se ha podido modificar";
+            }
+
+
+            echo $mensaje;
+
+        }
+
+        public function gestionarProductos(){
+            $modeloProductos = new ModeloProductos();
+
+            $datosTabla = $modeloProductos->generarDatosTabla();
+
+            if($datosTabla){
+                require_once "php/Vista/gestionProductos.php";
+            }else{
+                require_once "php/Vista/error404.php";
+            }
+
+
+
+        }
+
+
+        public function modificarProducto(){
+            require_once "php/Vista/modificarProducto.php";
+        }
+    
+    
+    
     }
+
+
+
 
 ?>
