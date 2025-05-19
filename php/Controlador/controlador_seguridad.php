@@ -17,7 +17,8 @@
 
 
             }else{
-                echo "Inicio de sesión incorrecto";
+                require_once "php/Vista/login.php";
+                echo "<div class='error'>Inicio de sesión incorrecto</div>";
             }
             
             

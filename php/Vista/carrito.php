@@ -29,7 +29,6 @@
 
     <div class="controles">
         <div class="total">Precio total: <span id="precioTotal"></span> € </div>
-        <button id="enviar" type="submit">Actualizar Carrito</button>
         <button id="borrar" type="submit">Borrar Carrito</button>
     </div>
     

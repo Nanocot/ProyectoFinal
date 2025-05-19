@@ -3,6 +3,9 @@
     require_once "php/Modelo/modelo_productos.php";
     require_once "php/Modelo/modelo_usuarios.php";
     require_once "php/Modelo/modelo_carrito.php";
+    require_once "php/Modelo/modelo_colecciones.php";
+    require_once "php/Modelo/modelo_descuento.php";
+    require_once "php/Modelo/modelo_categorias.php";
 
     class ControladorTablas {
 
@@ -211,12 +214,14 @@
 
         }
 
+        //Función para mostrar la vista de gestión de productos
         public function gestionarProductos(){
             $modeloProductos = new ModeloProductos();
 
             $datosTabla = $modeloProductos->generarDatosTabla();
 
             if($datosTabla){
+                
                 require_once "php/Vista/gestionProductos.php";
             }else{
                 require_once "php/Vista/error404.php";
@@ -226,8 +231,25 @@
 
         }
 
-
+        //Función para sacar la vista de modificar un producto en especifico
         public function modificarProducto(){
+            //Declaración de variables
+            $modeloProductos = new ModeloProductos();
+            $modeloDescuentos = new ModeloDescuento();
+            $modeloCategorias = new ModeloCategorias();
+            $modeloColecciones = new ModeloColecciones();
+
+            //Guardamos el id y la categoria
+            $id = $_GET["id"];
+            $categoria = $_GET["categoria"];
+
+
+            //Sacamos los datos necesarios para rellenar la tarjeta del producto
+            $producto = $modeloProductos->sacarDatosMod($id, $categoria);
+            $descuentos = $modeloDescuentos->sacarDescuentos();
+            $categorias = $modeloCategorias->sacarCategorias();
+            $colecciones = $modeloColecciones->sacarColecciones();
+
             require_once "php/Vista/modificarProducto.php";
         }
     

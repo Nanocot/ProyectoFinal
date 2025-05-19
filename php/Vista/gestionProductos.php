@@ -34,20 +34,20 @@
             <th>Foto</th>
             <th>Nombre</th>
             <th>Tallas</th>
-            <th>Descripción</th>
+            <th>Categoria</th>
             <th>Colección</th>
         </thead>
         <tbody>
             <?php foreach($datosTabla as $producto):?>
                 <tr>
                     <td>
-                        <a href="index.php?action=modificarProducto&id=<?=$producto["ID"]?>">
+                        <a href="index.php?action=modificarProducto&id=<?=$producto["ID"]?>&categoria=<?=$producto["Categoria"]?>">
                             <img src="<?= $producto["Foto"]?>" alt="Foto del producto <?= $producto["ID"]?>">
                         </a>
                     </td>
                     <td><?= $producto["Nombre"]?></td>
                     <td><?= $producto["Tallas"]?></td>
-                    <td><?= $producto["Descripcion"]?></td>
+                    <td><?= $producto["Categoria"]?></td>
                     <td><?= $producto["Coleccion"]?></td>
                 </tr>
             <?php endforeach; ?>

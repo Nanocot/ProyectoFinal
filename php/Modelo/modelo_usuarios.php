@@ -21,8 +21,8 @@
                 //Comprobamos que el email esté registrado dentro de la base de datos
                 if($stmt->execute([$email]) && $stmt->rowCount() > 0){
                     //En caso de que exista, devolvemos la constraseña
-                    $password = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    return $password[0];
+                    $password = $stmt->fetch(PDO::FETCH_ASSOC);
+                    return $password;
                 }else{
                     //Si no existe devolvemos un valor negativo
                     return -1;

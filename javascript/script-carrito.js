@@ -1,7 +1,6 @@
 //Declaración de variables
 let carrito = localStorage.getItem("carrito");
 const precioTotal = document.getElementById("precioTotal");
-const btnActualizar = document.getElementById("enviar");
 const btnBorrar = document.getElementById("borrar");
 const carritoDiv = document.querySelector(".carrito");
 const controles = document.querySelector(".controles");
@@ -154,11 +153,11 @@ function eliminarProducto(id, div){
 function activarListeners(){
     //Sacamos todos los botones de eliminar
     const btnEliminar = document.getElementsByClassName("elmRop");
-    
+    const cantidades = document.querySelectorAll("input");
 
-    btnActualizar.addEventListener("click", (event)=>{
-        actualizarCarrito();
-    });
+    // btnActualizar.addEventListener("click", (event)=>{
+    //     actualizarCarrito();
+    // });
 
     btnBorrar.addEventListener("click", (event) =>{
         borrarCarrito();
@@ -183,7 +182,15 @@ function activarListeners(){
             //Generamos la alerta de la actualización
             generarAlerta("Carrito Actualizado");
         });
-    }   
+    }  
+    
+    
+    for(let casilla of cantidades){
+        casilla.addEventListener("change", (event) => {
+            actualizarCarrito();
+        });
+        // console.log(casilla);
+    }
 
 
 }
