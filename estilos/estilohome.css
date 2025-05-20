@@ -12,14 +12,26 @@
     height: 350px;
     /* margin: 10px; */
     text-align: center;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .producto img{
-    max-width: 100%;
+    max-width: 80%;
     max-height: 60%;
+    margin: 4% 0;
 }
 
 a{
     padding: 10px;
     width: 30%;
+    color: black;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+a .nombreProd{
+
 }

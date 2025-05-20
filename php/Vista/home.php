@@ -38,11 +38,11 @@
     <div class="productos">
         <!-- Generamos los productos -->
         <?php foreach($productos as $producto):?>
-            <a href="index.php?action=producto&id=<?php echo $producto["Id"]?>&categoria=<?php echo $producto["Categoria"]?>">        
+            <a href="index.php?action=producto&id=<?= $producto["Id"]?>&categoria=<?= $producto["Categoria"]?>">        
                 <div class="producto">
                     <img src="<?=$producto["Foto"]?>" alt="Foto del producto<?=$producto["Nombre"]?>"class="imagenProd">
-                    <div class="nombreProd"><?php echo $producto['Nombre'] ?></div>
-                    <div class="precioProd"><?php echo $producto['Precio'] ?></div>
+                    <div class="nombreProd"><?= $producto['Nombre'] ?></div>
+                    <div class="precioProd"><?= $producto['Precio'] ?> €</div>
                 </div>
             </a>    
         <?php endforeach?>

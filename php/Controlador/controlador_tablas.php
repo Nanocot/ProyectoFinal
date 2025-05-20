@@ -249,6 +249,7 @@
             $descuentos = $modeloDescuentos->sacarDescuentos();
             $categorias = $modeloCategorias->sacarCategorias();
             $colecciones = $modeloColecciones->sacarColecciones();
+            $stockColores = $modeloProductos->sacarStock($id);
 
             require_once "php/Vista/modificarProducto.php";
         }

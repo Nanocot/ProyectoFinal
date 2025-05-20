@@ -1,5 +1,5 @@
 :root{
-    --colorFondo: brown;
+    --colorFondo: rgb(246, 227, 194);
     --colorFondoProductos: white; 
 }
 
@@ -21,13 +21,16 @@ header{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    max-height: 10%;
 }
 
 nav{
     width: 50%;
+    max-height: 100%;
 }
 
 nav ul{
+    max-height: 100%;
     display: flex;
     justify-content: space-around;
     align-items:end;

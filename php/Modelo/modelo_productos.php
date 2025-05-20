@@ -330,13 +330,12 @@
                 //Comprobamos que no es un accesorio
                 if($categoria != "Accesorios"){                    
                     //Construimos el sql para sacar los datos del producto
-                    $sql = "select p.nombre as Nombre, p.precio as Precio, p.descripcion as Descripcion, t.nombre AS Tallas, t.id as IDTalla, c.ColorPatron as ColorPatron, c.ColorBase as ColorBase, s.Stock, i.ruta as Foto, d.nombre as Descuento, co.Nombre as Coleccion
+                    $sql = "select p.nombre as Nombre, p.precio as Precio, p.descripcion as Descripcion, t.nombre AS Tallas, t.id as IDTalla, c.ColorPatron as ColorPatron, c.ColorBase as ColorBase, i.ruta as Foto, d.nombre as Descuento, co.Nombre as Coleccion
                         from productos p 
                         left join variacionesproductos v on p.id = v.idproducto
                         left join tallasproductos tp on v.id = tp.IDVARIACION
                         left join tallas t on tp.IDTALLA = t.id
                         left join colores c on v.IDCOLOR = c.id
-                        left join stock s on v.ID = s.IDVARIACION
                         left join imagenes i on p.id = i.IDPRODUCTO
                         left join descuentos d on p.descuentoid = d.id
                         left join colecciones co on p.coleccionid = co.id
@@ -347,18 +346,22 @@
                     if($stmt->execute([$id])){
                         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         $fotos = [];
+                        // echo "<pre>";
+                        // print_r ($resultado);
+                        // echo "</pre>";
 
-                        
+
                         $datosProd = ["Nombre" => $resultado[0]["Nombre"], "Categoria" => $categoria, "Descripcion" => $resultado[0]["Descripcion"], "Descuento" => $resultado[0]["Descuento"], "Precio" => $resultado[0]["Precio"], "Coleccion" => $resultado[0]["Coleccion"]];
 
                         for ($i=0; $i < count($resultado); $i++) { 
+
                             $rutaFoto = $resultado[$i]["Foto"];
                             $indiceTalla = $resultado[$i]["Tallas"];
 
                             if(!isset($infoTallas[$indiceTalla])){
-                                $infoTallas[$indiceTalla] = ["Colores" => [["Color Patron" => $resultado[0]["ColorPatron"], "Color Base" => $resultado[$i]["ColorBase"]]], "Stock" => $resultado[$i]["Stock"]];
+                                $infoTallas[$indiceTalla] = ["Colores" => [["Color Patron" => $resultado[$i]["ColorPatron"], "Color Base" => $resultado[$i]["ColorBase"]]]];
                             }else{
-                                $auxColores = ["Color Patron" => $resultado[$i]["ColorPatron"], "Color Base" => $resultado[0]["ColorBase"]];
+                                $auxColores = ["Color Patron" => $resultado[$i]["ColorPatron"], "Color Base" => $resultado[$i]["ColorBase"]];
 
                                 if(!in_array($auxColores, $infoTallas[$indiceTalla]["Colores"])){    
                                     array_push($infoTallas[$indiceTalla]["Colores"], $auxColores);
@@ -384,6 +387,66 @@
             
                 }else{
 
+                    $sql = "select p.nombre as Nombre, p.precio as Precio, p.descripcion as Descripcion, c.ColorPatron as ColorPatron, c.ColorBase as ColorBase, i.ruta as Foto, d.nombre as Descuento, co.Nombre as Coleccion
+                        from productos p 
+                        left join variacionesproductos v on p.id = v.idproducto
+                        left join colores c on v.IDCOLOR = c.id
+                        left join imagenes i on p.id = i.IDPRODUCTO
+                        left join descuentos d on p.descuentoid = d.id
+                        left join colecciones co on p.coleccionid = co.id
+                        where p.id = ?;";
+
+                    $stmt = $this->conex->prepare($sql);
+
+                    if($stmt->execute([$id])){
+                        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        $datosProd = ["Nombre" => $resultado[0]["Nombre"], "Categoria" => $categoria, "Descripcion" => $resultado[0]["Descripcion"], "Descuento" => $resultado[0]["Descuento"], "Precio" => $resultado[0]["Precio"], "Coleccion" => $resultado[0]["Coleccion"]];
+                        
+                        $fotos = [];
+                        $colores = [];
+
+                        foreach($resultado as  $fila){
+                            if(!in_array($fila["Foto"], $fotos)){
+                                array_push($fotos, $fila["Foto"]);
+                            }
+
+                            $auxColores =  ["Color Patron" => $fila["ColorPatron"], "Color Base" => $fila["ColorBase"]];
+
+                            if(!in_array($auxColores, $colores)){
+                                array_push($colores, $auxColores);
+                            }
+                        }
+
+                        $producto  = ["Datos" => $datosProd, "Fotos" => $fotos, "Colores" => $colores];
+
+                        return $producto;
+                    }
+                }
+
+            }catch(PDOException $e){
+                return $e->getMessage();
+            }
+        }
+
+
+        public function sacarStock($id){
+
+            try{
+                $sql = "select c.colorPatron as ColorPatron, c.colorBase as ColorBase, s.Stock
+                    from productos p
+                    left join variacionesproductos v on p.id = v.idproducto
+                    left join colores c on v.idcolor = c.id
+                    left join stock s on v.id = s.idvariacion
+                    where p.id = ?;
+                ";
+
+                $stmt = $this->conex->prepare($sql);
+
+                if($stmt->execute([$id])){
+                    $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    return $resultado;
                 }
 
             }catch(PDOException $e){
