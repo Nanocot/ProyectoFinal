@@ -68,7 +68,7 @@ ul{
 }
 
 
-.eliminar:hover{
+.eliminar:hover, .quitarColor:hover, .quitarColorTalla:hover{
     background-color: red;
     color:white;
     cursor: pointer;

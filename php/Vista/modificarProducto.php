@@ -93,7 +93,7 @@
                 <h4>Colores por talla</h4>
                 <div class="colDisponibles">
                     <?php foreach($producto["InfoTallas"] as $talla => $informacion):?>
-                        <span class="talla">
+                        <span class="talla" id="talla-<?=$informacion["ID"]?>">
                             <h4>Tallas <?=$talla?></h4>
                             <ul>
                                 <?php foreach($informacion["Colores"] as $datos):?>
@@ -136,5 +136,23 @@
     <script type="text/javascript" src="../../javascript/script-funciones-genericas.js"></script>
     <script type="text/javascript" src="../../javascript/script-modificar-producto.js"></script>
     
+
+    <!-- <div class="addColores">
+        <input type="radio" name="opcion" id="todas">
+        <label for="todas">Todas las tallas</label>
+        <input type="radio" name="opcion" id="algunas">
+        <label for="algunas">Seleccione</label>
+        <div class="algunasTallas">
+            <?php foreach($producto["InfoTallas"] as $indice => $fila): ?>
+                <input type="checkbox" name="talla-<?= $indice?>" id="<?=$fila["IDTallas"]?>">
+            <?php endforeach; ?>
+        </div>
+    </div> -->
+
+    <pre>
+        <?php print_r($producto)?>
+    </pre>
+
+
 </body>
 </html>

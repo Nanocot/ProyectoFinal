@@ -255,6 +255,24 @@
         }
     
     
+
+        function actualizarProducto(){
+            $modeloProducto = new ModeloProductos();
+            $datos = file_get_contents("php://input");
+            
+            $arrayDatos = json_decode($datos, true);
+            
+            
+            $respuesta = $modeloProducto->modificarProducto($arrayDatos);
+
+            // print_r( $respuesta);
+
+
+
+        }
+
+
+
     
     }
 

@@ -339,7 +339,9 @@
                         left join imagenes i on p.id = i.IDPRODUCTO
                         left join descuentos d on p.descuentoid = d.id
                         left join colecciones co on p.coleccionid = co.id
-                        where p.id = ?;";
+                        where p.id = ?
+                        order by t.id, i.id
+                        ;";
 
                     $stmt = $this->conex->prepare($sql);
 
@@ -359,7 +361,7 @@
                             $indiceTalla = $resultado[$i]["Tallas"];
 
                             if(!isset($infoTallas[$indiceTalla])){
-                                $infoTallas[$indiceTalla] = ["Colores" => [["Color Patron" => $resultado[$i]["ColorPatron"], "Color Base" => $resultado[$i]["ColorBase"]]]];
+                                $infoTallas[$indiceTalla] = ["Colores" => [["Color Patron" => $resultado[$i]["ColorPatron"], "Color Base" => $resultado[$i]["ColorBase"]]], "ID" => $resultado[$i]["IDTalla"]];
                             }else{
                                 $auxColores = ["Color Patron" => $resultado[$i]["ColorPatron"], "Color Base" => $resultado[$i]["ColorBase"]];
 
@@ -457,6 +459,51 @@
 
         }
 
+
+        public function modificarProducto($datos){
+            try{
+
+                //Datos del producto
+                $id = $datos["ID"];
+                $nombre = $datos["Nombre"];
+                $idCategoria = $datos["Categoria"];
+                $idColeccion = $datos["Coleccion"];
+                $precio = $datos["Precio"];
+                $description = $datos["Descripcion"];
+
+                //Datos relacionados con el produccto
+                $infoTallas = $datos["Tallas"];
+                $infoColores = $datos["Colores"];
+                $rutasFotos = $datos["Fotos"];
+
+
+                //Declaración de variables
+                $tallas = [];
+
+                foreach($infoTallas as $indice => $fila){
+                    // if(!in_array($indice, $tallas)){
+                    //     array_push($tallas,$indice);
+                    // }
+
+                    if(!isset($tallas[$indice])){
+                        $tallas[$indice] = count($fila);
+                    }
+                    
+                }
+
+                // print_r($tallas);
+                // return $tallas;
+
+
+
+
+
+                
+                
+            }catch(PDOException $e){
+                return $e->getMessage();
+            }
+        }
 
 
     }
