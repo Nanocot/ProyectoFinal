@@ -1,10 +1,13 @@
 let cambios = false;
 let original;
+const  url =  window.location.href;
+const  parametros =  new URLSearchParams(url);
+const idURL = parametros.get("id");
+const categoriaURL = parametros.get("categoria");
 
 window.addEventListener("DOMContentLoaded", (event) =>{
     // Declaración de variables
      original  = cogerDatos();
-
 
     activarListener();
 });
@@ -22,23 +25,34 @@ function cogerDatos(){
     const descuento = document.getElementById("descuento").value;
     const colores = coloresStock();
     const tallas = coloresTallas();
+    let datos;
 
-
-
-
-    const datos = {
-        "Nombre" : nombre,
-        "Categoria" : categoria,
-        "Coleccion" : coleccion,
-        "Precio" : precio,
-        "Descuento" : descuento,
-        "Descripcion" : descripcion,
-        "Tallas" : tallas,
-        "Colores": colores,
-        "Fotos" : fotos
+    if(categoria != 3){
+        datos = {
+            "Nombre" : nombre,
+            "Categoria" : categoria,
+            "Coleccion" : coleccion,
+            "Precio" : precio,
+            "Descuento" : descuento,
+            "Descripcion" : descripcion,
+            "Tallas" : tallas,
+            "Colores": colores,
+            "Fotos" : fotos
+        }
+        
+    }else{
+        datos = {
+            "Nombre" : nombre,
+            "Categoria" : categoria,
+            "Coleccion" : coleccion,
+            "Precio" : precio,
+            "Descuento" : descuento,
+            "Descripcion" : descripcion,
+            "Colores": colores,
+            "Fotos" : fotos
+        }
     }
-
-
+        
     return datos;
 }
 
@@ -54,6 +68,8 @@ function coloresStock(){
         aux = color.textContent.trim().split(" y ");
         aux[1] = aux[1].split(" ")[0];
         stock = document.getElementById(`${aux[0]}${aux[1]}`).value;
+        aux[0] = capitalize(aux[0]);
+        aux[1] = capitalize(aux[1]);
 
         fila = {
             "Color": `${aux[0]} y ${aux[1]}`, 
@@ -73,21 +89,20 @@ function coloresTallas(){
     for(let datos  of colores){
         let titulo =  datos.querySelector("h4").textContent;
         let talla = titulo.split(" ")[1];
+        let id = datos.id.split("-")[1];
         const listaColores =[];
         for(let fila of datos.querySelectorAll("li")){
             textoColores = fila.textContent.replace(" ×", "");
             listaColores.push(textoColores);
         }
-        colorTallas[talla] = listaColores;
+        colorTallas[talla] = {"Colores": listaColores, "ID" : id};
     }
 
     return colorTallas;
 }
 
 async function actualizar(datos){
-    const  url =  window.location.href;
-    const  parametros =  new URLSearchParams(url);
-    const id = parametros.get("id");
+    
     const {Nombre, Categoria, Coleccion, Precio, Descuento, Descripcion, Tallas, Colores, Fotos} = datos;
 
     const rutasFotos = [];
@@ -104,18 +119,32 @@ async function actualizar(datos){
     for(let talla in Tallas){
         let colorPatron;
         let colorBase;
-        for(let fila of Tallas[talla]){
-            [colorPatron, colorBase] = fila.split(" y ");
-            if(!nuevasTallas[talla]){
-                nuevasTallas[talla] = [{"ColorPatron": colorPatron, "ColorBase": colorBase}];
-            }else{
-                nuevasTallas[talla].push({"ColorPatron" : colorPatron, "ColorBase" : colorBase});
+        // console.log(Tallas[talla]);
+        for(let atributo in Tallas[talla]){
+            for(let fila of Tallas[talla][atributo]){
+                
+                
+                if(atributo == "Colores"){
+                    [colorPatron, colorBase] = fila.split(" y ");
+                    
+                    if(!nuevasTallas[talla]){
+                        nuevasTallas[talla] = {"Colores" :[{"ColorPatron": colorPatron, "ColorBase": colorBase}]};
+                        console.log(nuevasTallas);
+                    }else{
+                        nuevasTallas[talla]["Colores"].push({"ColorPatron" : colorPatron, "ColorBase" : colorBase});
+                    }
+                }else{
+                    console.log(Tallas[talla][atributo]);
+                    nuevasTallas[talla]["ID"] = Tallas[talla][atributo];
+                }
             }
         }
     }
+    console.log(nuevasTallas);
+
 
     const datosEnvio = {
-        "ID" : id,
+        "ID" : idURL,
         "Nombre" : Nombre,
         "Categoria" : Categoria,
         "Coleccion" : Coleccion,
@@ -152,44 +181,23 @@ async function actualizar(datos){
 }
 
 
-// function cuadroNuevosColores(){
-//     const form = document.createElement("form");
-//     const todas = document.createElement("input");
-//     const etiquetaTodoas = document.createElement("label");
-//     const algunas = document.createElement("input");
-//     const etiquetasAlgunas = document.createElement("")
-
-//     todas.type = "radio";
-//     todas.id = "todas";
-//     todas.name = "opciones";
-//     algunas.type = "radio";
-//     algunas.id = "algunas";
-//     algunas.name = "opciones";
-
-
-
-
-
-// }
-
-
-
-
-
 
 
 function activarListener(){
 
-    const btnFotos = document.querySelectorAll(".imagenProducto .eliminar");
+    
     const categoria = document.getElementById("categoria");
     const coleccion = document.getElementById("coleccion");
     const descripcion = document.getElementById("description");
     const descuento = document.getElementById("descuento");
-    const colores = document.querySelectorAll(".stock .quitarColor");
-    const tallas = document.querySelectorAll(".talla .quitarColorTalla");
     const inputs = document.querySelectorAll("input");
     const btnActualizar = document.querySelector(".aplicarCambios");
     const btnAddColores = document.querySelector("#nuevoColor");
+    const btnAdd = document.querySelector("#addColor");
+    const radios = document.getElementsByName("opcion");
+    let valorRadio = 0;
+
+    activarCruces();
     
 
     window.addEventListener("beforeunload", (event) =>{    
@@ -198,31 +206,40 @@ function activarListener(){
         }
     });
 
-    for(let boton of btnFotos){
-        boton.addEventListener("click", (event) =>{
-            event.target.parentNode.remove();
-            cambios = true;
-        });
-    }
+    
     
     for(let boton of inputs){
-        boton.addEventListener("change", (event) =>{
-            console.log(event.target.value);
-            cambios = true;
-        });
+        if(boton.type != "radio" && boton.type != "checkbox"){    
+            boton.addEventListener("change", (event) =>{
+                console.log(event.target.value);
+                cambios = true;
+            });
+        }
     }
     
-    for(let boton of colores){
-        boton.addEventListener("click", (event) => {
-            event.target.parentNode.remove();
-            cambios = true;
-        });
-    }
     
-    for(let boton of tallas){
-        boton.addEventListener("click", (event) => {
-            event.target.parentNode.remove();
-            cambios = true;
+
+    for(let radio of radios){
+        radio.addEventListener("change", (event) =>{
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const divAlgunas = document.querySelector(".algunasTallas");
+
+            if(event.target.value == 2){
+                divAlgunas.style.opacity = "1";
+                divAlgunas.style.pointerEvents = "auto";
+                for(let casilla of checkboxes){
+                    casilla.disabled = false;
+                }    
+                valorRadio = event.target.value;
+            }else{
+                divAlgunas.style.opacity = "0.5";
+                divAlgunas.style.pointerEvents = "none";
+                for(let casilla of checkboxes){
+                    casilla.disabled = true;
+                    casilla.checked = false;
+                }
+                valorRadio = event.target.value;
+            }
         });
     }
     
@@ -261,15 +278,135 @@ function activarListener(){
 
     btnAddColores.addEventListener("click", (event)=>{
         event.preventDefault();
-
-
         
 
+        const colorPatron = document.querySelector("#colorPatron");
+        const colorBase = document.querySelector("#colorBase");
+
+
+        if(categoriaURL != "Accesorios" && colorPatron.value != "" && colorBase.value != ""){
+            const divColores = document.querySelector(".addColores");
+            divColores.style.display = "flex";
+        }else if(colorPatron.value != "" && colorBase.value != ""){
+            const stockColores = document.querySelector(".stock ul");
+            const nuevaFila = document.createElement("li");
+
+            nuevaFila.innerHTML = `${capitalize(colorPatron.value)} y ${capitalize(colorBase.value)} <span class="quitarColor">&times;</span> <input type="number" min="0" id="${colorPatron.value}${colorBase.value}" value="0">`;
+            
+            stockColores.appendChild(nuevaFila);
+
+            colorPatron.value = "";
+            colorBase.value = "";
+        }else{
+            generarAlerta("No hay ningun color nuevo");
+        }
+    });
+
+    btnAdd.addEventListener("click", (event) =>{
+        event.preventDefault();
+        const colorPatron = document.querySelector("#colorPatron");
+        const colorBase = document.querySelector("#colorBase");
+        const divColores = document.querySelector(".addColores");
+        
+        if(colorPatron.value != "" && colorBase.value != ""){
+            
+            const tallas = document.querySelectorAll(".talla");
+            const checkboxes = document.querySelectorAll("input[type=checkbox]")
+            const stockColores = document.querySelector(".stock ul");
+            
+            const nuevaFila = document.createElement("li");
+            nuevaFila.innerHTML = `<span class="color">${capitalize(colorPatron.value)} y ${capitalize(colorBase.value)}</span> <span class="quitarColorTalla">&times;</span>`;
+            
+            if(valorRadio == 1){
+                for(let div of tallas){
+                    let lista = div.querySelector("ul");
+                    let nuevaFilaCopia = nuevaFila.cloneNode(true);
+                    lista.appendChild(nuevaFilaCopia);
+                    console.log(lista.innerHTML);
+                }
+            }else if(valorRadio == 2){
+                const casillas = [];
+                for(let casilla of checkboxes){
+                    if(casilla.checked){
+                        casillas.push(casilla.value);
+                    }
+                }
+                for(let div of tallas){
+                    let nombreTalla = div.querySelector("h4").textContent.split(" ")[1];
+                    
+                    if(casillas.includes(nombreTalla)){
+                        let lista = div.querySelector("ul");
+                        let nuevaFilaCopia = nuevaFila.cloneNode(true);
+                        lista.appendChild(nuevaFilaCopia);
+                    }
+                }
+                
+                
+            }
+            
+            nuevaFila.innerHTML = `${capitalize(colorPatron.value)} y ${capitalize(colorBase.value)} <span class="quitarColor">&times;</span> <input type="number" min="0" id="${capitalize(colorPatron.value)}${capitalize(colorBase.value)}" value="0">`;
+            
+            stockColores.appendChild(nuevaFila);
+            
+            
+            divColores.style.display = "none";
+            colorPatron.value = "";
+            colorBase.value = "";
+            activarCruces();
+        }else{
+            divColores.style.display = "none";
+            generarAlerta("No hay ningun color nuevo");
+        }
+    });
+
+
+    
 
 
 
-    })
+}
 
 
 
+function activarCruces(){
+    const btnFotos = document.querySelectorAll(".imagenProducto .eliminar");
+    const colores = document.querySelectorAll(".stock .quitarColor");
+    const tallas = document.querySelectorAll(".talla .quitarColorTalla");
+    const cerrarDialogo = document.querySelector(".cerrarCuadro");
+    let lista = document.querySelectorAll(".color");
+    
+
+    for(let boton of colores){
+        boton.addEventListener("click", (event) => {
+            let color = event.target.parentNode.textContent;
+            color = color.slice(0, color.indexOf("×"));
+
+            for(let dato of lista){
+                if(dato.textContent.trim() == color.trim()){
+                    dato.parentNode.remove();
+                }
+            }
+            event.target.parentNode.remove();
+            cambios = true;
+        });
+    }
+    
+    for(let boton of tallas){
+        boton.addEventListener("click", (event) => {
+            event.target.parentNode.remove();
+            cambios = true;
+        });
+    }
+
+    for(let boton of btnFotos){
+        boton.addEventListener("click", (event) =>{
+            event.target.parentNode.remove();
+            cambios = true;
+        });
+    }
+
+    cerrarDialogo.addEventListener("click", (event) =>{
+        const divColores = document.querySelector(".addColores");
+        divColores.style.display = "none";
+    });
 }

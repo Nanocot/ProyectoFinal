@@ -8,6 +8,7 @@
     border-radius: 10px;
     border: 5px solid black;
     height: 100dvh;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5); 
 }
 
 .titulos{
@@ -25,13 +26,14 @@
     width: 60%;
     text-align: center;
     font-size: 50px;
-    margin-top: 10px;
+    margin-top: 5%;
     padding-bottom: 5px;
 }
 
 .aplicarCambios:hover {
     background-color: gray;
     color: white;
+    cursor: pointer;
 }
 
 ul{
@@ -68,7 +70,7 @@ ul{
 }
 
 
-.eliminar:hover, .quitarColor:hover, .quitarColorTalla:hover{
+.eliminar:hover, .quitarColor:hover, .quitarColorTalla:hover, .cerrarCuadro:hover{
     background-color: red;
     color:white;
     cursor: pointer;
@@ -173,6 +175,55 @@ ul{
     padding: 0;
     margin: 10px 0px 0px 0px;
 }
+
+
+
+/* Estilo para el cuadro de añadir nuevos colores */
+.addColores{
+    background-color: white;
+    position: fixed;
+    top: 40dvh;
+    left: 50%;
+    width: 50dvh;
+    height: 50dvh;
+    z-index: 999;
+    border-radius: 5px;
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    color: black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translate(-50%, -50%);
+}
+
+
+.addColores label{
+    width: 90%;
+}
+
+.algunasTallas{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0.5; 
+    pointer-events: none; 
+}
+
+.algunasTallas label{
+    width: 40%;    
+}
+
+.cerrarCuadro{
+    position: absolute;
+    top: 5%;
+    left: 90%;
+    font-size: 20px;
+}
+
 
 
 

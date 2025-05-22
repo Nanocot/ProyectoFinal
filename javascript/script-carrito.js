@@ -135,12 +135,20 @@ function eliminarProducto(id, div){
             div[i+1].setAttribute("id", i.toString());
         }
 
-        //Al final cambiamos el atributo contador, para que los objetos se identifiquen con la nueva posición que tienen en el array
-        carritoTemporal[i]["contador"] = i;
+        if(carritoTemporal.length > 0){
+            //Al final cambiamos el atributo contador, para que los objetos se identifiquen con la nueva posición que tienen en el array
+            carritoTemporal[i]["contador"] = i;
+            //Por último guardamos el carrito en LocalStorage
+            localStorage.setItem("carrito", JSON.stringify(carritoTemporal));
+        }else{
+            carritoDiv.innerHTML = "";
+            let btnComprar = document.querySelector("#comprar");
+            btnComprar.remove();
+            localStorage.removeItem("carrito");
+        }
     }
 
-    //Por último guardamos el carrito en LocalStorage
-    localStorage.setItem("carrito", JSON.stringify(carritoTemporal));
+    
 
     
 

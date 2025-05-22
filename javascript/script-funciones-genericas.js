@@ -153,7 +153,7 @@ function generarAlerta(mensaje){
     setTimeout(() =>{
         div.remove();
     }
-    , 5000);
+    , 2000);
 }
 
 
@@ -210,3 +210,10 @@ async function  cerrarSesion (){
 }
     
 
+function capitalize(cadena){
+
+    let cadenaAux = cadena.toLowerCase();
+    cadenaAux = cadenaAux.charAt(0).toUpperCase() + cadenaAux.slice(1);
+
+    return cadenaAux;
+}

@@ -477,23 +477,53 @@
                 $rutasFotos = $datos["Fotos"];
 
 
-                //Declaración de variables
-                $tallas = [];
+                print_r($datos);
+                
+                // $this->conex->beginTransaction();
+                    //Comprobación de los colores
+                    $sql = "select id, concat(colorPatron, ' y ', colorBase) as Colores from colores order by id";
 
-                foreach($infoTallas as $indice => $fila){
-                    // if(!in_array($indice, $tallas)){
-                    //     array_push($tallas,$indice);
-                    // }
-
-                    if(!isset($tallas[$indice])){
-                        $tallas[$indice] = count($fila);
-                    }
+                    $stmt = $this->conex->prepare($sql);
                     
-                }
+                    $stmt->execute();
 
-                // print_r($tallas);
-                // return $tallas;
+                    if($stmt->rowCount() > 0){
+                        //Sacamos todos los colores, para comprobar si el usario ha añadido alguno nuevo o no
+                        $coloresDB = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        $existe = false;
+                        for($i = 0; $i < count($infoColores); $i++){   
+                            foreach($coloresDB as $fila){
+                                if($fila["Colores"] == $infoColores[$i]["Color"]){
+                                    $existe = true;
+                                }
+                            }
 
+                            if(!$existe){
+                                echo "Entra";
+                                [$colorPatron, $colorBase] = explode(" y ", $infoColores[$i]["Color"]);
+                                $sqlAddColor = "insert into colores (colorPatron, colorBase) values (?, ?);";
+
+                                $stmtAddColor = $this->conex->prepare($sqlAddColor);
+
+                                $stmtAddColor->bindParam(1, $colorPatron, PDO::PARAM_STR);
+                                $stmtAddColor->bindParam(2, $colorBase, PDO::PARAM_STR);
+
+                                $stmtAddColor->execute();
+                            }
+
+                            $existe = false;
+
+                        }
+
+
+
+
+                    }
+
+
+                // $this->conex->commit();
+
+                echo "Colores Añadidos";
 
 
 
@@ -501,6 +531,7 @@
                 
                 
             }catch(PDOException $e){
+                $this->conex->rollBack();
                 return $e->getMessage();
             }
         }

@@ -137,21 +137,24 @@
     <script type="text/javascript" src="../../javascript/script-modificar-producto.js"></script>
     
 
-    <!-- <div class="addColores">
-        <input type="radio" name="opcion" id="todas">
+    <div class="addColores">
+        <span class="cerrarCuadro">&times;</span>
+        <input type="radio" name="opcion" id="todas" value="1">
         <label for="todas">Todas las tallas</label>
-        <input type="radio" name="opcion" id="algunas">
+        <input type="radio" name="opcion" id="algunas" value="2">
         <label for="algunas">Seleccione</label>
         <div class="algunasTallas">
             <?php foreach($producto["InfoTallas"] as $indice => $fila): ?>
-                <input type="checkbox" name="talla-<?= $indice?>" id="<?=$fila["IDTallas"]?>">
+                <input type="checkbox" name="talla-<?= $indice?>" id="<?=$fila["ID"]?>" value="<?= $indice?>">
+                <label for="talla-<?= $indice?>">Talla <?= $indice?></label>
             <?php endforeach; ?>
         </div>
-    </div> -->
+        <button id="addColor">Añadir Color</button>
+    </div>
 
-    <pre>
+    <!-- <pre>
         <?php print_r($producto)?>
-    </pre>
+    </pre> -->
 
 
 </body>
