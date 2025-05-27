@@ -28,6 +28,7 @@
         </nav>
     </header>
 
+    <div class="add"><a href="index.php?action=addProduct">Añadir nuevo producto</a></div>
 
     <table>
         <thead>
@@ -36,6 +37,7 @@
             <th>Tallas</th>
             <th>Categoria</th>
             <th>Colección</th>
+            <th>Eliminar</th>
         </thead>
         <tbody>
             <?php foreach($datosTabla as $producto):?>
@@ -49,6 +51,8 @@
                     <td><?= $producto["Tallas"]?></td>
                     <td><?= $producto["Categoria"]?></td>
                     <td><?= $producto["Coleccion"]?></td>
+                    <td class="eliminar">&times;</td>
+
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -56,7 +60,7 @@
 
     
 
-
+<script type="text/javascript" src="javascript/script-funciones-gestion.js"></script>
 
     
 </body>

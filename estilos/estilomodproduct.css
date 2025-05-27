@@ -19,7 +19,7 @@
     justify-content: space-around;
 }
 
-.aplicarCambios{
+.aplicarCambios, .addProducto{
     background-color: lightgray;
     border: 2px solid black;
     border-radius: 10px;
@@ -30,7 +30,7 @@
     padding-bottom: 5px;
 }
 
-.aplicarCambios:hover {
+.aplicarCambios:hover, .addProducto:hover{
     background-color: gray;
     color: white;
     cursor: pointer;
@@ -41,6 +41,39 @@ ul{
     margin-left: 0;
     padding-left: 0;
 }
+
+
+.botones{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2% 10%;
+    width: 80%;
+}
+
+.btnAddFoto{
+    background-color: burlywood;
+    color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: black;
+    padding: 2%;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3); 
+    /* position: absolute;
+    left: 30dvb;
+    top:20dvb; */
+    float: right;
+    display: flex;
+    align-self: flex-end;
+}
+
+
+.btnAddFoto:hover{
+    background-color: rgb(60, 49, 36);
+    color: white;
+    cursor: pointer;
+}
+
 
 
 /* Estilos de las fotos */
@@ -70,7 +103,7 @@ ul{
 }
 
 
-.eliminar:hover, .quitarColor:hover, .quitarColorTalla:hover, .cerrarCuadro:hover{
+.eliminar:hover, .quitarColor:hover, .quitarColorTalla:hover, .cerrarCuadro:hover, .cerrarCuadro:hover{
     background-color: red;
     color:white;
     cursor: pointer;
@@ -225,6 +258,61 @@ ul{
 }
 
 
+
+/* Estilo para el cuadro añadir foto */
+.addFoto{
+    background-color: white;
+    position: fixed;
+    top: 50dvh;
+    left: 50%;
+    width: 80dvw;
+    height: 80dvh;
+    z-index: 999;
+    border-radius: 5px;
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    color: black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translate(-50%, -50%);
+    overflow: scroll;
+    /* overflow-x: hidden; */
+}
+
+.nuevaFoto{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 100%;
+}
+
+.nuevaFoto form{
+    /* width: 100%; */
+    max-height: 80%;   
+    /* overflow: scroll; */
+    padding: 5px;
+}
+.previsualizacion{
+    max-height: 100%;
+    max-width: 100%;
+    /* overflow: scroll; */
+}
+
+#previsualizacion{
+    max-width: 100%;
+    max-height: 50dvh;
+}
+
+.colorFoto{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-self: flex-start;
+    justify-self: flex-start;
+}
 
 
 

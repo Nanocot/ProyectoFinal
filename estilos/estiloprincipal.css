@@ -79,7 +79,7 @@ nav a{
     /* position: absolute;
     left: 30dvb;
     top:20dvb; */
-    margin: 2% 10%;
+    /* margin: 2% 10%; */
     float: left;
     display: flex;
     align-self: flex-start;

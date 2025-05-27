@@ -6,9 +6,6 @@ const idURL = parametros.get("id");
 const categoriaURL = parametros.get("categoria");
 
 window.addEventListener("DOMContentLoaded", (event) =>{
-    // Declaración de variables
-     original  = cogerDatos();
-
     activarListener();
 });
 
@@ -67,7 +64,6 @@ function coloresStock(){
     for(let color of colores){
         aux = color.textContent.trim().split(" y ");
         aux[1] = aux[1].split(" ")[0];
-        // console.log(`${aux[0]}${aux[1]}`);
         stock = document.getElementById(`${aux[0]}${aux[1]}`).value;
         aux[0] = capitalize(aux[0]);
         aux[1] = capitalize(aux[1]);
@@ -102,7 +98,7 @@ function coloresTallas(){
     return colorTallas;
 }
 
-async function actualizar(datos){
+async function addProducto(datos){
     
     const {Nombre, Categoria, Coleccion, Precio, Descuento, Descripcion, Tallas, Colores, Fotos} = datos;
 
@@ -116,6 +112,7 @@ async function actualizar(datos){
         rutasFotos.push({"Ruta" : ruta, "Alt" : alt});
     }
 
+    console.log(Tallas);
 
     for(let talla in Tallas){
         let colorPatron;
@@ -123,17 +120,24 @@ async function actualizar(datos){
         for(let atributo in Tallas[talla]){
             for(let fila of Tallas[talla][atributo]){
                 
-                
+                console.log(atributo);
                 if(atributo == "Colores"){
                     [colorPatron, colorBase] = fila.split(" y ");
+
+
                     
                     if(!nuevasTallas[talla]){
                         nuevasTallas[talla] = {"Colores" :[{"ColorPatron": colorPatron, "ColorBase": colorBase}]};
                     }else{
                         nuevasTallas[talla]["Colores"].push({"ColorPatron" : colorPatron, "ColorBase" : colorBase});
                     }
+                    console.log(nuevasTallas);
                 }else{
-                    nuevasTallas[talla]["ID"] = Tallas[talla][atributo];
+                    if(!nuevasTallas[talla]){
+                        nuevasTallas[talla] = {"ID" : Tallas[talla][atributo]};
+                    }else{
+                        nuevasTallas[talla]["ID"] = Tallas[talla][atributo];
+                    }
                 }
             }
         }
@@ -158,7 +162,7 @@ async function actualizar(datos){
     try{
 
         //Enviamos la petición al servidor con los datos necesarios
-        fetch("../index.php?action=actualizarProducto", {
+        fetch("../index.php?action=addProducto", {
             method: "POST",
             body: JSON.stringify(datosEnvio),
             headers: {
@@ -190,7 +194,7 @@ function activarListener(){
     const descripcion = document.getElementById("description");
     const descuento = document.getElementById("descuento");
     const inputs = document.querySelectorAll("input");
-    const btnActualizar = document.querySelector(".aplicarCambios");
+    const btnaddProducto = document.querySelector(".addProducto");
     const btnAddColores = document.querySelector("#nuevoColor");
     const btnAdd = document.querySelector("#addColor");
     const btnAddFoto = document.querySelector(".btnAddFoto");
@@ -251,6 +255,16 @@ function activarListener(){
     categoria.addEventListener("change", (event) =>{
         // console.log(event.target.value);
         cambios = true;
+        let tituloColoresTallas = document.querySelector(".colores h4");
+        let divColoresTallas = document.querySelector(".colDisponibles");
+        if(event.target.value == 3){
+            console.log("ACCESORIOS"); 
+            tituloColoresTallas.style.display = "none";
+            divColoresTallas.style.display = "none";
+        }else{
+            tituloColoresTallas.style.display = "block";
+            divColoresTallas.style.display = "flex";
+        }
     });
     
     coleccion.addEventListener("change", (event) =>{
@@ -271,17 +285,17 @@ function activarListener(){
 
     
 
-    btnActualizar.addEventListener("click", (event) =>{
+    btnaddProducto.addEventListener("click", (event) =>{
         const copia = cogerDatos();
         
         let originalJSON = JSON.stringify(original);
         let copiaJSON = JSON.stringify(copia);
 
         if(cambios && copiaJSON !== originalJSON){
-            actualizar(copia);
+            addProducto(copia);
             cambios = false;
         }else if(copiaJSON === originalJSON || !cambios){
-            generarAlerta("No hay cambios"); 
+            generarAlerta("No ha introducido datos"); 
         }
     });
 
@@ -293,7 +307,7 @@ function activarListener(){
         const colorBase = document.querySelector("#colorBase");
 
 
-        if(categoriaURL != "Accesorios" && colorPatron.value != "" && colorBase.value != ""){
+        if(categoria.value != 3 && colorPatron.value != "" && colorBase.value != ""){
             const divColores = document.querySelector(".addColores");
             divColores.style.display = "flex";
         }else if(colorPatron.value != "" && colorBase.value != ""){
@@ -309,7 +323,7 @@ function activarListener(){
 
             cambios = true;
         }else{
-            generarAlerta("No hay ningun color nuevo");
+            generarAlerta("Añada un color");
         }
     });
 
@@ -394,7 +408,7 @@ function activarListener(){
             activarCruces();
         }else{
             divColores.style.display = "none";
-            generarAlerta("No hay ningun color nuevo");
+            generarAlerta("Añada un color");
         }
     });
 
@@ -402,8 +416,6 @@ function activarListener(){
 
 
     btnAddFoto.addEventListener("click", (event)=>{
-        
-        
         const divAddFoto = document.querySelector(".addFoto");
         const coloresFoto = document.querySelector(".stock ul");
         const coloresAddFoto = document.querySelector(".colorFoto");
@@ -413,15 +425,15 @@ function activarListener(){
         let labelRadioColor = document.createElement("label");
         const datosFotos = document.querySelectorAll(".imagenProducto img");
         const coloresReferencias = [];
-        
+
         imagePreview.src = "#";
-        
-        
+
+
         if(coloresAddFoto.innerHTML != ""){
             coloresAddFoto.innerHTML = "";
         }
-        
-        if(categoriaURL != "Accesorios"){   
+
+        if(categoria.value != 3){   
             for(let imagen of datosFotos){
                 let ruta = imagen.src.split("-");
                 if(ruta.length > 1){
@@ -589,10 +601,6 @@ function activarListener(){
         }else{
             generarAlerta("Añada una foto");
         }
-            
-
-
-        // generarAlerta("SUBIENDO FOTO");
 
     });
 

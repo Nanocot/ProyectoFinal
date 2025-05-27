@@ -31,3 +31,35 @@ table img{
     height: 50%;
 }
 
+
+.add{
+    display: flex;
+    margin: 5dvh 10dvw;
+    background-color: burlywood;
+    border: black  solid 2px;
+    border-radius: 5px;
+    align-self: flex-end;
+    padding: 10px;
+}
+
+.add a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+
+
+.add:hover a, .add:hover{
+    background-color: rgb(60, 49, 36);
+    color: white;
+}
+
+
+.eliminar{
+    font-size: 50px;
+    text-align: center;
+}
+
+.eliminar:hover{
+    cursor: pointer;
+}

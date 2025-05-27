@@ -3,13 +3,13 @@ DROP TABLE IF EXISTS DetallesCompra;
 DROP TABLE IF EXISTS Carrito;
 DROP TABLE IF EXISTS Imagenes;
 DROP TABLE IF EXISTS TallasProductos;
-DROP TABLE IF EXISTS VariacionesProductos;
+DROP TABLE IF EXISTS Stock;
 DROP TABLE IF EXISTS Opiniones;
+DROP TABLE IF EXISTS VariacionesProductos;
 DROP TABLE IF EXISTS Compras;
 DROP TABLE IF EXISTS Tokens;
 DROP TABLE IF EXISTS Direcciones;
 DROP TABLE IF EXISTS Reclamaciones;
-DROP TABLE IF EXISTS Stock;
 DROP TABLE IF EXISTS Productos;
 DROP TABLE IF EXISTS Descuentos;
 DROP TABLE IF EXISTS Colecciones;
@@ -65,9 +65,9 @@ CREATE TABLE Productos (
     CATEGORIAID INT,
     COLECCIONID INT,
     DESCUENTOID INT,
-    FOREIGN KEY (CATEGORIAID) REFERENCES Categorias(Id),
-    FOREIGN KEY (COLECCIONID) REFERENCES Colecciones(Id),
-    FOREIGN KEY (DESCUENTOID) REFERENCES Descuentos(Id)
+    FOREIGN KEY (CATEGORIAID) REFERENCES Categorias(Id) on delete set null,
+    FOREIGN KEY (COLECCIONID) REFERENCES Colecciones(Id) on delete set null,
+    FOREIGN KEY (DESCUENTOID) REFERENCES Descuentos(Id) on delete set null
 );
 
 -- Tabla Colores
@@ -83,8 +83,8 @@ CREATE TABLE VariacionesProductos (
     Id INT PRIMARY KEY AUTO_INCREMENT,
     IDPRODUCTO INT NOT NULL,
     IDCOLOR INT NOT NULL,
-    FOREIGN KEY (IDPRODUCTO) REFERENCES Productos(Id),
-    FOREIGN KEY (IDCOLOR) REFERENCES Colores(Id)
+    FOREIGN KEY (IDPRODUCTO) REFERENCES Productos(Id) on delete cascade,
+    FOREIGN KEY (IDCOLOR) REFERENCES Colores(Id) on delete cascade
 );
 
 -- Tabla Tallas
@@ -97,8 +97,8 @@ CREATE TABLE Tallas (
 CREATE TABLE TallasProductos (
     IDVARIACION INT NOT NULL,
     IDTALLA INT NOT NULL,
-    FOREIGN KEY (IDVARIACION) REFERENCES VariacionesProductos(Id),
-    FOREIGN KEY (IDTALLA) REFERENCES Tallas(Id),
+    FOREIGN KEY (IDVARIACION) REFERENCES VariacionesProductos(Id) on delete cascade,
+    FOREIGN KEY (IDTALLA) REFERENCES Tallas(Id) on delete cascade,
     PRIMARY KEY (IDVARIACION, IDTALLA)
 );
 
@@ -107,8 +107,8 @@ CREATE TABLE Stock (
     IDPRODUCTO INT NOT NULL,
     IDVARIACION INT NOT NULL,
     stock INT DEFAULT 0,
-    FOREIGN KEY (IDPRODUCTO) REFERENCES Productos(Id),
-    FOREIGN KEY (IDVARIACION) REFERENCES VariacionesProductos(Id),
+    FOREIGN KEY (IDPRODUCTO) REFERENCES Productos(Id) on delete cascade,
+    FOREIGN KEY (IDVARIACION) REFERENCES VariacionesProductos(Id) on delete cascade,
     PRIMARY KEY (IDPRODUCTO, IDVARIACION)
 );
 
@@ -126,8 +126,8 @@ CREATE TABLE Compras (
     IDMETODOPAGO INT,
     EMAILUSUARIO VARCHAR(255) NOT NULL,
     PrecioTotal DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (IDMETODOPAGO) REFERENCES MetodoPago(Id),
-    FOREIGN KEY (EMAILUSUARIO) REFERENCES Usuarios(Email)
+    FOREIGN KEY (IDMETODOPAGO) REFERENCES MetodoPago(Id) on delete set null,
+    FOREIGN KEY (EMAILUSUARIO) REFERENCES Usuarios(Email) on delete cascade
 );
 
 -- Tabla Opiniones
@@ -137,8 +137,8 @@ CREATE TABLE Opiniones (
     Descripcion TEXT,
     EMAILUSUARIO VARCHAR(255) NOT NULL,
     IDPRODUCTO INT NOT NULL,
-    FOREIGN KEY (EMAILUSUARIO) REFERENCES Usuarios(Email),
-    FOREIGN KEY (IDPRODUCTO) REFERENCES Productos(Id)
+    FOREIGN KEY (EMAILUSUARIO) REFERENCES Usuarios(Email) on delete cascade,
+    FOREIGN KEY (IDPRODUCTO) REFERENCES Productos(Id) on delete cascade
 );
 
 -- Tabla Imagenes
@@ -147,7 +147,7 @@ CREATE TABLE Imagenes (
     Tipo ENUM('anverso', 'reverso') DEFAULT ('anverso'),
     Ruta VARCHAR(255),
     IDPRODUCTO INT NOT NULL,
-    FOREIGN KEY (IDPRODUCTO) REFERENCES Productos(Id)
+    FOREIGN KEY (IDPRODUCTO) REFERENCES Productos(Id) on delete cascade
 );
 
 
@@ -160,7 +160,7 @@ CREATE TABLE Reclamaciones (
     Fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     EMAILUSUARIO VARCHAR(255) NOT NULL,
     Estado ENUM('pendiente', 'cerrada', 'rechazada') DEFAULT 'pendiente',
-    FOREIGN KEY (EMAILUSUARIO) REFERENCES Usuarios(Email)
+    FOREIGN KEY (EMAILUSUARIO) REFERENCES Usuarios(Email) on delete cascade
 );
 
 -- Tabla Direcciones
@@ -173,7 +173,7 @@ CREATE TABLE Direcciones (
     Puerta VARCHAR(50),
     Planta VARCHAR(50),
     EMAILUSUARIO VARCHAR(255) NOT NULL,
-    FOREIGN KEY (EMAILUSUARIO) REFERENCES Usuarios(Email)
+    FOREIGN KEY (EMAILUSUARIO) REFERENCES Usuarios(Email) on delete cascade
 );
 
 -- Tabla Carrito
@@ -183,9 +183,9 @@ CREATE TABLE Carrito (
     IDTALLA INT NOT NULL,
     Cantidad INT DEFAULT 1,
     FechaAgregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (EMAILUSUARIO) REFERENCES Usuarios(Email),
-    FOREIGN KEY (IDVARIACION) REFERENCES VariacionesProductos(Id),
-    FOREIGN KEY (IDTALLA) REFERENCES Tallas(Id),
+    FOREIGN KEY (EMAILUSUARIO) REFERENCES Usuarios(Email) on delete cascade,
+    FOREIGN KEY (IDVARIACION) REFERENCES VariacionesProductos(Id) on delete cascade,
+    FOREIGN KEY (IDTALLA) REFERENCES Tallas(Id) on delete cascade,
     PRIMARY KEY (EMAILUSUARIO, IDVARIACION)
 );
 
@@ -196,9 +196,9 @@ CREATE TABLE DetallesCompra (
     IDTALLA INT NOT NULL,
     Cantidad INT NOT NULL,
     PrecioTotal DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (IDCOMPRA) REFERENCES Compras(Id),
-    FOREIGN KEY (IDVARIACION) REFERENCES VariacionesProductos(Id),
-    FOREIGN KEY (IDTALLA) REFERENCES Tallas(Id),
+    FOREIGN KEY (IDCOMPRA) REFERENCES Compras(Id) on delete cascade,
+    FOREIGN KEY (IDVARIACION) REFERENCES VariacionesProductos(Id) on delete cascade,
+    FOREIGN KEY (IDTALLA) REFERENCES Tallas(Id) on delete cascade,
     PRIMARY KEY (IDCOMPRA, IDVARIACION, IDTALLA)
 );
 
@@ -208,7 +208,7 @@ CREATE TABLE Tokens (
     IdToken VARCHAR(255),
     Expiracion DATETIME,
     EMAILUSUARIO VARCHAR(255),
-    FOREIGN KEY (EMAILUSUARIO) REFERENCES Usuarios(Email)
+    FOREIGN KEY (EMAILUSUARIO) REFERENCES Usuarios(Email) on delete cascade
 );
 
 -- INSERTS

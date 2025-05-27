@@ -6,6 +6,7 @@
     require_once "php/Modelo/modelo_colecciones.php";
     require_once "php/Modelo/modelo_descuento.php";
     require_once "php/Modelo/modelo_categorias.php";
+    require_once "php/Modelo/modelo_tallas.php";
 
     class ControladorTablas {
 
@@ -221,7 +222,6 @@
             $datosTabla = $modeloProductos->generarDatosTabla();
 
             if($datosTabla){
-                
                 require_once "php/Vista/gestionProductos.php";
             }else{
                 require_once "php/Vista/error404.php";
@@ -264,11 +264,42 @@
             
             
             $respuesta = $modeloProducto->modificarProducto($arrayDatos);
+            
+            echo $respuesta;
+        }
 
-            // print_r( $respuesta);
+
+
+        function addProduct(){
+            $modeloProductos = new ModeloProductos();
+            $modeloDescuentos = new ModeloDescuento();
+            $modeloCategorias = new ModeloCategorias();
+            $modeloColecciones = new ModeloColecciones();
+            $modeloTallas = new ModeloTallas();
+
+            $descuentos = $modeloDescuentos->sacarDescuentos();
+            $categorias = $modeloCategorias->sacarCategorias();
+            $colecciones = $modeloColecciones->sacarColecciones();
+            $tallas = $modeloTallas->sacarTallas();
+
+
+            require "php/Vista/addProduct.php";
+
+
+        }
 
 
 
+        function addProducto(){
+            $modeloProducto = new ModeloProductos();
+            $datos = file_get_contents("php://input");
+            
+            $arrayDatos = json_decode($datos, true);
+            
+            
+            $respuesta = $modeloProducto->addProduct($arrayDatos);
+            // print_r($arrayDatos);
+            print_r($respuesta);
         }
 
 
