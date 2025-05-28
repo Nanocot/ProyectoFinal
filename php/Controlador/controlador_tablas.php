@@ -303,6 +303,71 @@
         }
 
 
+        function eliminarProd(){
+            $modeloProducto = new ModeloProductos();
+            $datos = file_get_contents("php://input");
+
+            $datosDecode = json_decode($datos, true);
+
+            
+            echo $modeloProducto->eliminarProd($datosDecode);
+
+        }
+
+
+
+        function gestionarColecciones(){
+
+            $modeloColecciones = new ModeloColecciones();
+
+            $datos = $modeloColecciones->datosTabla();
+
+
+            require_once "php/Vista/gestionColecciones.php";
+        }
+
+
+        function eliminarColeccion(){
+            $modeloColecciones = new ModeloColecciones();
+
+            $id = file_get_contents("php://input");
+
+            $mensaje = $modeloColecciones->eliminarColeccion($id);
+
+            echo $mensaje;
+
+        }
+
+
+
+        function actualizarColeccion(){
+            $modeloColecciones = new ModeloColecciones();
+
+            $datosRecibidos = file_get_contents("php://input");
+
+            $datosDecode = json_decode($datosRecibidos, true);
+
+            $mensaje = $modeloColecciones->actualizarColeccion($datosDecode);
+
+            echo $mensaje;
+
+        }
+
+
+        function crearColeccion(){
+            $modeloColecciones = new ModeloColecciones();
+
+            $datosRecibidos = file_get_contents("php://input");
+
+            $datosDecode = json_decode($datosRecibidos, true);
+
+            $mensaje = $modeloColecciones->crearColeccion($datosDecode);
+
+            header("Content-Type: application/json");
+            echo json_encode($mensaje);
+
+        }
+
 
     
     }

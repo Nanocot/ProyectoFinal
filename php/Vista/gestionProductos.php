@@ -41,18 +41,17 @@
         </thead>
         <tbody>
             <?php foreach($datosTabla as $producto):?>
-                <tr>
-                    <td>
-                        <a href="index.php?action=modificarProducto&id=<?=$producto["ID"]?>&categoria=<?=$producto["Categoria"]?>">
+                <tr data-href="index.php?action=modificarProducto&id=<?=$producto["ID"]?>&categoria=<?=$producto["Categoria"]?>">
+                    <td>    
+                        <!-- <a href=""> -->
                             <img src="<?= $producto["Foto"]?>" alt="Foto del producto <?= $producto["ID"]?>">
-                        </a>
+                        <!-- </a> -->
                     </td>
                     <td><?= $producto["Nombre"]?></td>
                     <td><?= $producto["Tallas"]?></td>
                     <td><?= $producto["Categoria"]?></td>
                     <td><?= $producto["Coleccion"]?></td>
                     <td class="eliminar">&times;</td>
-
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -60,8 +59,8 @@
 
     
 
-<script type="text/javascript" src="javascript/script-funciones-gestion.js"></script>
-
+<script type="text/javascript" src="javascript/script-funciones-gestion-productos.js"></script>
+<script type="text/javascript" src="javascript/script-funciones-genericas.js"></script>
     
 </body>
 </html>

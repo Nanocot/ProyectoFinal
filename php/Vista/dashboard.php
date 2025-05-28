@@ -31,13 +31,13 @@
 
 
     <div class="dashboard">
-        <span class="gesUsuarios"><a href="index.php?action=gestionarUsuarios">Gestionar Usuarios</a></span>
-        <span class="gesProductos"><a href="index.php?action=gestionarProductos">Gestionar Productos</a></span>
-        <span class="gesColecciones"><a href="index.php?action=gestionarColecciones">Gestionar Colecciones</a></span>
-        <span class="gesDescuentos"><a href="index.php?action=gestionarDescuentos">Gestionar Descuentos</a></span>
-        <span class="gesCategorias"><a href="index.php?action=gestionarCategorias">Gestionar Categorías</a></span>
-        <span class="gesCompras"><a href="index.php?action=gestionarCompras">Gestionar Compras</a></span>
-        <span class="gesIncidencias"><a href="index.php?action=gestionarIncidencias">Gestionar Incidencias</a></span>
+        <a href="index.php?action=gestionarUsuarios"><span class="gesUsuarios">Gestionar Usuarios</span></a>
+        <a href="index.php?action=gestionarProductos"><span class="gesProductos">Gestionar Productos</span></a>
+        <a href="index.php?action=gestionarColecciones"><span class="gesColecciones">Gestionar Colecciones</span></a>
+        <a href="index.php?action=gestionarDescuentos"><span class="gesDescuentos">Gestionar Descuentos</span></a>
+        <a href="index.php?action=gestionarCategorias"><span class="gesCategorias">Gestionar Categorías</span></a>
+        <a href="index.php?action=gestionarCompras"><span class="gesCompras">Gestionar Compras</span></a>
+        <a href="index.php?action=gestionarIncidencias"><span class="gesIncidencias">Gestionar Incidencias</span></a>
     </div>
 
 

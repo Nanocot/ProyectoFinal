@@ -191,10 +191,10 @@
                         GROUP_CONCAT(DISTINCT t.nombre ORDER BY t.id SEPARATOR ', ') AS Tallas, 
                         i.ruta as Foto
                         from productos p 
-                        join variacionesproductos v on p.id = v.idproducto 
+                        left join variacionesproductos v on p.id = v.idproducto 
                         left join tallasproductos tp on v.id = tp.IDVARIACION
                         left join tallas t on tp.IDTALLA = t.id
-                        join imagenes i on p.id = i.IDPRODUCTO
+                        left join imagenes i on p.id = i.IDPRODUCTO
                         left join colecciones c on p.coleccionid = c.id
                         left join categorias ca on p.categoriaid = ca.id 
                         GROUP by p.id
@@ -988,26 +988,26 @@
                                             $idColor = $coloresServidor["ID"];
                                         }
                                     }
-                                    $agregar = false;
+                                    // $agregar = false;
                                     foreach($variacionesActualizadas as $datosVariacion){
                                         if($datosVariacion["IDCOLOR"] == $idColor){
                                             $idVar = $datosVariacion["Id"];
                                             $agregar = true;
                                         }
                                         
+                                        if($agregar){
+                                            $sqlInsertTallas = "insert into tallasproductos (idvariacion, idtalla) values (?, ?);";
+                                            
+                                            $stmtInsertTallas = $this->conex->prepare($sqlInsertTallas);
+                                            
+                                            $stmtInsertTallas->execute([$idVar, $datosUsuario["ID"]]);
+                                        }
+                                        $agregar = false; 
                                     }
                                     
                                 }
                                 
                                 
-                                if($agregar){
-                                    $sqlInsertTallas = "insert into tallasproductos (idvariacion, idtalla) values (?, ?);";
-                                    
-                                    $stmtInsertTallas = $this->conex->prepare($sqlInsertTallas);
-                                    
-                                    $stmtInsertTallas->execute([$idVar, $datosUsuario["ID"]]);
-                                }
-                                $agregar = false; 
                             }
                         }
 
@@ -1025,6 +1025,53 @@
                 $this->conex->rollBack();
                 return "Algo ha salido mal, contacte al administrador-->" . $e->getMessage();
             }
+        }
+
+
+
+
+        public function eliminarProd($id){
+
+            try{
+                //Sacamos las fotos del producto para borrarlas de la carpeta del servidor
+
+                $sqlFotos = "select * from imagenes where idproducto = ?;";
+                $stmtFotos = $this->conex->prepare($sqlFotos);
+
+
+                if($stmtFotos->execute([$id])){
+                    $fotos = $stmtFotos->fetchAll(PDO::FETCH_ASSOC);
+                }
+
+
+                //Borramos el producto
+                $sqlProd = "delete from productos where id = ?;";
+
+                $stmtProd = $this->conex->prepare($sqlProd);
+
+                if($stmtProd->execute([$id])){
+                    if($fotos){
+                        foreach($fotos as $datosFoto){
+                            if(file_exists($datosFoto["Ruta"])){
+                                unlink($datosFoto["Ruta"]);
+                            }
+                        }
+                    }
+                    return "Producto borrado correctamente";
+                }else{
+                    return "No se ha encontrado el producto";
+                }
+
+
+
+
+
+            }catch(PDOException $e){
+                return $e->getMessage();
+            }
+
+
+
         }
 
     }

@@ -1,0 +1,197 @@
+table{
+    background-color: white;
+    border: 2px solid black;
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 0 5% 0;
+}
+
+th{
+    background-color: lightgrey;
+}
+
+th, tr, td{
+    /* text-align: center; */
+    border: 2px solid black;
+    padding: 5px;
+    border-radius: 5px;
+    width: 20%;
+}
+
+tr:hover{
+    cursor: pointer;
+}
+
+
+button{
+    border: none;
+    background: none; 
+    padding: 0; 
+    cursor: pointer;
+}
+
+table img{
+    width: 100%;
+    height: 50%;
+}
+
+
+.add{
+    display: flex;
+    margin: 5dvh 10dvw;
+    background-color: burlywood;
+    border: black  solid 2px;
+    border-radius: 5px;
+    align-self: flex-end;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.add a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+
+
+.add:hover a, .add:hover{
+    background-color: rgb(60, 49, 36);
+    color: white;
+    cursor: pointer;
+}
+
+
+.eliminar{
+    font-size: 50px;
+    text-align: center;
+}
+
+
+
+td{
+    padding: 0;
+}
+
+
+input, textarea{
+    border: none; 
+    background-color: transparent; 
+    padding: 0; 
+    margin: 0; 
+    width: 100%; 
+    box-sizing: border-box; 
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    resize: none;
+    outline: none;
+}
+
+
+/* Estilos para los cuadros de dialogo de colecciones */
+
+
+.modificarDescp, .addCategoria{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+    visibility: hidden; 
+    opacity: 0; 
+}
+
+
+.contenidoDescp, .nuevaCategoria{
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px; /* Ancho máximo del modal */
+}
+
+
+.contenidoDescp h2, .titulo{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #2d3748;
+}
+
+
+.contenidoDescp textarea, .addCategoria textarea{
+    width: 100%;
+    min-height: 150px; /* Altura mínima para que sea cómodo editar */
+    border: 1px solid #cbd5e0;
+    border-radius: 4px;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1em;
+    margin-bottom: 15px;
+    box-sizing: border-box; /* Importante para que el padding no desborde */
+    resize: vertical; /* Permitir redimensionamiento vertical solo en el modal */
+    background-color: #f7fafc; /* Fondo ligero para el textarea del modal */
+    color: #2d3748;
+}
+
+#nuevoNombre{
+    outline: 1px solid black; 
+    background-color: transparent; 
+    padding: 10px 5px; 
+    margin: 0;  
+    width: 100%; 
+    box-sizing: border-box; 
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    resize: none;
+    border-radius: 5px;
+}
+
+
+
+.modificarDescBotones, .nuevaCatBotones{
+    display: flex;
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+    gap: 10px; /* Espacio entre los botones */
+}
+
+.modificarDescBotones button, .nuevaCatBotones button{
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+.guardar {
+    background-color: #4299e1; /* Azul */
+    color: white;
+    border: none;
+}
+
+/* Efecto hover para el botón "Guardar" */
+.guardar:hover {
+    background-color: #3182ce;
+}
+
+/* Estilos específicos para el botón "Cancelar" del modal */
+.cancelar {
+    background-color: #e2e8f0; /* Gris */
+    color: #2d3748;
+    border: 1px solid #cbd5e0;
+}
+
+/* Efecto hover para el botón "Cancelar" */
+.cancelar:hover {
+    background-color: #cbd5e0;
+}
+
+
+

@@ -1,9 +1,5 @@
 let cambios = false;
 let original;
-const  url =  window.location.href;
-const  parametros =  new URLSearchParams(url);
-const idURL = parametros.get("id");
-const categoriaURL = parametros.get("categoria");
 
 window.addEventListener("DOMContentLoaded", (event) =>{
     activarListener();
@@ -112,8 +108,6 @@ async function addProducto(datos){
         rutasFotos.push({"Ruta" : ruta, "Alt" : alt});
     }
 
-    console.log(Tallas);
-
     for(let talla in Tallas){
         let colorPatron;
         let colorBase;
@@ -142,43 +136,49 @@ async function addProducto(datos){
             }
         }
     }
-    // console.log(rutasFotos);
 
+    if(Categoria != "Elija una" && Coleccion != "Elija una"){
 
-    const datosEnvio = {
-        "ID" : idURL,
-        "Nombre" : Nombre,
-        "Categoria" : Categoria,
-        "Coleccion" : Coleccion,
-        "Precio" : Precio,
-        "Descuento" : Descuento,
-        "Descripcion" : Descripcion,
-        "Tallas" : nuevasTallas,
-        "Colores": Colores,
-        "Fotos" : rutasFotos
-    }
-    
+        const datosEnvio = {
+            "ID" : "",
+            "Nombre" : Nombre,
+            "Categoria" : Categoria,
+            "Coleccion" : Coleccion,
+            "Precio" : Precio,
+            "Descuento" : Descuento,
+            "Descripcion" : Descripcion,
+            "Tallas" : nuevasTallas,
+            "Colores": Colores,
+            "Fotos" : rutasFotos
+        }
+        
+        
+        try{
+            
+            //Enviamos la petición al servidor con los datos necesarios
+            fetch("../index.php?action=addProducto", {
+                method: "POST",
+                body: JSON.stringify(datosEnvio),
 
-    try{
-
-        //Enviamos la petición al servidor con los datos necesarios
-        fetch("../index.php?action=addProducto", {
-            method: "POST",
-            body: JSON.stringify(datosEnvio),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-        //Capturamos posibles errores en la respuesta del servidor
-        .catch((error) => console.error("Error:", error))
-        //Convertimos el objeto respuesta en texto, para poder leerlo
-        .then(response => response.text())
-        .then(html => {
-                console.log(html);
-                generarAlerta(html);
-        });
-    }catch(error){
-        console.error("Error antes del fetch", error);
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            //Capturamos posibles errores en la respuesta del servidor
+            .catch((error) => console.error("Error:", error))
+            //Convertimos el objeto respuesta en texto, para poder leerlo
+            .then(response => response.text())
+            .then(html => {
+                    console.log(html);
+                    generarAlerta(html);
+            });
+        }catch(error){
+            cambios = false;
+            generarAlerta("Error, contacte con el administrador");
+            console.error("Error antes del fetch", error);
+        }
+    }else{
+        generarAlerta("Compruebe los datos");
     }
 
 }
