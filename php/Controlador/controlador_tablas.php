@@ -256,7 +256,7 @@
     
     
 
-        function actualizarProducto(){
+        public function actualizarProducto(){
             $modeloProducto = new ModeloProductos();
             $datos = file_get_contents("php://input");
             
@@ -270,7 +270,7 @@
 
 
 
-        function addProduct(){
+        public function addProduct(){
             $modeloProductos = new ModeloProductos();
             $modeloDescuentos = new ModeloDescuento();
             $modeloCategorias = new ModeloCategorias();
@@ -290,7 +290,7 @@
 
 
 
-        function addProducto(){
+        public function addProducto(){
             $modeloProducto = new ModeloProductos();
             $datos = file_get_contents("php://input");
             
@@ -303,7 +303,7 @@
         }
 
 
-        function eliminarProd(){
+        public function eliminarProd(){
             $modeloProducto = new ModeloProductos();
             $datos = file_get_contents("php://input");
 
@@ -316,7 +316,7 @@
 
 
 
-        function gestionarColecciones(){
+        public function gestionarColecciones(){
 
             $modeloColecciones = new ModeloColecciones();
 
@@ -327,7 +327,7 @@
         }
 
 
-        function eliminarColeccion(){
+        public function eliminarColeccion(){
             $modeloColecciones = new ModeloColecciones();
 
             $id = file_get_contents("php://input");
@@ -340,7 +340,7 @@
 
 
 
-        function actualizarColeccion(){
+        public function actualizarColeccion(){
             $modeloColecciones = new ModeloColecciones();
 
             $datosRecibidos = file_get_contents("php://input");
@@ -354,12 +354,15 @@
         }
 
 
-        function crearColeccion(){
+        public function crearColeccion(){
             $modeloColecciones = new ModeloColecciones();
 
             $datosRecibidos = file_get_contents("php://input");
 
             $datosDecode = json_decode($datosRecibidos, true);
+
+
+
 
             $mensaje = $modeloColecciones->crearColeccion($datosDecode);
 
@@ -367,6 +370,61 @@
             echo json_encode($mensaje);
 
         }
+
+
+        public function gestionarDescuentos(){
+            $modeloDescuentos = new ModeloDescuento();  
+
+            $datos  = $modeloDescuentos->generarTabla();
+
+
+            require_once "php/Vista/gestionDescuento.php";
+        }
+
+
+        public function crearDescuento(){
+
+            $modeloDescuentos = new ModeloDescuento();
+
+            $datos = file_get_contents("php://input");
+
+            $datosDecode = json_decode($datos, true);
+
+            $resultado = $modeloDescuentos->crearDescuento($datosDecode);
+
+            header("Content-Type: application/json");
+            echo json_encode($resultado);
+        }
+
+
+        public function eliminarDescuento(){
+            $modeloDescuentos = new ModeloDescuento();
+
+            $datos = file_get_contents("php://input");
+
+            $datosDecode = json_decode($datos, true);
+
+            $resultado = $modeloDescuentos->borrarDescuento($datosDecode);
+
+            echo $resultado;
+        }
+
+
+        public function actualizarDescuento(){
+            $modeloDescuentos = new ModeloDescuento();
+
+            $datos = file_get_contents("php://input");
+
+            $datosDecode = json_decode($datos, true);
+
+            $resultado = $modeloDescuentos->actualizarDescuento($datosDecode);
+
+            echo $resultado;
+        }
+
+
+
+
 
 
     

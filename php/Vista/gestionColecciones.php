@@ -59,8 +59,8 @@
             <h2>Editar Descripción</h2>
             <textarea id="modificarDescpTextarea"></textarea>
             <div class="modificarDescBotones">
-                <button id="cancelar" class="cancelar">Cancelar</button>
-                <button id="guardar" class="guardar">Guardar</button>
+                <button id="cancelar1" class="cancelar">Cancelar</button>
+                <button id="guardar1" class="guardar">Guardar</button>
             </div>
         </div>
     </div>
@@ -73,8 +73,8 @@
             <span class="titulo">Descripción</span>
             <textarea name="nuevaDesc" id="nuevaDesc"></textarea>
             <div class="nuevaCatBotones">
-                <button id="cancelar" class="cancelar">Cancelar</button>
-                <button id="guardar" class="guardar">Guardar</button>
+                <button id="cancelar2" class="cancelar">Cancelar</button>
+                <button id="guardar2" class="guardar">Guardar</button>
             </div>
         </div>
     </div>

@@ -13,26 +13,12 @@ th{
 th, tr, td{
     border: 2px solid black;
     padding: 5px;
-    width: 30%;
+    min-width: 10%;
 }
 
 tr:hover{
     cursor: pointer;
 }
-
-
-button{
-    border: none;
-    background: none; 
-    padding: 0; 
-    cursor: pointer;
-}
-
-table img{
-    width: 100%;
-    height: 50%;
-}
-
 
 .add{
     display: flex;
@@ -65,7 +51,7 @@ table img{
 }
 
 
-input, textarea{
+table input, table textarea, table select{
     border: none; 
     background-color: transparent; 
     padding: 0; 
@@ -81,10 +67,10 @@ input, textarea{
 }
 
 
-/* Estilos para los cuadros de dialogo de colecciones */
+/* Estilos para los cuadros de dialogo de descuentos */
 
 
-.modificarDescp, .addCategoria{
+.modificarDescp, .addDescuento{
     position: fixed;
     top: 0;
     left: 0;
@@ -100,25 +86,29 @@ input, textarea{
 }
 
 
-.contenidoDescp, .nuevaCategoria{
+.contenidoDescp{
     background-color: #ffffff;
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     width: 90%;
-    max-width: 500px; /* Ancho máximo del modal */
+    max-width: 50dvw; /* Ancho máximo del modal */
+    height: 90%;
+    max-height: 50dvh;
+    
+    /* justify-content: space-between; */
 }
 
-
-.contenidoDescp h2, .titulo{
+.contenidoDescp h2{
     font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 15px;
     color: #2d3748;
+    width: 100%;
 }
 
 
-.contenidoDescp textarea, .addCategoria textarea{
+.contenidoDescp textarea, .addDescuento textarea{
     width: 100%;
     min-height: 150px; /* Altura mínima para que sea cómodo editar */
     border: 1px solid #cbd5e0;
@@ -133,29 +123,90 @@ input, textarea{
     color: #2d3748;
 }
 
-#nuevoNombre{
-    outline: 1px solid black; 
-    background-color: transparent; 
-    padding: 10px 5px; 
-    margin: 0;  
-    width: 100%; 
-    box-sizing: border-box; 
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    resize: none;
-    border-radius: 5px;
+
+.nuevoDescuento{
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+    width: 90%; 
+    max-width: 900px; 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 30px; 
+    box-sizing: border-box;
+    max-height: 95vh; 
+    overflow-y: auto; 
+    align-items: stretch; 
+}
+
+.nombreDescp{
+    flex: 1; /* Ocupa el 50% del ancho disponible */
+    min-width: 50%; 
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; 
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.fechasCantidadTipo {
+    flex: 1; 
+    min-width: 280px; 
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; 
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.titulo {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px; 
+    display: block;
+}
+
+.nuevoDescuento input[type="text"],
+.nuevoDescuento input[type="date"],
+.nuevoDescuento input[type="number"],
+.nuevoDescuento textarea,
+.nuevoDescuento select {
+    width: 100%; /* Ocupar todo el ancho disponible en su contenedor */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Incluir padding y borde en el ancho/alto */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nuevoDescuento input[type="text"]:focus,
+.nuevoDescuento input[type="date"]:focus,
+.nuevoDescuento input[type="number"]:focus,
+.nuevoDescuento textarea:focus,
+.nuevoDescuento select:focus {
+    outline: none;
+    border-color: #007bff; /* Color de borde al enfocar */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Sombra al enfocar */
+}
+
+.nuevoDescuento textarea {
+    resize: vertical; /* Permitir redimensionar verticalmente */
+    min-height: 80px; /* Altura mínima para el textarea */
+    flex-grow: 1; /* Permite que el textarea crezca para llenar el espacio vertical restante */
 }
 
 
 
-.modificarDescBotones, .nuevaCatBotones{
+.modificarDescBotones, .nuevoDesBotones{
     display: flex;
+    width: 100%;
     justify-content: flex-end; /* Alinea los botones a la derecha */
     gap: 10px; /* Espacio entre los botones */
 }
 
-.modificarDescBotones button, .nuevaCatBotones button{
+.modificarDescBotones button, .nuevoDesBotones button{
     padding: 8px 15px;
     border-radius: 5px;
     font-weight: 600;
