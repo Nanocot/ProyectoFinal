@@ -37,7 +37,7 @@ async function rellenarProducto() {
 
     //Rellenamos los datos del producto que son inmutables
     nombre.innerHTML = jsonFINAL["Nombre"];
-    precio.textContent = jsonFINAL["Precio"];
+    precio.textContent = `${jsonFINAL["Precio"]} €`;
     descp.textContent = jsonFINAL["Descripcion"];
     cantidad.setAttribute("max", jsonFINAL["Stock"]);
     imagen.setAttribute("src", jsonFINAL["Foto"][0]);
@@ -73,7 +73,7 @@ function cambiarFoto(color, fotos){
 //Añadimos listener para cuando seleccionamos el color, para generar el botón de limpiar los filtros 
 colores.addEventListener("change", (event) =>{
     colorSELECT = event.target.value;
-    producto.appendChild(btnLimpiar);
+    botones.appendChild(btnLimpiar);
     let ruta = cambiarFoto(colorSELECT, jsonFINAL["Foto"]);
     if(ruta){
         imagen.setAttribute("src", ruta);

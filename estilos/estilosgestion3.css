@@ -1,6 +1,17 @@
+.botones{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2% 10%;
+    width: 80%;
+}
+
+
+
 table{
     background-color: white;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     width: 80%;
     margin: 0 0 5% 0;
     border-radius: 5px;
@@ -20,15 +31,41 @@ tr:hover{
     cursor: pointer;
 }
 
+table tr:first-child th:first-child {
+    border-top-left-radius: 10px; 
+}
+
+
+table tr:first-child th:last-child {
+    border-top-right-radius: 10px; 
+}
+
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+
+tbody tr:nth-child(odd) {
+    background-color: whitesmoke;
+}
+
+
 .add{
     display: flex;
-    margin: 5dvh 10dvw;
+    margin: 5dvh 0;
     background-color: burlywood;
     border: black  solid 2px;
     border-radius: 5px;
     align-self: flex-end;
     padding: 10px;
     font-size: 20px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3); 
 }
 
 .add a{
@@ -43,6 +80,31 @@ tr:hover{
     color: white;
     cursor: pointer;
 }
+
+.enlaceVuelta{
+    background-color: burlywood;
+    margin: 5dvh 0;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3); 
+    float: left;
+    display: flex;
+    align-self: flex-start;
+}
+
+.enlaceVuelta a{
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.enlaceVuelta:hover, .enlaceVuelta:hover a{
+    background-color: rgb(60, 49, 36);
+    color: white;
+}
+
+
 
 
 .eliminar{

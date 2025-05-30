@@ -1,0 +1,107 @@
+.mostrarproducto{
+    height: 50dvh;
+    width: 60dvw;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3); 
+    border: 1px solid black;
+    padding: 2%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+.imagen{
+    width: 50%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-bottom: 40px;
+}
+
+.imagen{
+    align-items: center;
+}
+
+
+#imagenProd{
+    width: 80%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: inherit;
+}
+
+
+.informacion{
+    width: 50%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "nombre nombre"
+        "precio descripcion"
+        "colores descripcion"
+        "tallas descripcion"
+        "cantidad descripcion"
+        "stock descripcion";
+}
+
+#nombreProd{
+    grid-area: nombre;
+    font-size: 2dvi;
+    padding: 5px;
+    font-weight: bold;
+}
+
+#precioProd{
+    grid-area: precio;
+    width: 50%;
+    font-size: 30px;
+    max-height: fit-content;
+}
+
+#descpProd{
+    grid-area: descripcion;
+    background-color: lightgray;
+    border-radius: 5px;
+    /* text-align: justify; */
+    padding: 4px;
+}
+
+#coloresProd{
+    grid-area: colores;
+}
+#colores, #tallas, #cantidad{
+    display: block;
+    width: 80%;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#colores, #tallas{
+    background-color: burlywood;
+}
+
+#tallasProd{
+    grid-area: tallas;
+}
+
+#cantidadProd{
+    grid-area: cantidad;
+}
+
+#stock{
+    grid-area: stock;
+}
+
+
+.botones{
+    
+}
+
+

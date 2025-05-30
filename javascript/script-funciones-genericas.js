@@ -1,5 +1,6 @@
 //Declaración de variables 
-const producto = document.getElementsByClassName("producto")[0];
+const producto = document.querySelector(".mostrarproducto");
+const botones = document.querySelector(".botones");
 const almLocal = window.localStorage
 let tallaSELECT = "";
 let colorSELECT = "";
@@ -112,7 +113,7 @@ function limpiar() {
     }
 
     //Borramos el botón
-    producto.removeChild(btnLimpiar);
+    botones.removeChild(btnLimpiar);
     if (productCategoria != "Accesorios") {
         //Generamos los selects por defecto solo cuando no es un accesorio
         generarSelects();

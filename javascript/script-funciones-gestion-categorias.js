@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 function activarListener(){
 
     const divModDesc = document.querySelector(".modificarDescp");
-    const divNuevaColc = document.querySelector(".addColeccion");
+    const divNuevaCat = document.querySelector(".addCategoria");
     const descMod = document.querySelector("#modificarDescpTextarea");
     const btnGuardar1 = document.querySelector("#guardar1");
     const btnCancelar1 = document.querySelector("#cancelar1");
@@ -48,8 +48,8 @@ function activarListener(){
         let nombre;
         let datosEnvio = {};
         
-        divNuevaColc.style.visibility = "hidden";
-        divNuevaColc.style.opacity = 0;
+        divNuevaCat.style.visibility = "hidden";
+        divNuevaCat.style.opacity = 0;
 
         nombre = document.querySelector("#nuevoNombre");
         desc = document.querySelector("#nuevaDesc");
@@ -83,8 +83,8 @@ function activarListener(){
 
 
     btnNuevaCat.addEventListener("click", (event) =>{
-        divNuevaColc.style.visibility = "visible";
-        divNuevaColc.style.opacity = 1;
+        divNuevaCat.style.visibility = "visible";
+        divNuevaCat.style.opacity = 1;
     });
 }
 
@@ -157,7 +157,7 @@ function activarTabla(){
 async function borrar(id, event){
     try{
         //Enviamos la petición al servidor con los datos necesarios
-        fetch("../index.php?action=eliminarColeccion", {
+        fetch("../index.php?action=eliminarCategoria", {
             method: "POST",
             body: id,
             headers: {
@@ -182,7 +182,7 @@ async function actualizar(datos){
     datosEnvio = datos;
     try{
         //Enviamos la petición al servidor con los datos necesarios
-        fetch("../index.php?action=actualizarColeccion", {
+        fetch("../index.php?action=actualizarCategoria", {
             method: "POST",
             body: JSON.stringify(datosEnvio),
             headers: {
@@ -211,7 +211,7 @@ async function crear(datos){
 
     try{
         //Enviamos la petición al servidor con los datos necesarios
-        fetch("../index.php?action=crearColeccion", {
+        fetch("../index.php?action=crearCategoria", {
             method: "POST",
             body: JSON.stringify(datosEnvio),
             headers: {

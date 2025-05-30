@@ -41,7 +41,7 @@ async function rellenarProducto() {
 
     //Añadimos los datos a la tarjeta del producto
     nombre.innerHTML = jsonFINAL["Nombre"];
-    precio.textContent = jsonFINAL["Precio"];
+    precio.textContent = `${jsonFINAL["Precio"]} €`;
     descp.textContent = jsonFINAL["Descripcion"];
     cantidad.setAttribute("max", jsonFINAL["Stock"]);
     imagen.setAttribute("src", jsonFINAL["Foto"][0]);
@@ -122,7 +122,7 @@ function cambiarCOLORES(talla) {
     }
 
     //Al final añadimos el botón para limpiar los filtros
-    producto.appendChild(btnLimpiar);
+    botones.appendChild(btnLimpiar);
 }
 
 
@@ -155,7 +155,7 @@ function cambiarTALLAS(color) {
     }
 
     //Al final añadimos el botón para limpiar el filtro
-    producto.appendChild(btnLimpiar);
+    botones.appendChild(btnLimpiar);
 }
 
 //Función para cambiar las fotos de las prendas

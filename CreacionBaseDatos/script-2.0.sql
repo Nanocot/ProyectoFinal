@@ -122,7 +122,7 @@ CREATE TABLE MetodoPago (
 CREATE TABLE Compras (
     Id INT PRIMARY KEY AUTO_INCREMENT,
     Fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    EstadoPago VARCHAR(50),
+    EstadoPago ENUM('pendiente', 'pagada', 'rechazada') DEFAULT 'pendiente',
     IDMETODOPAGO INT,
     EMAILUSUARIO VARCHAR(255) NOT NULL,
     PrecioTotal DECIMAL(10, 2) NOT NULL,
@@ -334,10 +334,10 @@ INSERT INTO MetodoPago (Tipo) VALUES
 ('PayPal');
 
 -- Tabla Compras
-INSERT INTO Compras (EMAILUSUARIO, IDMETODOPAGO, PrecioTotal) VALUES
-('usuario1@farko.es', 1, 79.98),
-('usuario2@farko.es', 2, 24.99),
-('usuario3@farko.es', 1, 119.97);
+INSERT INTO Compras (EMAILUSUARIO, IDMETODOPAGO, EstadoPago, PrecioTotal) VALUES
+('usuario1@farko.es', 1, 'pendiente', 79.98),
+('usuario2@farko.es', 2, 'pagada',24.99),
+('usuario3@farko.es', 1, 'rechazada', 119.97);
 
 -- Tabla Opiniones
 INSERT INTO Opiniones (EMAILUSUARIO, IDPRODUCTO, Valoracion, Descripcion) VALUES

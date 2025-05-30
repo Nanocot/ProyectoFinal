@@ -4,14 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos/estiloprincipal.css">
+    <link rel="stylesheet" href="estilos/estilosproducto.css">
     <title>Farko</title>
-
-    <style>
-        #imagenProd{
-            width: 300px;
-            height: 150px;
-        }
-    </style>
 </head>
 <body>
     
@@ -29,34 +23,38 @@
         </nav>
     </header>
 
-    <div id="resultado" style="white-space: pre-wrap; font-family: monospace">
-    </div>
+    
 
 
-    <div class="producto">
-        
-        <img src="" alt="Imagen del producto" id="imagenProd">
-        <div id="nombreProd"></div>
-        <div id="precioProd"></div>
-        <div id="descpProd"></div>
-        <div id="coloresProd">
-            <label for="colores">COLOR</label>
-            <select name="colores" id="colores">
-            </select>
+    <div class="mostrarproducto">
+        <div class="imagen">
+            <img src="" alt="Imagen del producto" id="imagenProd">
         </div>
-    <?php if($_GET["categoria"] != "Accesorios"):?>
-        <div id="tallasProd">
-            <label for="tallas">TALLAS</label>
-            <select name="tallas" id="tallas">
-            </select>
+        <div class="informacion">
+
+            <div id="nombreProd"></div>
+            <div id="precioProd"></div>
+            <div id="descpProd"></div>
+            <div id="coloresProd">
+                <label for="colores">COLOR</label>
+                <select name="colores" id="colores"></select>
+            </div>
+                <?php if($_GET["categoria"] != "Accesorios"):?>
+                    <div id="tallasProd">
+                        <label for="tallas">TALLAS</label>
+                        <select name="tallas" id="tallas">
+                        </select>
+                    </div>
+                <?php endif?>
+                <div id="cantidadProd">
+                    <label for="cantidad">Unidades</label>
+                    <input type="number" id="cantidad" name="cantidad" value=1 min="1">
+                </div>
+            <div id="stock">Quedan: </div>
         </div>
-    <?php endif?>
-        <div id="cantidadProd">
-            <label for="cantidad">Unidades</label>
-            <input type="number" id="cantidad" name="cantidad" value=1 min="1">
+        <div class="botones">
+            <button onclick="addToCart()">Añadir al carrito</button>
         </div>
-        <div id="stock">Quedan: </div>
-        <button onclick="addToCart()">Añadir al carrito</button>
     </div>
     
 

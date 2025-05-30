@@ -76,10 +76,6 @@ nav a{
     color: black;
     padding: 2%;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3); 
-    /* position: absolute;
-    left: 30dvb;
-    top:20dvb; */
-    /* margin: 2% 10%; */
     float: left;
     display: flex;
     align-self: flex-start;

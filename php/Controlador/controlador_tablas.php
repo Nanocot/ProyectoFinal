@@ -102,56 +102,14 @@
         }
 
         public function  gestionarUsuarios(){
-            require_once "php/Vista/gestionUsuarios.php";
 
             $modeloUsuarios = new ModeloUsuarios();
 
             $respuesta = $modeloUsuarios->mostrarUsuarios();
 
+
             if(is_array($respuesta)){
-                echo "<table>
-                    <th>Email</th><th>Nombre</th><th>Apellidos</th><th>Teléfono</th><th>Estado</th><th>NewsLetter</th>
-                ";
-                    foreach($respuesta as $usuario){
-                        switch($usuario["newsletter"]){
-                            case "1":
-                                $newsletter = "Suscrito";
-                                break;
-                            case "0":
-                                $newsletter = "No Suscrito";
-                                break;
-                        }
-                        switch ($usuario["estado"]){
-                            case "1":
-                                    $estado = "Activo";
-                                break;
-                            case "0":
-                                    $estado = "Desactivado";
-                                break;
-                        }
-
-                        echo "
-                            <tr>
-                                <td>
-                                    <form action='index.php?action=gestionUsuario' method='post'>
-                                        <input type='hidden' name='usuario' id='usuario' value='{$usuario["email"]}'>
-                                        <button type='submit'>
-                                            {$usuario["email"]}
-                                        </button>
-                                    </form>
-                                </td>
-                                <td>{$usuario["nombre"]}</td>
-                                <td>{$usuario["apellido1"]} {$usuario["apellido2"]}</td>
-                                <td>{$usuario["telefono"]}</td>
-                                <td>{$estado}</td>
-                                <td>{$newsletter}</td>
-                            </tr>
-                        ";
-                    } 
-
-                echo "</table>";
-            }else{
-                echo "<div class='error'>{$respuesta}</div>";
+                require_once "php/Vista/gestionUsuarios.php";
             }
 
             
@@ -422,7 +380,60 @@
             echo $resultado;
         }
 
+        public function gestionarCategorias(){
 
+            $modeloCategorias = new ModeloCategorias();
+
+            $datos = $modeloCategorias->generarTabla();
+
+
+            require_once "php/Vista/gestionCategorias.php";
+        }
+
+
+        public function eliminarCategoria(){
+            $modeloCategorias = new ModeloCategorias();
+
+            $id = file_get_contents("php://input");
+
+            $mensaje = $modeloCategorias->eliminarCategoria($id);
+
+            echo $mensaje;
+
+        }
+
+
+
+        public function actualizarCategoria(){
+            $modeloCategorias = new ModeloCategorias();
+
+            $datosRecibidos = file_get_contents("php://input");
+
+            $datosDecode = json_decode($datosRecibidos, true);
+
+            $mensaje = $modeloCategorias->actualizarCategoria($datosDecode);
+
+            echo $mensaje;
+
+        }
+
+
+        public function crearCategoria(){
+            $modeloCategorias = new ModeloCategorias();
+
+            $datosRecibidos = file_get_contents("php://input");
+
+            $datosDecode = json_decode($datosRecibidos, true);
+
+
+
+
+            $mensaje = $modeloCategorias->crearCategoria($datosDecode);
+
+            header("Content-Type: application/json");
+            echo json_encode($mensaje);
+
+        }
 
 
 

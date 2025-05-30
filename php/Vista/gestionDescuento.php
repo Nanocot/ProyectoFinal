@@ -28,7 +28,11 @@
         </nav>
     </header>
 
-    <div class="add">Añadir nuevo Descuento</div>
+
+    <div class="botones">
+        <div class="enlaceVuelta"><a href="index.php?action=dashboard">Volver atrás</a></div>
+        <div class="add">Crear Descuento</div>
+    </div>
 
     <table>
         <thead>

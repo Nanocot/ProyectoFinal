@@ -27,6 +27,57 @@
             </ul>
         </nav>
     </header>
+
+
+
+    <table>
+        <thead>
+            <th>Email</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Teléfono</th>
+            <th>Estado</th>
+            <th>NewsLetter</th>
+        </thead>
+        <tbody>
+            <?php foreach($respuesta as $usuario): ?>
+                <?php 
+                    switch($usuario["newsletter"]){
+                            case "1":
+                                $newsletter = "Suscrito";
+                                break;
+                            case "0":
+                                $newsletter = "No Suscrito";
+                                break;
+                        }
+                    switch ($usuario["estado"]){
+                        case "1":
+                                $estado = "Activo";
+                            break;
+                        case "0":
+                                $estado = "Desactivado";
+                            break;
+                    }    
+                ?>
+                <tr>
+                    <td>
+                        <form action='index.php?action=gestionUsuario' method='post'>
+                            <input type='hidden' name='usuario' id='usuario' value='<?=$usuario["email"]?>'>
+                            <button type='submit'>
+                                <?=$usuario["email"] ?>
+                            </button>
+                        </form>
+                    </td>
+                    <td><?=$usuario["nombre"]?></td>
+                    <td><?=$usuario["apellido1"]?> <?=$usuario["apellido2"]?></td>
+                    <td><?=$usuario["telefono"]?></td>
+                    <td><?=$estado?></td>
+                    <td><?=$newsletter?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
     
 </body>
 </html>

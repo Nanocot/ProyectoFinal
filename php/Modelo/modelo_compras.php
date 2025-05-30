@@ -5,12 +5,37 @@
 
     class ModeloCompras{
 
+
+        private $conex;
+
         public function __construct(){
-            $conex = ModeloConexion::conectar();
+            $this->conex = ModeloConexion::conectar();
         }
 
 
-        
+        public function generarTabla(){
+
+            try{
+                $sql = "select * from compras";
+
+                $stmt = $this->conex->prepare($sql);
+
+                if($stmt->execute()){
+                    $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    return $datos;
+                }else{
+                    return false;
+                }
+
+
+            }catch(PDOException $e){
+                return $e->getMessage();
+            }
+
+
+
+        }
 
 
     }

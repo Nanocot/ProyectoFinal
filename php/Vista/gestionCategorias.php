@@ -30,7 +30,7 @@
 
     <div class="botones">
         <div class="enlaceVuelta"><a href="index.php?action=dashboard">Volver</a></div>
-        <div class="add">Añadir nueva Colección</div>
+        <div class="add">Añadir nueva Categoría</div>
     </div>
         
 
@@ -41,10 +41,10 @@
             <th>Eliminar</th>
         </thead>
         <tbody>
-            <?php foreach($datos as $coleccion):?>
-                <tr data-id="<?= $coleccion["Id"]?>">
-                    <td><input type="text" name="nombre" id="nombre-<?= $coleccion["Id"]?>" value="<?= $coleccion["Nombre"]?>"></td>
-                    <td><textarea name="descripcion" id="desc-<?= $coleccion["Nombre"]?>"><?= $coleccion["Descripcion"]?></textarea></td>
+            <?php foreach($datos as $categoria):?>
+                <tr data-id="<?= $categoria["Id"]?>">
+                    <td><input type="text" name="nombre" id="nombre-<?= $categoria["Id"]?>" value="<?= $categoria["Nombre"]?>"></td>
+                    <td><textarea name="descripcion" id="desc-<?= $categoria["Nombre"]?>"><?= $categoria["Descripcion"]?></textarea></td>
                     <td class="eliminar">&times;</td>
                 </tr>
             <?php endforeach; ?>
@@ -53,7 +53,7 @@
 
     
 
-<script type="text/javascript" src="javascript/script-funciones-gestion-colecciones.js"></script>
+<script type="text/javascript" src="javascript/script-funciones-gestion-categorias.js"></script>
 <script type="text/javascript" src="javascript/script-funciones-genericas.js"></script>
 
 
@@ -69,13 +69,13 @@
     </div>
 
 
-    <div class="addColeccion">
-        <div class="nuevaColeccion">
+    <div class="addCategoria">
+        <div class="nuevaCategoria">
             <span class="titulo">Nombre</span>
             <input type="text" name="nuevoNombre" id="nuevoNombre" placeholder="Escriba el nombre aquí">
             <span class="titulo">Descripción</span>
             <textarea name="nuevaDesc" id="nuevaDesc"></textarea>
-            <div class="nuevaColBotones">
+            <div class="nuevaCatBotones">
                 <button id="cancelar2" class="cancelar">Cancelar</button>
                 <button id="guardar2" class="guardar">Guardar</button>
             </div>
