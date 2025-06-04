@@ -9,6 +9,7 @@ let productos = [];
 //Creamos el botón para limpiar las opciones del formulario
 const btnLimpiar = document.createElement("button");
 btnLimpiar.setAttribute("onclick", "limpiar()");
+btnLimpiar.id = "limpiar";
 btnLimpiar.textContent = "LIMPIAR";
 
 

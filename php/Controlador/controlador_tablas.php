@@ -7,6 +7,7 @@
     require_once "php/Modelo/modelo_descuento.php";
     require_once "php/Modelo/modelo_categorias.php";
     require_once "php/Modelo/modelo_tallas.php";
+    require_once "php/Modelo/modelo_compras.php";
 
     class ControladorTablas {
 
@@ -437,6 +438,43 @@
 
 
 
+        public function gestionarCompras(){
+
+            $modeloCompras = new ModeloCompras();
+
+            $datos = $modeloCompras->generarTabla();
+
+            require_once "php/Vista/gestionCompras.php";
+
+
+        }
+
+
+
+        public function  sacarDetalles(){
+            $modeloCompras = new ModeloCompras();
+
+            $id = file_get_contents("php://input");
+
+
+            $resultado = $modeloCompras->sacarDetalles($id);
+
+            header("Content-Type: application/json");
+            echo json_encode($resultado);
+
+        }
+
+
+
+        public function prueba(){
+            $modeloCompras = new ModeloCompras();
+
+            if($modeloCompras->prueba()){
+                echo "INSERTADO";
+            }else{
+                echo "HA devuelto false mira la bdd";
+            }
+        }
 
     
     }

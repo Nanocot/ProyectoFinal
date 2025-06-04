@@ -11,6 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../estilos/estiloprincipal.css">
+    <link rel="stylesheet" href="../estilos/estilologin.css">
     <title>Farko</title>
 </head>
 <body>
@@ -27,20 +28,18 @@
         </nav>
     </header>
 
-    <h1>Inicio Sesión</h1>
-
+    
     
     <div class="formInicioSesion">
+        <h1>Inicio Sesión</h1>
         <form action="index.php?action=login" method="post">
             <label for="email">Email</label>
             <input type="email" name="email" id="email" required>
-            <br>
             <label for="password">Contraseña</label>
             <input type="password" name="password" id="password" required>
-            <br>
             <button type="submit">Iniciar Sesión</button>
         </form>
-        <p>¿No tienes cuenta?<a href="index.php?action=register">Registrate aquí</a></p>
+        <p>¿No tienes cuenta? <a href="index.php?action=register">Registrate aquí</a></p>
     </div>
 
 </body>

@@ -53,7 +53,7 @@
             <div id="stock">Quedan: </div>
         </div>
         <div class="botones">
-            <button onclick="addToCart()">Añadir al carrito</button>
+            <button onclick="addToCart()" id="addCart">Añadir al carrito</button>
         </div>
     </div>
     

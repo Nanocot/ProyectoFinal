@@ -13,6 +13,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-x: hidden;
 }
 
 header{
@@ -39,6 +40,14 @@ nav ul{
 
 nav ul li{
     padding: 5px;
+    list-style: none;
+}
+
+nav ul li:hover a, nav ul li:hover{
+    background-color: white;
+    color:black;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 nav a{

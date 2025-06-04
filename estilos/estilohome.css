@@ -3,30 +3,43 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 .producto{
     background-color: var(--colorFondoProductos);
     width: 100%;
     height: 350px;
-    /* margin: 10px; */
+    padding: 10px;
     text-align: center;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.producto:hover{
+    background-color: black;
+    color: white;
+    transition: 0.5s;
 }
 
 .producto img{
     max-width: 80%;
     max-height: 60%;
-    margin: 4% 0;
+    margin: auto;
+    border-radius: 5px;
 }
 
-a{
-    padding: 10px;
-    width: 30%;
+.producto img:hover{
+    transform: scale(1.5);
+    transition: linear 0.5s;
+}
+
+.productos a{
+    margin: 10px;
+    width: 25%;
     color: black;
     text-decoration: none;
     font-size: 30px;

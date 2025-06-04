@@ -1,6 +1,7 @@
 .mostrarproducto{
     height: 50dvh;
     width: 60dvw;
+    margin: 5dvh 0;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3); 
@@ -87,6 +88,12 @@
     background-color: burlywood;
 }
 
+#colores:hover, #tallas:hover{
+    background-color: rgb(186, 120, 27);
+    color: white;
+    cursor: pointer;
+}
+
 #tallasProd{
     grid-area: tallas;
 }
@@ -101,7 +108,38 @@
 
 
 .botones{
-    
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
 }
 
+#addCart{
+    background-color: rgba(244, 133, 53, 0.881);
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 5px;
+}
+
+#addCart:hover{
+    background-color:  rgba(90, 38, 0, 0.881);
+    color: white;
+    cursor: pointer;
+}
+
+
+#limpiar{
+    background-color: rgb(244, 68, 68);
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 5px;
+}
+
+#limpiar:hover{
+    background-color:  rgb(255, 0, 0);
+    color: white;
+    cursor: pointer;
+}
 
