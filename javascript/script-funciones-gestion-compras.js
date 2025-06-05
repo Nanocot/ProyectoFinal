@@ -10,15 +10,19 @@ window.addEventListener("DOMContentLoaded", (event) =>{
 
 function activarListener(){
 
-    const filas = document.querySelectorAll("tr");
+    const filas = document.querySelectorAll("tbody tr");
     const detalles = document.querySelector(".detalles");
 
-
     detalles.addEventListener("click", (event) =>{
+        const estadoPago = document.querySelector("#estado");
         if(event.target === detalles){
             detalles.style.opacity = 0;
             detalles.style.visibility = "hidden";
-            console.log("Se cierra");
+            for(let opcion of estadoPago.children){
+                if(opcion.getAttribute("selected")){
+                    opcion.removeAttribute("selected");
+                }
+            }
         }
 
     });
@@ -30,7 +34,7 @@ function activarListener(){
             let id = fila.dataset.id;
             let usuario = fila.children[1].innerText;
             let precioTotal = fila.children[2].innerText;
-            let estado = fila.lastChild;
+            let estado = fila.children[4].innerText;
 
             sacarDetalles(id, usuario, estado, precioTotal);
 
@@ -62,7 +66,7 @@ async function sacarDetalles(id, usuario, estado, precioTotal){
     emailUsuario.innerHTML = usuario;
     totalProductos.innerHTML = "";
 
-    console.log(estadoPago);
+    
 
     try{
         //Enviamos la petición al servidor con los datos necesarios
@@ -78,11 +82,14 @@ async function sacarDetalles(id, usuario, estado, precioTotal){
         //Convertimos el objeto respuesta en texto, para poder leerlo
         .then(response => response.json())
         .then(html => {
-            console.log(html);
             totalProductos.innerHTML = html[1];
             detalles.innerHTML = "";
             
-            
+            for(let opcion of estadoPago.children){
+                if(opcion.value == estado){
+                    opcion.setAttribute("selected", true);
+                }
+            }
             
             for(let i = 0; i < html[0].length; i ++){
                 const fila = document.createElement("tr");

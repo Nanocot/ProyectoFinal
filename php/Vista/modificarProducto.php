@@ -173,9 +173,6 @@
 
     </div>
 
-    <!-- <pre>
-        <?php print_r($producto)?>
-    </pre> -->
 
 
 </body>

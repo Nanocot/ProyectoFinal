@@ -73,7 +73,7 @@
                 </span>
                 <span>
                     Estado del Pago: <select name="estado" id="estado">
-                        <option value="" disabled selected>Elija Una</option>
+                        <option value="" disabled>Elija Una</option>
                         <option value="pagada">Pagada</option>
                         <option value="pendiente">Pendiente</option>
                         <option value="rechazada">Rechazada</option>
@@ -89,7 +89,9 @@
             </div>
             
             <h4>Detalles</h4>
-            <table class="tablaProdus">
+        <div class="tablaProdus">
+            
+            <table>
                 <thead>
                     <th>Nombre</th>
                     <th>Color</th>
@@ -98,8 +100,9 @@
                     <th>Precio</th>
                 </thead>
                 <tbody class="infoProdus">
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
             <div class="precTotal"></div>        
         </div>
     </div>

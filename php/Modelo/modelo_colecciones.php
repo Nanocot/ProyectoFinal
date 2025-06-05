@@ -17,7 +17,7 @@
         public function sacarColecciones(){
 
             try{
-                $sql = "select id, nombre, from colecciones";
+                $sql = "select id, nombre from colecciones";
 
                 $stmt = $this->conex->prepare($sql);
 

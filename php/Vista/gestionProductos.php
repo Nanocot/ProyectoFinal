@@ -43,9 +43,7 @@
             <?php foreach($datosTabla as $producto):?>
                 <tr data-href="index.php?action=modificarProducto&id=<?=$producto["ID"]?>&categoria=<?=$producto["Categoria"]?>">
                     <td>    
-                        <!-- <a href=""> -->
                             <img src="<?= $producto["Foto"]?>" alt="Foto del producto <?= $producto["ID"]?>">
-                        <!-- </a> -->
                     </td>
                     <td><?= $producto["Nombre"]?></td>
                     <td><?= $producto["Tallas"]?></td>

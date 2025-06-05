@@ -98,26 +98,35 @@
     min-width: 50%;
 }
 
-.contenidoDetalles table{
-    table-layout: fixed;
-}
 
 .tablaProdus{
-    background-color: red;
-    height: 5dvh;
+    height: 300px;
+    max-height: 50dvh;
+    overflow: scroll;
+}
+
+.tablaProdus table{
     width: 100%;
     table-layout: fixed;
+    border-collapse: collapse;
 }
 
 .infoProdus{
     background-color: lightgrey;
-    /* border-radius: 5px; */
-    /* height: 300px; */
-    overflow: scroll;
     padding: 5px;
-    /* display: block; */
-    /* flex-direction: row;
-    flex-wrap: wrap; */
+}
+
+.infoProdus tr, .infoProdus td, .tablaProdus th{
+    border: 1px solid black;
+    text-align: center;
+}
+
+.tablaProdus th{
+    top: 0;
+    z-index: 1000;
+    position: sticky;
+    background-color: darkgoldenrod;
+    border: 1px solid black;
 }
 
 .precTotal{
