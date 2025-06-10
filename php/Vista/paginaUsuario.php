@@ -34,11 +34,17 @@
             <label for="email">Email</label>
             <input type="email" name="email" id="email" readonly value="<?= $_SESSION["usuario"] ?>">
         </span>
-        <span class="modPerfil">
-            Modificar Perfil
-        </span>
-        <span>
-            
+        <span class="botonesUsuario">
+            <span id="modificarPerfil">
+                Modificar Perfil
+            </span>
+            <span id="historialCompras">
+                Mirar Historial de compras
+            </span>
+            <span id="cambiarAjustes">
+                Cambiar ajustes de usuario
+            </span>
+
         </span>
     </div>
 
