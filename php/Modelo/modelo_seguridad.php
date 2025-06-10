@@ -26,9 +26,11 @@
 
 
 
+
                 //Comprobamos que tiene contraseña
                 if($passControl != -1){
                     //Comprobamos si la contraseña está cifrada
+                    session_regenerate_id(true);
                     if(preg_match($patron, $passControl["password"]) && password_verify($password, PASSWORD_DEFAULT)){
                         if($this->comprobarAdministrador($email)){
                             $_SESSION["usuario"] = "Administrador";
@@ -41,7 +43,7 @@
                             $_SESSION["usuario"] = "Administrador";
                             return true;
                         }
-                        $_SESSION["usuario"] = "Usuario";
+                        $_SESSION["usuario"] = $email;
                         return true;
                     }
                     return false;

@@ -106,6 +106,23 @@ function activarListener(){
         fecIni.value = fechaFormateada;
 
     });
+
+
+
+    divModDesc.addEventListener("click", (event) =>{
+        if(event.target == divModDesc){
+            divModDesc.style.visibility = "hidden";
+            divModDesc.style.opacity = 0;
+        }
+    });
+
+
+    divNuevoDes.addEventListener("click", (event) =>{
+        if(event.target == divNuevoDes){
+            divNuevoDes.style.visibility = "hidden";
+            divNuevoDes.style.opacity = 0;
+        }
+    });
 }
 
 

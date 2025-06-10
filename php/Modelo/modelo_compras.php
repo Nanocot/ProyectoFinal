@@ -75,34 +75,26 @@
         }
         
 
-        public function  prueba(){
+        public function actualizarCompra($id, $estado){
+
             try{
-                
-                $sql = "insert into detallescompra (idcompra, idvariacion, idtalla, cantidad, preciototal) values (?, ?, ?, ?, ?);";
+
+                $sql = "update  compras set estadopago = ? where id = ?;";
 
 
                 $stmt = $this->conex->prepare($sql);
-
-                
-                for($i = 0; $i <= 7; $i +=1){
-                    $idvariacion = floor(rand(1, 22));
-                    $idtalla = floor(rand(1, 4));
-                    $cantidad = floor(rand(1, 10));
-                    $precio = $cantidad * floor(rand(1, 30));
-
-                    $stmt->execute([1, $idvariacion, $idtalla, $cantidad, $precio]);
-                }
-
-                if($this->conex->lastInsertId() != null){
+                if($stmt->execute([$estado, $id])){
                     return true;
                 }else{
                     return false;
                 }
 
-
             }catch(PDOException $e){
                 return $e->getMessage();
             }
+
+
+
         }
 
 

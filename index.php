@@ -22,7 +22,6 @@
 
     // echo $action;
 
-
     //Comprobamos a que controlador pertenece la acción
     if(method_exists($controladorSeguridad, $action)){
         //En el caso de que exista usamos el método

@@ -12,6 +12,8 @@ function activarListener(){
 
     const filas = document.querySelectorAll("tbody tr");
     const detalles = document.querySelector(".detalles");
+    const cerrar = document.querySelector(".cerrar");
+    const estado = document.querySelector("#estado");
 
     detalles.addEventListener("click", (event) =>{
         const estadoPago = document.querySelector("#estado");
@@ -27,6 +29,28 @@ function activarListener(){
 
     });
 
+
+    cerrar.addEventListener("click", (event) =>{
+        const estadoPago = document.querySelector("#estado");
+        detalles.style.opacity = 0;
+        detalles.style.visibility = "hidden";
+        for(let opcion of estadoPago.children){
+            if(opcion.getAttribute("selected")){
+                opcion.removeAttribute("selected");
+            }
+        }
+    });
+
+
+    estado.addEventListener("change", (event) => {
+        const id = document.querySelector(".numero").textContent;
+        const estado = event.target.value;
+
+        const datos = {"ID" : id, "Estado" : estado};
+
+        actualizarEstado(datos);
+
+    });
 
 
     for(let fila of filas){
@@ -121,6 +145,47 @@ async function sacarDetalles(id, usuario, estado, precioTotal){
     }catch(error){
         console.error("Error antes del fetch", error);
     }
+
+
+
+}
+
+
+
+async function actualizarEstado(datos){
+
+    try{
+        fetch("../index.php?action=actualizarCompra", {
+            method: "POST",
+            body: JSON.stringify(datos),
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .catch((error) => console.error("Algo ha salido mal", error))
+        .then((response) => response.text())
+        .then((html) => {
+            generarAlerta(html);
+            actualizarEstadoTabla(datos["ID"], datos["Estado"]);
+        });
+    }catch(error){
+        console.error("Error antes del fetch", error);
+    }
+
+
+}
+
+
+
+function actualizarEstadoTabla(id, estado){
+    const filasTabla = document.querySelectorAll(".datos  tr");
+
+    for(let fila of filasTabla){
+        if(fila.dataset.id == id){
+            fila.children[4].innerText = estado;
+        }
+    }
+
 
 
 

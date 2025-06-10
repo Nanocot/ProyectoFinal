@@ -70,7 +70,15 @@
             
             //Mandamos el JSON generado
             echo $detallesProd;
-        
+        }
+
+
+        public function paginaUsuario(){
+
+            $modeloUsuario = new ModeloUsuarios();
+
+
+            require_once "php/Vista/paginaUsuario.php";
         }
 
         public function  generarCarrito(){
@@ -466,13 +474,19 @@
 
 
 
-        public function prueba(){
+        public function actualizarCompra(){
             $modeloCompras = new ModeloCompras();
 
-            if($modeloCompras->prueba()){
-                echo "INSERTADO";
+            $datos = json_decode(file_get_contents("php://input"), true);
+
+            ["ID" => $id, "Estado" => $estado] = $datos;
+
+            $mensaje = $modeloCompras->actualizarCompra($id,  $estado);
+            
+            if($mensaje === true){
+                echo "Actualizado";
             }else{
-                echo "HA devuelto false mira la bdd";
+                echo $mensaje;
             }
         }
 

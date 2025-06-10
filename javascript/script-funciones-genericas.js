@@ -18,8 +18,9 @@ function addToCart() {
     //Recuperamos la cantidad del producto
     let cantidad = parseInt(document.getElementById("cantidad").value);
     let contador = 0;
-    //Comprobamos que la cantidad que quiere añadir, no supera el stock disponible
-    if (cantidad <= unidades) {
+
+    //Comprobamos que la cantidad que quiere añadir, no supera el stock disponible y ha seleccionado alguna de las opciones
+    if(cantidad <= unidades) {
 
         
 
@@ -94,7 +95,20 @@ function addToCart() {
             }
         }
     }else{
-        generarAlerta("No hay stock suficiente");
+        if(productCategoria != "Accesorios"){
+            if(colores.value == "Elija una" && tallas.value == "Elija una"){
+                generarAlerta("No ha seleccionado ninguna opción");
+            }else{
+                generarAlerta("No hay stock suficiente");
+            }
+        }else{
+            if(colores.value == "Elija una"){
+                generarAlerta("No ha seleccionado ninguna opción");
+            }else{
+                generarAlerta("No hay stock suficiente");
+            }
+            
+        }
     }
 
 }

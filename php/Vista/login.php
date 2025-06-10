@@ -6,7 +6,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,7 @@
             <img src="../imagenes/Farko-logo-pequenio.png" alt="logo de farko">
         </a>
         <nav>
-            <ul>
+            <ul class="menu">
                 <li><a href="index.php?action=home">Home</a></li>
                 <li><a href="index.php?action=carrito">Carrito</a></li>
                 <li><a href="index.php?action=aboutus">Sobre Nosotros</a></li>
@@ -37,10 +37,15 @@
             <input type="email" name="email" id="email" required>
             <label for="password">Contraseña</label>
             <input type="password" name="password" id="password" required>
-            <button type="submit">Iniciar Sesión</button>
+            <button type="submit" id="envio">Iniciar Sesión</button>
         </form>
         <p>¿No tienes cuenta? <a href="index.php?action=register">Registrate aquí</a></p>
     </div>
+
+
+    <script type="text/javascript" src="javascript/script-funciones-login.js"></script>
+    <script type="text/javascript" src="javascript/script-funciones-genericas.js"></script>
+
 
 </body>
 </html>

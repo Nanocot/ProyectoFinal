@@ -86,6 +86,26 @@ function activarListener(){
         divNuevaColc.style.visibility = "visible";
         divNuevaColc.style.opacity = 1;
     });
+
+
+
+    divModDesc.addEventListener("click", (event) =>{
+        if(event.target == divModDesc){
+            divModDesc.style.visibility = "hidden";
+            divModDesc.style.opacity = 0;
+        }
+    });
+
+    divNuevaColc.addEventListener("click", (event) =>{
+        if(event.target == divNuevaColc){
+            divNuevaColc.style.visibility = "hidden";
+            divNuevaColc.style.opacity = 0;
+        }
+    }); 
+
+
+
+
 }
 
 

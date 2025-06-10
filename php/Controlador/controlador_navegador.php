@@ -9,7 +9,11 @@
         }
 
         public function usuario(){
-            require_once "php/Vista/login.php";
+            if(isset($_SESSION["usuario"]) && $_SESSION["usuario"] != "Administrador"){
+                require_once "php/Vista/paginaUsuario.php";
+            }else{
+                require_once "php/Vista/login.php";
+            }
         }
 
         public function err404(){
@@ -29,6 +33,8 @@
         public function dashboard(){
             require_once "php/Vista/dashboard.php";
         }
+
+        
 
 
     }

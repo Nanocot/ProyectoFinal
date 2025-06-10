@@ -86,6 +86,22 @@ function activarListener(){
         divNuevaCat.style.visibility = "visible";
         divNuevaCat.style.opacity = 1;
     });
+
+
+    divModDesc.addEventListener("click", (event) =>{
+        if(event.target == divModDesc){
+            divModDesc.style.visibility = "hidden";
+            divModDesc.style.opacity = 0;
+        }
+    });
+
+    divNuevaCat.addEventListener("click", (event) =>{
+        if(event.target == divNuevaCat){
+            divNuevaCat.style.visibility = "hidden";
+            divNuevaCat.style.opacity = 0;
+        }
+    }); 
+
 }
 
 

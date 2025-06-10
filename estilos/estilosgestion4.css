@@ -137,3 +137,24 @@
     border-radius: 5px;
     width: fit-content;
 }
+
+.cerrar{
+    float: right;
+    background-color: rgb(248, 114, 114);
+    color: black;
+    font-weight: bold;
+    font-size: large;
+    text-align: center;
+    padding: 5px;
+    width: 20px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}
+
+
+.cerrar:hover{
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    transition: 0.1s;
+}

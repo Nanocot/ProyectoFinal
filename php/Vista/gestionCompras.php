@@ -5,7 +5,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,9 +21,19 @@
             <img src="../imagenes/Farko-logo-pequenio.png" alt="logo de farko">
         </a>
         <nav>
-            <ul>
+            <ul class="menu">
                 <li><a href="index.php?action=home">Home</a></li>
-                <li><a href="index.php?action=dashboard">DashBoard</a></li>
+                <li><a href="index.php?action=dashboard">DashBoard</a>
+                    <ul class="submenu">
+                        <li><a href="index.php?action=gestionarUsuarios"><span class="gesUsuarios">Gestionar Usuarios</span></a></li>
+                        <li><a href="index.php?action=gestionarProductos"><span class="gesProductos">Gestionar Productos</span></a></li>
+                        <li><a href="index.php?action=gestionarColecciones"><span class="gesColecciones">Gestionar Colecciones</span></a></li>
+                        <li><a href="index.php?action=gestionarDescuentos"><span class="gesDescuentos">Gestionar Descuentos</span></a></li>
+                        <li><a href="index.php?action=gestionarCategorias"><span class="gesCategorias">Gestionar Categorías</span></a></li>
+                        <li><a href="index.php?action=gestionarCompras"><span class="gesCompras">Gestionar Compras</span></a></li>
+                        <li><a href="index.php?action=gestionarIncidencias"><span class="gesIncidencias">Gestionar Incidencias</span></a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </header>
@@ -65,7 +75,7 @@
 
     <div class="detalles">
         <div class="contenidoDetalles">
-
+            <span class="cerrar">&times;</span>
             <div class="infoUser">
                 <span>
                     Compra Nº: 
@@ -95,8 +105,8 @@
                 <thead>
                     <th>Nombre</th>
                     <th>Color</th>
-                    <th>Cantidad</th>
                     <th>Talla</th>
+                    <th>Cantidad</th>
                     <th>Precio</th>
                 </thead>
                 <tbody class="infoProdus">

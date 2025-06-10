@@ -5,20 +5,21 @@
         
         public function login(){
             $modeloSeguridad = new ModeloSeguridad();
-            
+
+            header("Content-Type: application/json");
 
             if($modeloSeguridad->login()){
                 
                 if($_SESSION["usuario"] == "Administrador"){
-                    header("location: index.php?action=dashboard");
+                    $respuesta = ["inicio" => true, "redirect" =>  "index.php?action=dashboard"];
+                    echo json_encode($respuesta);
                 }else{
-                    header("location: index.php?action=paginausuario");
+                    $respuesta = ["inicio" => true, "redirect" =>  "index.php?action=paginausuario"];
+                    echo json_encode($respuesta);
                 }
-
-
             }else{
-                require_once "php/Vista/login.php";
-                echo "<div class='error'>Inicio de sesión incorrecto</div>";
+                $respuesta = ["inicio" => false, "mensaje" =>  "Inicio de sesión incorrecto"];
+                echo json_encode($respuesta);
             }
             
             

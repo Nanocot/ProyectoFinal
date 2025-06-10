@@ -23,6 +23,8 @@ header{
     flex-direction: row;
     justify-content: space-between;
     max-height: 10%;
+    position: sticky;
+    top:0;
 }
 
 nav{
@@ -30,20 +32,22 @@ nav{
     max-height: 100%;
 }
 
-nav ul{
+nav .menu{
     max-height: 100%;
     display: flex;
     justify-content: space-around;
     align-items:end;
     flex-direction: row;
-}
-
-nav ul li{
-    padding: 5px;
     list-style: none;
 }
 
-nav ul li:hover a, nav ul li:hover{
+nav .menu li{
+    padding: 5px;
+    list-style: none;
+    position: relative;
+}
+
+nav .menu > li:hover > a, nav .menu > li:hover{
     background-color: white;
     color:black;
     border-radius: 5px;
@@ -54,6 +58,8 @@ nav a{
     color: white;
     text-decoration: none;
     font-size: 24px;
+    display: block;
+    padding: 5px 10px;
 }
 
 
@@ -98,4 +104,35 @@ nav a{
 .enlaceVuelta:hover, .enlaceVuelta:hover a{
     background-color: rgb(60, 49, 36);
     color: white;
+}
+
+
+
+/* Estilos para el menu desplegable del dashboard */
+
+.submenu{
+    display: none;
+    flex-direction: row;
+    align-content: space-between;
+    position: fixed;
+    top: 10%;
+    left: 0;
+    z-index: 1000;
+    list-style-type: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+nav ul li:hover .submenu{
+    display: flex;
+}
+
+.submenu li a{
+    padding: 10px 15px;
+    display: block;
+}
+
+.submenu li a:hover{
+    background-color: white;
+    color: black;
+    border-radius: 5px;
 }

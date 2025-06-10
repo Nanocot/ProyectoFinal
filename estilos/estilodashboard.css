@@ -19,7 +19,7 @@
 .dashboard a{
     width: 30%;
     height: 5vh;
-    background-color: aquamarine;
+    background-color: rgb(177, 125, 5);
     text-align: center;
     border: solid black 2px;
     border-radius: 5px;
@@ -40,10 +40,12 @@ button{
     border-radius: 5px;
     padding: 10px;
     font-size: 20px;
+    border: none;
 }
 
 
 button:hover {
-    background-color: aquamarine;
-    cursor: pointer; 
+    background-color: black;
+    color: white;
+    cursor: pointer;
 }

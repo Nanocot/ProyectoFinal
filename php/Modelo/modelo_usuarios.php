@@ -153,6 +153,19 @@
         }
 
 
+        public function paginaUsuario(){
+            try{
+
+                
+
+            }catch(PDOException $e){
+                return $e->getMessage();
+            }
+        }
+
+
+
+
 
 
     }

@@ -41,6 +41,8 @@ async function enviarDatos(){
                 btnComprar.setAttribute("id", "comprar");
                 btnComprar.innerText = "Comprar";
                 controles.appendChild(btnComprar);
+            }else{
+                carritoVacio();
             }
             
         });
@@ -80,6 +82,8 @@ function borrarCarrito(){
         btnComprar.remove();
     }
     carritoDiv.innerHTML = "";
+
+    carritoVacio();
     //Generamos una alerta
     generarAlerta("Carrito Borrado");
 }
@@ -202,6 +206,15 @@ function activarListeners(){
 
 
 }
+
+
+function carritoVacio(){
+    controles.style.display = "none";
+    const carritoVacio = document.createElement("h1");
+    carritoVacio.textContent = "Carrito vacio";
+    document.body.appendChild(carritoVacio);
+}
+
 
 enviarDatos();
 

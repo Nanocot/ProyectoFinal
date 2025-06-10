@@ -7,14 +7,15 @@ form{
     margin: 5dvh auto;
     padding: 5px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
 }
 
 form input{
     display: inline;
     width: 30%;
-    
 }
 
 form label{
