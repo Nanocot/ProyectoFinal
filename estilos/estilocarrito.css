@@ -1,10 +1,13 @@
 
 .carrito{
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    align-items: center;
+    align-items: left;
+    align-self:flex-start;
+    overflow: scroll;
+    height: 100%;
 }
 
 .producto{
@@ -88,7 +91,10 @@
 
 
 .controles{
-    width: 100%;
+    width: 25%;
+    position: fixed;
+    top: 15dvh;
+    left: 75%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -107,6 +113,7 @@
 #enviar, #borrar, #comprar {
     background-color: burlywood;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     width: 30%;
+    
 }

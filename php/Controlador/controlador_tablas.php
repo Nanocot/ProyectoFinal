@@ -77,7 +77,9 @@
 
             $modeloUsuario = new ModeloUsuarios();
 
+            $datosUsuario = $modeloUsuario->datosUsuario();
 
+            print_r($datosUsuario);
             require_once "php/Vista/paginaUsuario.php";
         }
 

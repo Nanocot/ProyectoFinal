@@ -153,10 +153,28 @@
         }
 
 
-        public function paginaUsuario(){
+
+        // Función para sacar los datos del usuario
+        public function datosUsuario(){
             try{
 
+
+                //Sentencia sql para sacar los datos necesarios
+                $sql = "select u.nombre, concat_ws(' ', u.apellido1, u.apellido2) as apellidos, u.telefono, u.newsletter, d.id, d.numero, d.codPostal, d.calle, d.poblacion, d.puerta, d.planta 
+                from usuarios u 
+                left join direcciones d on u.email = d.emailusuario
+                where u.email = '{$_SESSION["usuario"]}'";
                 
+                $stmt = $this->conex->prepare($sql);
+
+                if($stmt->execute()){
+                    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    return $resultado;
+                }else{
+                    return false;
+                }
+
 
             }catch(PDOException $e){
                 return $e->getMessage();

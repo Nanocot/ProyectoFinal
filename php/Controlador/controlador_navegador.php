@@ -10,7 +10,7 @@
 
         public function usuario(){
             if(isset($_SESSION["usuario"]) && $_SESSION["usuario"] != "Administrador"){
-                require_once "php/Vista/paginaUsuario.php";
+                header("Location: index.php?action=paginausuario");
             }else{
                 require_once "php/Vista/login.php";
             }

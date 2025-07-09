@@ -51,3 +51,141 @@
     transition: linear 0.3s;
     cursor: pointer;
 }
+
+
+
+
+
+/* Estilos para cuadros de dialogo */
+.cuadrosDialogo{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+    visibility: hidden; 
+    opacity: 0; 
+}
+
+
+
+#perfil, #historial, #reclamacion{
+    position: fixed;
+    top: 20dvh;
+    background-color: white;
+    border-radius: 5px;
+    border: solid 1px whitesmoke;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    width: 50dvw;
+    height: 50dvh;
+    visibility: hidden; 
+    opacity: 0;
+    /* overflow-y: scroll; */
+}
+
+.cerrar{
+    position: absolute;
+    top: 10px;
+    left: 95%;
+    background-color: rgb(241, 91, 91);
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.cerrar:hover{
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+
+/* Estilos para cuadro de cambio de ajustes de usuario */
+.btnDireccion{
+    background-color: rgb(227, 142, 39);
+    color: black;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 15px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+.btnDireccion:hover {
+    background-color: #5e3800;
+    color: white;
+}
+
+.datosDireccion {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s linear; 
+    padding-top: 0; 
+    border-top: none;
+}
+
+.datosDireccion.active {
+    max-height: 500px;
+    opacity: 1;
+    padding-top: 15px; 
+    border-top: 1px solid #eee;
+}
+
+.btnDireccion .flecha-desp {
+    transition: transform 0.3s linear;
+}
+
+.btnDireccion.active .flecha-desp {
+    transform: rotate(90deg); 
+}
+
+.formulario {
+    margin-bottom: 15px;
+}
+
+.formulario label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.formulario input[type="text"] {
+    width: calc(100% - 20px); 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.formulario button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.formulario button:hover {
+    background-color: #218838;
+}
+
+
+/* Estilos para cuadro de historial de compras */
+/* Estilos para cuadro de reclamaciones de usuario */
+
