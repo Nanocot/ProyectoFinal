@@ -114,6 +114,5 @@
     background-color: burlywood;
     border-radius: 5px;
     font-size: 20px;
-    width: 30%;
-    
+    min-width: 30%;
 }

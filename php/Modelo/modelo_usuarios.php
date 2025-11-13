@@ -39,7 +39,7 @@
         public function register($nombre, $apellido1, $apellido2 = null, $email, $password, $phoneNumber, $estado = true, $newsletter){
             try{
                 //Nos aseguramos que los datos necesarios existen para evitar insercciones con los datos insuficientes
-                if($nombre != null && $apellido1 != null && $email != null && $password != null && $phoneNumber != null && $newsletter!= null){    
+                if($nombre != null && $apellido1 != null && $email != null && $password != null && $phoneNumber != null){    
                     //Preparamos el sql de insercción
                     $sql = "insert into usuarios (Email, Nombre, Apellido1, Apellido2, Password, Telefono, Estado, NewsLetter) values (?, ?, ?, ?, ?, ?, ?, ?);";
                     
@@ -54,12 +54,13 @@
                         return false;
                     }
                 }else{
-                    return false;
+                    return false ;
                 }
             }catch(PDOException $e){
                 if($e->getCode() == 23000){
                     return "Este correo ya está registrado";
                 }
+                return $e->getMessage();
 
             }
         }

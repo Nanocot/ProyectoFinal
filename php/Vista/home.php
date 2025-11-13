@@ -48,6 +48,10 @@
         <?php endforeach?>
     </div>
     
+    <script src="../../javascript/script-funciones-genericas.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        borrarAlerta();
+    </script>
 
 </body>
 </html>

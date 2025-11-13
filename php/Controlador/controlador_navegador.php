@@ -34,6 +34,11 @@
             require_once "php/Vista/dashboard.php";
         }
 
+
+        public function comprar(){
+            require_once "php/Vista/checkout.php";
+        }
+
         
 
 

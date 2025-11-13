@@ -231,3 +231,15 @@ function capitalize(cadena){
 
     return cadenaAux;
 }
+
+function borrarAlerta(){
+    let  alerta = document.querySelector(".alerta");
+
+    if(alerta != null){
+        setTimeout(() =>{
+            alerta.remove();
+        }
+        , 2000);
+        
+    }
+}

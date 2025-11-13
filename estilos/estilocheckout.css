@@ -1,0 +1,14 @@
+#formularioPago{
+    background-color: white;
+    border-radius: 5px;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 20px;
+}
+
+
+#formularioPago input{
+    width: 100%;
+}

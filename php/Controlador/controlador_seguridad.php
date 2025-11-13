@@ -8,8 +8,9 @@
 
             header("Content-Type: application/json");
 
-            if($modeloSeguridad->login()){
-                
+            $comprobacion = $modeloSeguridad->login();
+
+            if(!is_array($comprobacion)){
                 if($_SESSION["usuario"] == "Administrador"){
                     $respuesta = ["inicio" => true, "redirect" =>  "index.php?action=dashboard"];
                     echo json_encode($respuesta);
@@ -18,7 +19,8 @@
                     echo json_encode($respuesta);
                 }
             }else{
-                $respuesta = ["inicio" => false, "mensaje" =>  "Inicio de sesión incorrecto"];
+                $mensaje = $comprobacion[1];
+                $respuesta = ["inicio" => false, "mensaje" =>  $mensaje];
                 echo json_encode($respuesta);
             }
             

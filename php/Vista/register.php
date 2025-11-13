@@ -43,6 +43,9 @@
         <button type="submit">Enviar</button>
     </form>
 
+    <script src="../../javascript/script-funciones-genericas.js" type="text/javascript"></script>
+    <script src="../../javascript/script-register.js" type="text/javascript"></script>
+
 
 </body>
 </html>

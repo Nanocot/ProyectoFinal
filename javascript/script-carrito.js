@@ -32,19 +32,22 @@ async function enviarDatos(){
             carritoDiv.innerHTML = html;
             //Calculamos el total del carrito
             calcularTotal();
-            //Activamos los listeners
-            activarListeners();
             
             if(html){
+                let enlace = document.createElement("a");
+                enlace.setAttribute("href", "index.php?action=comprar");
                 let btnComprar = document.createElement("button");
                 btnComprar.setAttribute("type", "submit");
                 btnComprar.setAttribute("id", "comprar");
                 btnComprar.innerText = "Comprar";
-                controles.appendChild(btnComprar);
+                enlace.appendChild(btnComprar);
+                controles.appendChild(enlace);
             }else{
                 carritoVacio();
             }
             
+            //Activamos los listeners
+            activarListeners();
         });
     }catch(error){
         console.error("Error antes del fetch", error);

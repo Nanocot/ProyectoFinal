@@ -28,30 +28,31 @@
             $modeloUsuarios = new ModeloUsuarios();
             //Comprobamos que el método de envio sea post
             if($_SERVER["REQUEST_METHOD"] == "POST"){
-                //Cogemos los datos necesarios para el registro de usuario
+                //Cogemos los datos necesarios para el registro de usuario  
                 $email = $_POST["email"];
                 $nombre = $_POST["nombre"];
                 $apellido1 = $_POST["apellido1"];
                 $apellido2 = $_POST["apellido2"];
                 $password = $_POST["password1"];
-                $telefono = $_POST["phonenumber"];
+                $telefono = !empty($_POST["phonenumber"]) ? $_POST["phonenumber"] : 123456789;
                 $estado = true;
                 //Comprobamos que exista la celda de newsletter, en caso de que exista, significa que el usuario ha marcado la casilla, en caso contrario no la ha marcado
                 $newsletter = isset($_POST["newsletter"]) ? true : false;
 
                 $condicion = $modeloUsuarios->register($nombre, $apellido1, $apellido2, $email, $password, $telefono, $estado, $newsletter);
-
+                
                 if($condicion === true){
-                    echo "usuario registrado con éxito";
+                    echo "<div class='alerta'>Usuario registrado con éxito</div>";
                 }else{
-                    echo "No ha sido posible registrar el usuario: $condicion";
+                    echo "<div class='alerta'>No ha sido posible registrar el usuario: $condicion</div>";
+                    require_once "php/Vista/register.php";
                 }
-
-
-
+                
+                
+                
             }
-
             require_once "php/Vista/register.php";
+
         }
 
         public function volcarApi(){
@@ -79,7 +80,7 @@
 
             $datosUsuario = $modeloUsuario->datosUsuario();
 
-            print_r($datosUsuario);
+            // print_r($datosUsuario);
             require_once "php/Vista/paginaUsuario.php";
         }
 
@@ -236,8 +237,6 @@
             
             echo $respuesta;
         }
-
-
 
         public function addProduct(){
             $modeloProductos = new ModeloProductos();
