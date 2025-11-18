@@ -38,6 +38,30 @@
 
         }
 
+        public function generarTablaUser($usuario){
+
+            try{
+                $sql = "select c.id as Id, c.fecha as Fecha, c.estadoPago as EstadoPago, c.precioTotal as PrecioTotal, m.tipo as MetodoPago from compras c left join metodopago m on c.IDMETODOPAGO = m.ID where c.emailusuario = '{$usuario}';";
+
+                $stmt = $this->conex->prepare($sql);
+
+                if($stmt->execute()){
+                    $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    return $datos;
+                }else{
+                    return false;
+                }
+
+
+            }catch(PDOException $e){
+                return $e->getMessage();
+            }
+
+
+
+        }
+
         
 
 

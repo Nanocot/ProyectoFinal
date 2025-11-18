@@ -183,6 +183,34 @@
         }
 
 
+        public function modPerfil($email, $nombre, $apellidos){
+            try{
+                [$apellido1, $apellido2] = explode(" ", $apellidos);
+                
+
+
+
+                $sql = "update usuarios set nombre = ?, apellido1 = ?, apellido2 = ? where email = ?";
+
+                $stmt = $this->conex->prepare($sql);
+
+                if($stmt->execute([$nombre, $apellido1, $apellido2, $email])){
+                    return true;
+                }else{
+                    return false;
+                }
+
+
+            }catch(PDOException $e){
+                return $e->getMessage();
+            }
+
+
+
+
+        }
+
+
 
 
 

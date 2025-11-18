@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="../../estilos/estilocheckout.css">
     <title>FARKO</title>
 </head>
+
 <body>
     <header>
         <a href="index.php?action=home">
@@ -26,42 +28,72 @@
 
 
     <!-- Formulario de pago -->
-        <form id="formularioPago">
-            <!-- Campo de número de tarjeta -->
-            <div>
-                <label for="numeroTar">Número de Tarjeta</label>
-                <input type="text" id="numeroTar" placeholder="0000 0000 0000 0000" maxlength="19" required>
-            </div>
+    <form id="formularioPago">
+        <div class="contenido">
 
-            <!-- Campo de nombre del titular -->
-            <div>
-                <label for="nombreTitu">Nombre del Titular</label>
-                <input type="text" id="nombreTitu" placeholder="Nombre completo" required>
-            </div>
+            <div class="direccion">
+                <h2>Datos Dirección</h2>
+                <label for="calle">Calle: *</label>
+                <input type="text" id="calle" name="calle" required>
+                
+                <label for="numero">Número: *</label>
+                <input type="text" id="numero" name="numero" required>
+                
+                <label for="planta">Planta: *</label>
+                <input type="text" id="planta" name="planta" required>
+                
+                <label for="puerta">Puerta: *</label>
+                <input type="text" id="puerta" name="puerta" required>
+                
+                <label for="poblacion">Poblacion: *</label>
+                <input type="text" id="poblacion" name="poblacion" required>
+                
+                <label for="codPostal">Código Postal: *</label>
+                <input type="text" id="codPostal" name="codPostal" required>
+            </div>    
+        
+        
+        <!-- Campo de número de tarjeta -->
+            <div class="metodoPago">
+                <h2>Método de Pago</h2>
 
-            <div>
-                <!-- Campo de fecha de vencimiento -->
                 <div>
-                    <label for="expiryDate">Fecha de Caducidad</label>
-                    <input type="text" id="expiryDate" placeholder="MM/AA" maxlength="5" required>
+                    <label for="numeroTar">Número de Tarjeta *</label>
+                    <input type="text" id="numeroTar" placeholder="0000 0000 0000 0000" maxlength="19" required>
                 </div>
 
-                <!-- Campo de CVV -->
+                <!-- Campo de nombre del titular -->
                 <div>
-                    <label for="cvv">CVV</label>
-                    <input type="text" id="cvv" placeholder="123" maxlength="4" required>
+                    <label for="nombreTitu">Nombre del Titular *</label>
+                    <input type="text" id="nombreTitu" placeholder="Nombre completo" required>
+                </div>
+
+                <div>
+                    <!-- Campo de fecha de vencimiento -->
+                    <div>
+                        <label for="expiryDate">Fecha de Caducidad *</label>
+                        <input type="text" id="expiryDate" placeholder="MM/AA" maxlength="5" required>
+                    </div>
+
+                    <!-- Campo de CVV -->
+                    <div>
+                        <label for="cvv">CVV *</label>
+                        <input type="text" id="cvv" placeholder="123" maxlength="4" required>
+                    </div>
                 </div>
             </div>
 
-            <!-- Botón de pago -->
-            <button type="submit" id="btnPagar">
-                <span>Pagar</span>
-            </button>
-        </form>
-    
-    
-        <script src="../../javascript/script-funciones-genericas.js" type="text/javascript"></script>
+        </div>
+        <!-- Botón de pago -->
+        <button type="submit" id="btnPagar">
+            <span>Pagar</span>
+        </button>
+    </form>
+
+
+    <script src="../../javascript/script-funciones-genericas.js" type="text/javascript"></script>
     <script src="../../javascript/script-checkout.js" type="text/javascript"></script>
 
 </body>
+
 </html>

@@ -82,7 +82,7 @@
     border: solid 1px whitesmoke;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     width: 50dvw;
-    height: 50dvh;
+    height: 70dvh;
     visibility: hidden; 
     opacity: 0;
     /* overflow-y: scroll; */
@@ -99,6 +99,22 @@
 }
 
 .cerrar:hover{
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+
+.cerrarDetalles{
+    position: relative;
+    top: 10px;
+    left: 95%;
+    background-color: rgb(241, 91, 91);
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.cerrarDetalles:hover{
     background-color: red;
     color: white;
     cursor: pointer;
@@ -187,5 +203,158 @@
 
 
 /* Estilos para cuadro de historial de compras */
+.datos{
+    width: 80%;
+    margin: 0 10% ;
+
+}
+
+.datos table{
+    background-color: white;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 5px;
+}
+
+.datos th{
+    background-color: lightgrey;
+}
+
+.datos th, .datos tr, .datos td{
+    border: 2px solid black;
+    padding: 5px;
+    min-width: 10%;
+}
+
+.datos tr:hover{
+    cursor: pointer;
+}
+
+.datos table tr:first-child th:first-child {
+    border-top-left-radius: 10px; 
+}
+
+
+.datos table tr:first-child th:last-child {
+    border-top-right-radius: 10px; 
+}
+
+
+.datos table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+
+.datos table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+
+.datos tbody tr:nth-child(odd) {
+    background-color: whitesmoke;
+}
+
+
+
+.detalles{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+    visibility: hidden; 
+    opacity: 0; 
+}
+
+.contenidoDetalles{
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: fit-content;
+    min-width: 500px;
+    max-width: 50%;
+}
+
+
+
+.infoUser{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.infoUser span{
+    min-width: 50%;
+}
+
+
+.tablaProdus{
+    height: 300px;
+    max-height: 50dvh;
+    overflow: scroll;
+}
+
+.tablaProdus table{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.infoProdus{
+    background-color: lightgrey;
+    padding: 5px;
+}
+
+.infoProdus tr, .infoProdus td, .tablaProdus th{
+    border: 1px solid black;
+    text-align: center;
+}
+
+.tablaProdus th{
+    top: 0;
+    z-index: 1000;
+    position: sticky;
+    background-color: darkgoldenrod;
+    border: 1px solid black;
+}
+
+.precTotal{
+    float: right;
+    margin: 5px 0;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+}
+
+
+
 /* Estilos para cuadro de reclamaciones de usuario */
+#reclamacion{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 20px;
+}
+
+
+#textReclamacion{
+    min-width: 50%;
+    max-width: 90%;
+    min-height: 20%;
+    max-height: 80%;
+    margin: 0px 5%;
+}
+#enviarReclamacion{
+    width: 20%;
+    background-color:#28a745;
+    margin: 0px 5%;
+}
 

@@ -138,7 +138,7 @@ table input, table textarea, table select{
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    background-color: rgba(0, 0, 0, 0.5); 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -154,7 +154,7 @@ table input, table textarea, table select{
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     width: 90%;
-    max-width: 50dvw; /* Ancho máximo del modal */
+    max-width: 50dvw; 
     height: 90%;
     max-height: 50dvh;
     
@@ -172,16 +172,16 @@ table input, table textarea, table select{
 
 .contenidoDescp textarea, .addDescuento textarea{
     width: 100%;
-    min-height: 150px; /* Altura mínima para que sea cómodo editar */
+    min-height: 150px; 
     border: 1px solid #cbd5e0;
     border-radius: 4px;
     padding: 10px;
     font-family: 'Inter', sans-serif;
     font-size: 1em;
     margin-bottom: 15px;
-    box-sizing: border-box; /* Importante para que el padding no desborde */
-    resize: vertical; /* Permitir redimensionamiento vertical solo en el modal */
-    background-color: #f7fafc; /* Fondo ligero para el textarea del modal */
+    box-sizing: border-box; 
+    resize: vertical; 
+    background-color: #f7fafc; 
     color: #2d3748;
 }
 
@@ -203,7 +203,7 @@ table input, table textarea, table select{
 }
 
 .nombreDescp{
-    flex: 1; /* Ocupa el 50% del ancho disponible */
+    flex: 1;
     min-width: 50%; 
     display: flex;
     flex-direction: column; 
@@ -234,12 +234,12 @@ table input, table textarea, table select{
 .nuevoDescuento input[type="number"],
 .nuevoDescuento textarea,
 .nuevoDescuento select {
-    width: 100%; /* Ocupar todo el ancho disponible en su contenedor */
+    width: 100%; 
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 1rem;
-    box-sizing: border-box; /* Incluir padding y borde en el ancho/alto */
+    box-sizing: border-box; 
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -249,14 +249,14 @@ table input, table textarea, table select{
 .nuevoDescuento textarea:focus,
 .nuevoDescuento select:focus {
     outline: none;
-    border-color: #007bff; /* Color de borde al enfocar */
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Sombra al enfocar */
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); 
 }
 
 .nuevoDescuento textarea {
-    resize: vertical; /* Permitir redimensionar verticalmente */
-    min-height: 80px; /* Altura mínima para el textarea */
-    flex-grow: 1; /* Permite que el textarea crezca para llenar el espacio vertical restante */
+    resize: vertical; 
+    min-height: 80px; 
+    flex-grow: 1; 
 }
 
 
@@ -264,8 +264,8 @@ table input, table textarea, table select{
 .modificarDescBotones, .nuevoDesBotones{
     display: flex;
     width: 100%;
-    justify-content: flex-end; /* Alinea los botones a la derecha */
-    gap: 10px; /* Espacio entre los botones */
+    justify-content: flex-end; 
+    gap: 10px; 
 }
 
 .modificarDescBotones button, .nuevoDesBotones button{
@@ -277,7 +277,7 @@ table input, table textarea, table select{
 
 
 .guardar {
-    background-color: #4299e1; /* Azul */
+    background-color: #4299e1; 
     color: white;
     border: none;
 }
@@ -289,7 +289,7 @@ table input, table textarea, table select{
 
 /* Estilos específicos para el botón "Cancelar" del modal */
 .cancelar {
-    background-color: #e2e8f0; /* Gris */
+    background-color: #e2e8f0; 
     color: #2d3748;
     border: 1px solid #cbd5e0;
 }

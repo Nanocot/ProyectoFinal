@@ -30,8 +30,6 @@
     </header>
 
     <span class="email">
-        <!-- <label for="email">Email</label>
-        <input type="email" name="email" id="email" readonly value="<?= $_SESSION["usuario"] ?>"> -->
         <h1>Bienvenido <?= $datosUsuario["nombre"]?></h1>
     </span>
 
@@ -44,7 +42,7 @@
             <span id="historialCompras">
                 Mirar Historial de compras
             </span>
-            <span id="realizarReclamacion">
+            <span id="cuadReclamacion">
                 Realizar Reclamación
             </span>
 
@@ -65,8 +63,10 @@
             <h1>Modificación del perfil</h1>
 
             <span class="informacionPersonal">
+                <span><h2>Correo</h2><p id="email"><?= $_SESSION["usuario"]?></p></span>
                 <span><h2>Nombre</h2><input type="text" name="nombre" id="nombre" value="<?= $datosUsuario["nombre"]?>"></span>
-                <span><h2>Apellidos</h2><input type="text" name="nombre" id="nombre" value="<?= $datosUsuario["apellidos"]?>"></span>
+                <span><h2>Apellidos</h2><input type="text" name="apellidos" id="apellidos" value="<?= $datosUsuario["apellidos"]?>"></span>
+                <button id="btnModDatos">Guardar</button>
             </span>
             <span class="direccion">
                 <button class="btnDireccion" id="btnDireccion">
@@ -111,11 +111,63 @@
         </div>
         <div id="historial">
             <span class="cerrar">&times;</span>
-            <h1>Cuadro de texto de historial</h1>
+            <h1>Historial de compras</h1>
+            <div class="datos">
+
+                <table>
+                    <thead>
+                        <th>Fecha</th>
+                        <th>Total</th>
+                        <th>Método de Pago</th>
+                        <th>Estado</th>
+                    </thead>
+                    <tbody>
+                        <?php foreach($datosCompras as $compra):?>
+                            <tr data-id="<?= $compra["Id"]?>">
+                                <td><?= $compra["Fecha"]?></td>
+                                <td><?= $compra["PrecioTotal"]?> €</td>
+                                <td><?= $compra["MetodoPago"]?></td>
+                                <td><?= $compra["EstadoPago"]?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="detalles">
+                <div class="contenidoDetalles">
+                    <span class="cerrarDetalles">&times;</span>
+                    <div class="infoUser">
+                        <h4>
+                            Total Productos: <span class="totalProdus"></span>
+                        </h4>
+                    </div>
+                    
+                <h4>Detalles</h4>
+                    <div class="tablaProdus">
+                        
+                        <table>
+                            <thead>
+                                <th>Nombre</th>
+                                <th>Color</th>
+                                <th>Talla</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                            </thead>
+                            <tbody class="infoProdus">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="precTotal"></div>        
+                </div>
+    </div>
+
         </div>
         <div id="reclamacion">
             <span class="cerrar">&times;</span>
-            <h1>Cuadro de texto de reclamaciones</h1>
+            <h1>¿Cómo podemos ayudarle?</h1>
+            <textarea name="textReclamacion" id="textReclamacion"></textarea>
+            <button type="submit" id="enviarReclamacion">Enviar</button>
         </div>
     </div>
         

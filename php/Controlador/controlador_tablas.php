@@ -8,6 +8,8 @@
     require_once "php/Modelo/modelo_categorias.php";
     require_once "php/Modelo/modelo_tallas.php";
     require_once "php/Modelo/modelo_compras.php";
+    require_once "php/Modelo/modelo_reclamaciones.php";
+    require_once "php/Modelo/modelo_direccion.php";
 
     class ControladorTablas {
 
@@ -77,8 +79,10 @@
         public function paginaUsuario(){
 
             $modeloUsuario = new ModeloUsuarios();
+            $modeloCompras = new ModeloCompras();
 
             $datosUsuario = $modeloUsuario->datosUsuario();
+            $datosCompras = $modeloCompras->generarTablaUser($_SESSION["usuario"]);
 
             // print_r($datosUsuario);
             require_once "php/Vista/paginaUsuario.php";
@@ -446,6 +450,17 @@
         }
 
 
+        // public function comprasUsuario(){
+        //     $modeloCompras  = new ModeloCompras();
+        //     $userCoded = file_get_contents("php://input");
+        //     $user = json_decode($userCoded, true);
+
+
+        //     $datos = $modeloCompras->generarTablaUser($user);
+
+        //     echo json_encode($datos);
+
+        // }
 
         public function gestionarCompras(){
 
@@ -491,8 +506,100 @@
             }
         }
 
+
+        public function gestionarIncidencias(){
+            $modeloReclamaciones = new ModeloReclamaciones();
+
+
+            $datos = $modeloReclamaciones->sacarReclamaciones();
+
+            require_once "php/vista/gestionIncidencias.php";
+        }
+
+
+        public function cambiarIncidencia(){
+            $modeloReclamaciones = new ModeloReclamaciones();
+
+            $datos = json_decode(file_get_contents("php://input"), true);
+            $estado = $modeloReclamaciones->cambiarEstado($datos["id"], $datos["estado"]);
+
+
+            if($estado){
+                echo "Cambio realizado";
+            }else{
+                echo "No se pudo cambiar";
+            }
+        }
+
+
+
+
+        
+        public function enviarReclamacion(){
+            $modeloRecla = new ModeloReclamaciones();
+
+            $fecha = date('Y-m-d H:i:s');
+            $foto = "-";
+
+            $datosUser = json_decode(file_get_contents("php://input"), true);
+
+
+            $estadoRecla = $modeloRecla->guardarReclamacion("reclamacion", $datosUser["descripcion"], $foto, $fecha, $datosUser["user"]);
+
+
+            if($estadoRecla){
+                echo "Reclamacion realizada";
+
+            }else{
+                echo "Reclamacion fallida por: {$estadoRecla}";
+            }
+            
+
+
+        }
+
+
+
+
+        public function modDireccion(){
+            $modeloDireccion = new ModeloDireccion();
+
+            $datos = json_decode(file_get_contents("php://input"), true);
+
+            $resultado = $modeloDireccion->modDireccion($datos["numero"], $datos["codPostal"], $datos["calle"], $datos["poblacion"], $datos["puerta"], $datos["planta"], $datos["usuario"]);
+
+
+            
+
+            if($resultado){
+                echo "Direccion guardada.";
+            }else{
+                echo "No se pudo modificar la dirección";
+            }
+
+
+        }
+
+
+
+
+        public function modPerfil(){
+            $modeloUsuario = new ModeloUsuarios();
+
+            $datos = json_decode(file_get_contents("php://input"), true);
+        
+            $resultado = $modeloUsuario->modPerfil($datos["usuario"], $datos["nombre"], $datos["apellidos"]);
+
+            
+            if($resultado){
+                echo "Datos guardados";
+            }else{
+                echo "No se pudo modificar";
+            }
+        }
     
     }
+
 
 
 

@@ -156,16 +156,16 @@ input, textarea{
 
 .contenidoDescp textarea, .addColeccion textarea, .addCategoria textarea{
     width: 100%;
-    min-height: 150px; /* Altura mínima para que sea cómodo editar */
+    min-height: 150px; 
     border: 1px solid #cbd5e0;
     border-radius: 4px;
     padding: 10px;
     font-family: 'Inter', sans-serif;
     font-size: 1em;
     margin-bottom: 15px;
-    box-sizing: border-box; /* Importante para que el padding no desborde */
-    resize: vertical; /* Permitir redimensionamiento vertical solo en el modal */
-    background-color: #f7fafc; /* Fondo ligero para el textarea del modal */
+    box-sizing: border-box; 
+    resize: vertical; 
+    background-color: #f7fafc;
     color: #2d3748;
 }
 
@@ -187,8 +187,8 @@ input, textarea{
 
 .modificarDescBotones, .nuevaColBotones, .nuevaCatBotones {
     display: flex;
-    justify-content: flex-end; /* Alinea los botones a la derecha */
-    gap: 10px; /* Espacio entre los botones */
+    justify-content: flex-end; 
+    gap: 10px; 
 }
 
 .modificarDescBotones button, .nuevaColBotones button, .nuevaCatBotones button{
@@ -200,7 +200,7 @@ input, textarea{
 
 
 .guardar {
-    background-color: #4299e1; /* Azul */
+    background-color: #4299e1; 
     color: white;
     border: none;
 }
