@@ -14,6 +14,51 @@
         }
 
 
+        public function addCompra($usuario, $precio){
+            try{
+                $hoy = date("Y-m-d H:i:s");
+                $estado = "pendiente";
+                $metodo = 1;
+
+                $sql = "insert into compras (fecha, estadoPago, idmetodopago, emailusuario, precioTotal) values (?, ?, ?, ?, ?);";
+
+
+                $stmt = $this->conex->prepare($sql);
+
+                if($stmt->execute([$hoy, $estado, $metodo, $usuario, $precio])){
+
+                    return [true, $this->conex->lastInsertId()];
+                }else{  
+                    return false;
+                }
+
+
+            }catch(PDOException $e){
+                return $e->getMessage();
+            }
+        }
+
+
+        public function guardarDetalles($idCompra, $idVariacion, $idTalla, $cantidad, $precio){
+            try{
+
+                $sql = "insert into detallescompra (idcompra, idvariacion, idtalla, cantidad, preciototal) values (?, ?, ?, ?, ?);";
+
+                $stmt = $this->conex->prepare($sql);
+
+                if($stmt->execute([$idCompra, $idVariacion, $idTalla, $cantidad, $precio])){
+                    return true;
+                }else{
+                    return false;
+                }
+
+
+            }catch(PDOException $e){
+                return $e->getMessage();
+            }
+        }
+
+
         public function generarTabla(){
 
             try{

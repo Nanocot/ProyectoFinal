@@ -49,3 +49,25 @@ button:hover {
     color: white;
     cursor: pointer;
 }
+
+
+/* ------------------ */
+@media (max-width: 768px) {
+    .dashboard {
+        height: auto;
+        min-height: 40vh;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 10px;
+    }
+
+    .dashboard a {
+        width: 90%;
+        height: auto;
+        margin: 10px auto;
+        padding: 15px 5px;
+        font-size: 18px;
+        box-sizing: border-box;
+        line-height: normal;
+    }
+}

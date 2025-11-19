@@ -222,5 +222,72 @@ input, textarea{
     background-color: #cbd5e0;
 }
 
+/* -------------------- */
 
+@media (max-width: 768px) {
+    .botones {
+        flex-direction: column;
+        width: 90%;
+        margin: 5% auto;
+        gap: 15px;
+    }
 
+    table {
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+        border-radius: 0;
+        margin: 20px 0;
+    }
+
+    th, tr, td {
+        width: 150px;
+        min-width: 150px;
+        box-sizing: border-box;
+    }
+
+    .add {
+        margin: 20px auto;
+        width: 90%;
+        align-self: center;
+        justify-content: center;
+    }
+
+    .enlaceVuelta {
+        float: none;
+        align-self: center;
+        width: 90%;
+        margin: 20px auto;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .eliminar {
+        font-size: 36px;
+    }
+
+    /* Estilos para los modales */
+    .modificarDescp, .addColeccion, .addCategoria {
+        align-items: flex-start;
+        padding-top: 50px;
+    }
+
+    .contenidoDescp, .nuevaColeccion, .nuevaCategoria {
+        width: 95%;
+        margin: 0 10px;
+    }
+
+    .modificarDescBotones, .nuevaColBotones, .nuevaCatBotones {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .modificarDescBotones button, .nuevaColBotones button, .nuevaCatBotones button {
+        width: 100%;
+        order: -1;
+    }
+
+    .cancelar {
+        order: 1;
+    }
+}

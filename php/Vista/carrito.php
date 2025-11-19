@@ -23,8 +23,7 @@
 
 
     <div class="carrito">
-
-
+        
     </div>
 
     <div class="controles">

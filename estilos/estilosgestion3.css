@@ -300,4 +300,115 @@ table input, table textarea, table select{
 }
 
 
+/* ------------------------------------------ */
 
+
+@media (max-width: 768px) {
+ 
+    .botones {
+        flex-direction: column;
+        width: 90%;
+        margin: 5% auto;
+        gap: 15px;
+    }
+
+    .add {
+        width: 100%;
+        align-self: center;
+        justify-content: center;
+        margin: 10px auto;
+    }
+
+    .enlaceVuelta {
+        float: none;
+        align-self: center;
+        width: 100%;
+        margin: 10px auto;
+        text-align: center;
+        justify-content: center;
+    }
+
+ 
+    table {
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+        border-radius: 0;
+        margin: 20px 0;
+    }
+
+    th, tr, td {
+        min-width: 120px;
+        box-sizing: border-box;
+        white-space: nowrap;
+    }
+
+    table tr:first-child th:first-child,
+    table tr:first-child th:last-child,
+    table tr:last-child td:first-child,
+    table tr:last-child td:last-child {
+        border-radius: 0;
+    }
+
+    tbody tr:nth-child(odd) {
+        background-color: whitesmoke;
+    }
+
+ 
+    .eliminar {
+        font-size: 36px;
+    }
+
+ 
+    .modificarDescp, .addDescuento {
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+
+ 
+    .contenidoDescp {
+        width: 95%;
+        margin: 0 10px;
+        max-width: none;
+        max-height: 80vh;
+        height: auto;
+    }
+
+    .nuevoDescuento {
+        width: 95%;
+        margin: 0 10px;
+        max-width: none;
+        padding: 15px;
+        gap: 15px;
+    }
+
+ 
+    .nombreDescp, .fechasCantidadTipo {
+        min-width: 100%;
+        padding: 0;
+    }
+
+    .nuevoDescuento input[type="text"],
+    .nuevoDescuento input[type="date"],
+    .nuevoDescuento input[type="number"],
+    .nuevoDescuento textarea,
+    .nuevoDescuento select {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    
+    .nuevoDescuento textarea {
+        min-height: 100px;
+    }
+
+ 
+    .modificarDescBotones, .nuevoDesBotones {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .modificarDescBotones button, .nuevoDesBotones button {
+        width: 100%;
+        order: -1;
+    }
+}

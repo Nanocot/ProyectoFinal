@@ -30,55 +30,75 @@
     <!-- Formulario de pago -->
     <form id="formularioPago">
         <div class="contenido">
+            <div class="arriba">
+                <div class="datosUsuario">
+                    <h2>Datos Usuario</h2>
+                    <label for="nombre">Nombre: *</label>
+                    <input type="text" id="nombre" name="nombre" required>
 
-            <div class="direccion">
-                <h2>Datos Dirección</h2>
-                <label for="calle">Calle: *</label>
-                <input type="text" id="calle" name="calle" required>
-                
-                <label for="numero">Número: *</label>
-                <input type="text" id="numero" name="numero" required>
-                
-                <label for="planta">Planta: *</label>
-                <input type="text" id="planta" name="planta" required>
-                
-                <label for="puerta">Puerta: *</label>
-                <input type="text" id="puerta" name="puerta" required>
-                
-                <label for="poblacion">Poblacion: *</label>
-                <input type="text" id="poblacion" name="poblacion" required>
-                
-                <label for="codPostal">Código Postal: *</label>
-                <input type="text" id="codPostal" name="codPostal" required>
-            </div>    
-        
-        
-        <!-- Campo de número de tarjeta -->
-            <div class="metodoPago">
-                <h2>Método de Pago</h2>
+                    <label for="apellidos">Apellidos: *</label>
+                    <input type="text" id="apellidos" name="apellidos" required>
 
-                <div>
-                    <label for="numeroTar">Número de Tarjeta *</label>
-                    <input type="text" id="numeroTar" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                    <label for="email">Correo Eléctronico: *</label>
+                    <?php if(isset($_SESSION["usuario"])): ?>
+                        <input type="text" id="email" name="email" value="<?= $_SESSION["usuario"] ?>" required>
+                    <?php else: ?>
+                        <input type="text" id="email" name="email" required>
+                    <?php endif;?>
+                
+                </div>
+            </div>
+            <div class="abajo">
+
+                <div class="direccion">
+                    <h2>Datos Dirección</h2>
+                    <label for="calle">Calle: *</label>
+                    <input type="text" id="calle" name="calle" required>
+
+                    <label for="numero">Número: *</label>
+                    <input type="text" id="numero" name="numero" required>
+
+                    <label for="planta">Planta: *</label>
+                    <input type="text" id="planta" name="planta" required>
+
+                    <label for="puerta">Puerta: *</label>
+                    <input type="text" id="puerta" name="puerta" required>
+
+                    <label for="poblacion">Poblacion: *</label>
+                    <input type="text" id="poblacion" name="poblacion" required>
+
+                    <label for="codPostal">Código Postal: *</label>
+                    <input type="text" id="codPostal" name="codPostal" required>
                 </div>
 
-                <!-- Campo de nombre del titular -->
-                <div>
-                    <label for="nombreTitu">Nombre del Titular *</label>
-                    <input type="text" id="nombreTitu" placeholder="Nombre completo" required>
-                </div>
 
-                <div>
-                    <!-- Campo de fecha de vencimiento -->
+                <!-- Campo de número de tarjeta -->
+                <div class="metodoPago">
+                    <h2>Método de Pago</h2>
+
                     <div>
-                        <label for="expiryDate">Fecha de Caducidad *</label>
-                        <input type="text" id="expiryDate" placeholder="MM/AA" maxlength="5" required>
+                        <label for="numeroTar">Número de Tarjeta *</label>
+                        <input type="text" id="numeroTar" placeholder="0000 0000 0000 0000" maxlength="19" required>
                     </div>
 
-                    <!-- Campo de CVV -->
+                    <!-- Campo de nombre del titular -->
                     <div>
-                        <label for="cvv">CVV *</label>
-                        <input type="text" id="cvv" placeholder="123" maxlength="4" required>
+                        <label for="nombreTitu">Nombre del Titular *</label>
+                        <input type="text" id="nombreTitu" placeholder="Nombre completo" required>
+                    </div>
+
+                    <div>
+                        <!-- Campo de fecha de vencimiento -->
+                        <div>
+                            <label for="expiryDate">Fecha de Caducidad *</label>
+                            <input type="text" id="expiryDate" placeholder="MM/AA" maxlength="5" required>
+                        </div>
+
+                        <!-- Campo de CVV -->
+                        <div>
+                            <label for="cvv">CVV *</label>
+                            <input type="text" id="cvv" placeholder="123" maxlength="4" required>
+                        </div>
                     </div>
                 </div>
             </div>

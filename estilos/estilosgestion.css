@@ -1,7 +1,5 @@
 table{
     background-color: white;
-    /* border: 1px solid black; */
-    /* outline: 1px solid black; */
     border-collapse: separate;
     border-spacing: 0;
     width: 80%;
@@ -15,7 +13,6 @@ th{
 }
 
 th, td{
-    /* text-align: center; */
     border: 2px solid black;
     padding: 10px;
     width: 20%;
@@ -106,4 +103,51 @@ input, textarea{
     height: 100%;
     padding: 0;
     margin: 0;
+}
+
+
+
+@media (max-width: 768px) {
+    /* Ajustes generales para inputs y textareas */
+    input, textarea {
+        padding: 10px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    /* Estilos de la tabla para permitir scroll horizontal */
+    table {
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+        margin: 20px 0;
+        border-radius: 0;
+    }
+
+    th, td {
+        width: 150px;
+        min-width: 150px; /* Asegura un ancho mínimo para cada columna */
+        box-sizing: border-box;
+    }
+
+    /* Eliminar los border-radius que rompen el scroll lateral en la tabla */
+    table tr:first-child th:first-child,
+    table tr:first-child th:last-child,
+    table tr:last-child td:first-child,
+    table tr:last-child td:last-child {
+        border-radius: 0;
+    }
+
+    /* Ajuste para el botón/enlace "Add" */
+    .add {
+        margin: 20px auto;
+        width: 90%;
+        align-self: center;
+        justify-content: center;
+    }
+
+    /* Ajuste para el tamaño del ícono de eliminar */
+    .eliminar {
+        font-size: 36px;
+    }
 }

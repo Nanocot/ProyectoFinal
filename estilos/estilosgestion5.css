@@ -54,3 +54,40 @@ table tr:last-child td:last-child {
 tbody tr:nth-child(odd) {
     background-color: whitesmoke;
 }
+
+
+/* ------------------- */
+
+
+@media (max-width: 768px) {
+    /* Estilos para los botones (si existieran) */
+    .botones {
+        flex-direction: column;
+        width: 90%;
+        margin: 5% auto;
+        gap: 10px;
+    }
+
+    /* Tabla principal */
+    table {
+        width: 100%;
+        display: block; /* Permite que overflow funcione */
+        overflow-x: auto; /* Habilita el scroll horizontal */
+        border-radius: 0;
+        margin: 20px 0;
+    }
+
+    th, tr, td {
+        min-width: 150px; /* Asegura que las columnas tengan espacio para el scroll */
+        box-sizing: border-box;
+        white-space: nowrap; /* Evita que el contenido de la celda se envuelva */
+    }
+    
+    /* Eliminar los border-radius complejos ya que el scroll los rompe */
+    table tr:first-child th:first-child,
+    table tr:first-child th:last-child,
+    table tr:last-child td:first-child,
+    table tr:last-child td:last-child {
+        border-radius: 0;
+    }
+}

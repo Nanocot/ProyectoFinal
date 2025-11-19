@@ -19,10 +19,23 @@
 
 .contenido{
     display: flex;
-    flex-direction: row ;
+    flex-direction: column ;
+    flex-wrap: nowrap;
     gap: 5%;
     width: 100%;
 }
+
+.arriba{
+    width: 45%;
+}
+
+.abajo{
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+    width: 100%;
+}
+
 
 .direccion{
     width: 50%;
@@ -43,4 +56,32 @@ button:hover, span:hover{
     background-color: rgb(104, 59, 0);
     color: white;
     cursor: pointer;
+}
+
+/* ------------------------- */
+@media (max-width: 768px) {
+    #formularioPago {
+        width: 90%;
+        padding: 5%;
+        margin: 20px auto;
+    }
+
+    .arriba {
+        width: 100%;
+    }
+
+    .abajo {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .direccion, .metodoPago {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+        padding: 15px;
+        font-size: 18px;
+    }
 }

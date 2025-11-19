@@ -1074,5 +1074,36 @@
 
         }
 
+
+        public function sacarVariacion($idProd, $color1, $color2){
+            try {
+                $variacion = -1;
+
+
+                $sqlColores = "select id from colores where ColorPatron = ? and ColorBase = ?;";
+
+                $stmtColores = $this->conex->prepare($sqlColores);
+
+
+                if($stmtColores->execute([$color1, $color2])){
+                    $idColor = $stmtColores->fetch(PDO::FETCH_NUM);
+                }
+
+
+                $sqlVariacion = "select id from variacionesproductos where idproducto = ? and idcolor = ?;";
+
+                $stmtVariacion = $this->conex->prepare($sqlVariacion);
+
+                if($stmtVariacion->execute([$idProd, $idColor[0]])){
+                    $variacion = $stmtVariacion->fetch(PDO::FETCH_NUM);
+                }
+
+                return $variacion[0];
+
+            } catch (PDOException $e) {
+                return $e->getMessage();
+            }
+        }
+
     }
 

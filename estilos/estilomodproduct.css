@@ -317,4 +317,117 @@ ul{
 }
 
 
+/* ------------------------ */
 
+
+@media (max-width: 768px) {
+    .producto {
+        width: 95%;
+        height: auto;
+        flex-direction: column;
+        margin: 15px auto;
+    }
+
+    .titulos {
+        flex-direction: column;
+        padding-bottom: 10px;
+    }
+
+    .aplicarCambios, .addProducto {
+        width: 90%;
+        margin: 10px auto;
+        font-size: 24px;
+        padding: 10px;
+    }
+
+    .botones {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .btnAddFoto {
+        width: 100%;
+        padding: 10px;
+        float: none;
+        align-self: center;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .fotos {
+        width: 100%;
+        max-height: 400px;
+        margin-bottom: 20px;
+        padding: 10px;
+        justify-content: center;
+    }
+
+    .eliminar {
+        top: 10px;
+        left: 90%;
+        font-size: 20px;
+    }
+
+    .informacion {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 10px;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .categoria, .coleccion, .precio, .descuento {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .addcolor {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #nuevoColor {
+        flex-basis: auto;
+        width: 90%;
+        margin: 5px 0 10px 0;
+    }
+
+    .talla {
+        width: 100%;
+    }
+
+    .addColores {
+        top: 50%;
+        left: 50%;
+        width: 90%;
+        height: auto;
+        max-height: 90vh;
+        transform: translate(-50%, -50%);
+        padding: 15px;
+    }
+
+    .addFoto {
+        top: 50%;
+        left: 50%;
+        width: 95%;
+        height: auto;
+        max-height: 90vh;
+        transform: translate(-50%, -50%);
+        padding: 15px;
+    }
+
+    .cerrarCuadro {
+        top: 10px;
+        left: 90%;
+        font-size: 24px;
+    }
+
+    .nuevaFoto {
+        height: auto;
+    }
+
+    #previsualizacion {
+        max-height: 30dvh;
+    }
+}

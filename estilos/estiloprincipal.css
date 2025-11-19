@@ -136,4 +136,66 @@ nav ul li:hover .submenu{
     color: black;
     border-radius: 5px;
 }
-    
+
+
+
+
+/* --------------------- */
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        max-height: none;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    nav .menu {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+    }
+
+    nav .menu li {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav a {
+        font-size: 18px;
+        padding: 15px 0;
+        width: 100%;
+    }
+
+    .submenu {
+        position: relative;
+        top: 0;
+        width: 100%;
+        flex-direction: column;
+        background-color: black;
+    }
+
+    .submenu li a {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .alerta {
+        width: 90%;
+        font-size: 1em;
+        padding: 15px;
+    }
+
+    .enlaceVuelta {
+        width: 90%;
+        justify-content: center;
+        margin: 10px auto;
+        float: none;
+    }
+}

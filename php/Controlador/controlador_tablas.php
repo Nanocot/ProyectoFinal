@@ -92,30 +92,32 @@
             //Creamos el modelo del carrito
             $modeloCarrito = new ModeloCarrito();
 
-            //Guardamos el fichero JSON que recibimos
-            $json = file_get_contents('php://input');
-            //Convertimos el JSON a un array asociativo
-            $data = json_decode($json, true);
-
-            
-            if($data["carrito"] != ""){
-
-                //Limpiamos la cadena de caracteres especiales
-                $cadenaLimpia =  preg_replace(["/{/", "/}/", "/\[/", "/\]/", "/\"/"],  "", $data["carrito"]);
+                 
+                //Guardamos el fichero JSON que recibimos
+                $json = file_get_contents('php://input');
+                //Convertimos el JSON a un array asociativo
+                $data = json_decode($json, true);
                 
-                //Separamos los distintos atributos de los productos
-                $datos = explode(",", $cadenaLimpia);
-                
-                //Llamamos a la función de mostrar Carrito
-                $html = $modeloCarrito->mostrarCarrito($datos);
-                
-                
-                
-                // Mandamos el html al cliente para mostrarlo en la vista    
-                echo $html;
-            }
+                if($data["carrito"] != ""){
+                    
+                    //Limpiamos la cadena de caracteres especiales
+                    $cadenaLimpia =  preg_replace(["/{/", "/}/", "/\[/", "/\]/", "/\"/"],  "", $data["carrito"]);
+                    
+                    //Separamos los distintos atributos de los productos
+                    $datos = explode(",", $cadenaLimpia);
+                    
+                    //Llamamos a la función de mostrar Carrito
+                    $html = $modeloCarrito->mostrarCarrito($datos);
+                    
+                    
+                    
+                    // Mandamos el html al cliente para mostrarlo en la vista    
+                    echo $html;
+                    
+                }
             
         }
+
 
         public function  gestionarUsuarios(){
 
@@ -449,19 +451,6 @@
 
         }
 
-
-        // public function comprasUsuario(){
-        //     $modeloCompras  = new ModeloCompras();
-        //     $userCoded = file_get_contents("php://input");
-        //     $user = json_decode($userCoded, true);
-
-
-        //     $datos = $modeloCompras->generarTablaUser($user);
-
-        //     echo json_encode($datos);
-
-        // }
-
         public function gestionarCompras(){
 
             $modeloCompras = new ModeloCompras();
@@ -598,7 +587,66 @@
             }
         }
     
+
+        public function guardarCompra(){
+            $modeloCompras = new ModeloCompras();
+            $modeloProducto = new ModeloProductos();
+
+            $datos = json_decode(file_get_contents("php://input"), true);
+            $carrito = json_decode($datos["carrito"], true);
+
+
+            $precTotal = 0;
+            $prodGuardados = 0;
+
+
+            foreach($carrito as $producto){
+                $precioPrenda = $producto["Precio"] * $producto["Cantidad"];
+                $precTotal += $precioPrenda;
+            }
+
+
+            [$resultado, $idCompra] = $modeloCompras->addCompra($datos["usuario"], $precTotal);
+
+
+            foreach($carrito as $prod){
+                [$color1, $color2] = explode(" y ", $prod["Colores"]);
+
+                $idVariacion = $modeloProducto->sacarVariacion($prod["IdProd"], $color1, $color2);
+
+                $precCant = $prod["Cantidad"] * $prod["Precio"];
+
+                $resultado = $modeloCompras->guardarDetalles($idCompra, $idVariacion, $prod["IDTalla"], $prod["Cantidad"], $precCant);
+
+                if($resultado){
+                    $prodGuardados += 1;
+                }
+
+            }
+            
+
+            if($prodGuardados === count($carrito)){
+                echo "Compra guardada";
+            }else{
+                echo ($prodGuardados . "<-Prod---Carr->" . count($carrito));
+            }
+            
+
+
+        }
+
+
+        public function datosUsuario(){
+            $modeloUsuario = new ModeloUsuarios();
+
+            $datos = $modeloUsuario->datosUsuario();
+
+            header("Content-Type: application/json");
+            echo json_encode($datos);
+        }
+
     }
+
 
 
 

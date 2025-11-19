@@ -37,3 +37,33 @@
 .enlaceVuelta{
     margin: 5dvh 10dvw;
 }
+
+/* ----------------- */
+
+
+@media (max-width: 768px) {
+    .usuario {
+        width: 95%;
+        height: auto;
+        margin: 20px auto;
+    }
+
+    .datosUsuario, .direccionUsuario {
+        flex-direction: column;
+        padding: 10px 0;
+        margin: 10px;
+    }
+
+    .datosUsuario p, .direccionUsuario p, .datosUsuario label {
+        width: 90%;
+        padding: 10px 5%;
+        margin: 5px 0;
+        font-size: 16px;
+    }
+
+    .enlaceVuelta {
+        margin: 20px auto;
+        width: 90%;
+        text-align: center;
+    }
+}

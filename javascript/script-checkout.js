@@ -1,20 +1,35 @@
 function activarListeners(){
 
+    
+    
+    
     //Sacamos todos los datos que tenemos que comprobar
     const numTarj = document.querySelector("#numeroTar");
     const nombTitu = document.querySelector("#nombreTitu");
     const caducidad = document.querySelector("#expiryDate");
     const codigo = document.querySelector("#cvv");
     const btnPagar = document.querySelector("#btnPagar");
-
+    
     const formulario = document.querySelector("#formularioPago");
+    const usuario = document.querySelector("#email");
+    
 
 
-    // formulario.addEventListener("submit", (event) => {
-    //     event.preventDefault();
 
-    //     console.log("HOLA");    
-    // });
+    window.addEventListener("load", (event) =>{
+        if(usuario.value != ""){
+            let datos = {"usuario" : usuario.value};
+            
+            rellenarForm(datos);
+        }
+    
+    });
+
+    formulario.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+           
+    });
 
     // Agregar un "event listener" para detectar la entrada del usuario
     caducidad.addEventListener('input', (e) => {
@@ -55,6 +70,7 @@ function activarListeners(){
         let anio = fechaHoy.getFullYear();
         let anioUser = parseInt(caducidad.value.substring(3)) + 2000;
 
+        let carrito = localStorage.getItem("carrito");
 
         if(numTarj.value === "" || nombTitu.value === "" || codigo.value === "" || caducidad.value === ""){
             event.preventDefault();
@@ -68,6 +84,13 @@ function activarListeners(){
 
         if(mensaje != ""){
             generarAlerta(mensaje);
+        }else{
+            let datos = {"usuario": usuario.value, "carrito": carrito};
+            pagar(datos);
+            setTimeout(() => {
+                formulario.submit();
+                console.log("FUNCIONA EL TIMEOUT");
+            }, "4000");
         }
 
 
@@ -76,6 +99,72 @@ function activarListeners(){
 
 
 
+}
+
+async function rellenarForm(datos) {
+
+    try{
+        fetch("../index.php?action=datosUsuario", {
+            method : "POST",
+            body: datos,
+            headers: {
+                "Content-Type" : "application/json"
+            }
+        })
+        .catch((reject) => console.log(reject))
+        .then((response) => response.json())
+        .then((html) => {
+            
+            const nombre = document.querySelector("#nombre");
+            const apellidos = document.querySelector("#apellidos");
+            const numero = document.querySelector("#numero");
+            const codPostal = document.querySelector("#codPostal");
+            const calle = document.querySelector("#calle");
+            const poblacion = document.querySelector("#poblacion");
+            const puerta = document.querySelector("#puerta");
+            const planta = document.querySelector("#planta");
+
+
+            nombre.value = html["nombre"];
+            apellidos.value = html["apellidos"];
+            numero.value = html["numero"];
+            codPostal.value = html["codPostal"];
+            calle.value = html["calle"];
+            poblacion.value = html["poblacion"];
+            puerta.value = html["puerta"];
+            planta.value = html["planta"];
+
+
+
+        });
+    }catch(error){
+        console.log("Error antes del fetch", error);
+    }
+    
+}
+
+
+
+async function pagar(datos) {
+
+    try{
+        fetch("../index.php?action=guardarCompra", {
+            method : "POST",
+            body: JSON.stringify(datos),
+            headers: {
+                "Content-Type" : "application/json"
+            }
+        })
+        .catch((reject) => console.log(reject))
+        .then((response) => response.text())
+        .then((html) => {
+            generarAlerta(html);
+            localStorage.removeItem("carrito");
+        });
+    }catch(error){
+        console.log("Error antes del fetch", error);
+    }
+    
 }
 
 activarListeners();

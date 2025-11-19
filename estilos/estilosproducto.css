@@ -143,3 +143,71 @@
     cursor: pointer;
 }
 
+/* ------------------ */
+@media (max-width: 768px) {
+    .mostrarproducto {
+        width: 90%;
+        height: auto;
+        margin: 20px auto;
+        flex-direction: column;
+    }
+
+    .imagen {
+        width: 100%;
+        height: auto;
+        justify-content: center;
+        padding-bottom: 20px;
+    }
+
+    #imagenProd {
+        width: 60%;
+        max-width: 250px;
+    }
+
+    .informacion {
+        width: 100%;
+        height: auto;
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "nombre"
+            "precio"
+            "descripcion"
+            "colores"
+            "tallas"
+            "cantidad"
+            "stock";
+        gap: 15px;
+    }
+
+    #nombreProd {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    #precioProd {
+        width: 100%;
+        text-align: center;
+    }
+
+    #descpProd {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #colores, #tallas, #cantidad {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+    }
+
+    .botones {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #addCart, #limpiar {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+    }
+}

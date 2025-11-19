@@ -158,3 +158,107 @@
     color: white;
     transition: 0.1s;
 }
+
+
+
+/* ----------------------- */
+
+@media (max-width: 768px) {
+    /* Botones de acción */
+    .botones {
+        flex-direction: column;
+        width: 90%;
+        margin: 5% auto;
+        gap: 15px;
+    }
+
+    /* Contenedor de datos y tabla principal */
+    .datos {
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .datos table {
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+        border-radius: 0;
+    }
+
+    .datos th, .datos tr, .datos td {
+        min-width: 150px;
+        box-sizing: border-box;
+        white-space: nowrap;
+        padding: 10px 5px;
+    }
+
+    /* Eliminar border-radius que rompe el scroll lateral */
+    .datos table tr:first-child th:first-child,
+    .datos table tr:first-child th:last-child,
+    .datos table tr:last-child td:first-child,
+    .datos table tr:last-child td:last-child {
+        border-radius: 0;
+    }
+
+    /* Modal de Detalles del Pedido */
+    .detalles {
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+
+    .contenidoDetalles {
+        width: 95%;
+        min-width: 95%;
+        max-width: 95%;
+        padding: 15px;
+        margin: 0 10px;
+    }
+
+    /* Información del Usuario dentro del modal */
+    .infoUser {
+        flex-direction: column;
+    }
+
+    .infoUser span {
+        min-width: 100%;
+        margin-bottom: 5px;
+        padding: 5px 0;
+        border-bottom: 1px dashed lightgray;
+    }
+
+    /* Tabla de Productos dentro del modal */
+    .tablaProdus {
+        height: auto;
+        max-height: 40vh;
+        overflow-x: auto;
+    }
+
+    .tablaProdus table {
+        width: 150%; 
+        min-width: 400px;
+    }
+
+    .infoProdus tr, .infoProdus td, .tablaProdus th {
+        padding: 8px 3px;
+        overflow: hidden;
+    }
+
+    .infoProdus td {
+        white-space: nowrap;
+    }
+
+    /* Precio total */
+    .precTotal {
+        float: none;
+        width: 100%;
+        text-align: right;
+        box-sizing: border-box;
+    }
+
+    /* Botón de cerrar */
+    .cerrar {
+        font-size: 1.2em;
+        width: 25px;
+        padding: 2px;
+    }
+}

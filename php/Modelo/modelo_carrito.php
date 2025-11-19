@@ -5,13 +5,12 @@ require_once "conexion.php";
 class ModeloCarrito
 {
 
+    private $conex;
+
     public function __construct()
     {
-        $conex = ModeloConexion::conectar();
+        $this->conex = ModeloConexion::conectar();
     }
-
-
-    public function addCarrito() {}
 
 
     public function mostrarCarrito($jsonDecode){
@@ -80,5 +79,9 @@ class ModeloCarrito
         //Devolvemos el html de todos los productos
         return $html;
     }
+
+
+
+    
 }
 
