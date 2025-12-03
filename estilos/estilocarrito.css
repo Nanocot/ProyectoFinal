@@ -6,7 +6,6 @@
     flex-wrap: nowrap;
     align-items: left;
     align-self:flex-start;
-    overflow: scroll;
     height: 100%;
 }
 

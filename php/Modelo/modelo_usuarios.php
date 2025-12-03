@@ -91,7 +91,7 @@
         }
 
 
-        //Función para sar un usuario en específico
+        //Función para sacar un usuario en específico
         public function sacarUsuario($email){
             try{
                 //Generamos la consulta, con lo todos los datos del usuario que queremos buscar

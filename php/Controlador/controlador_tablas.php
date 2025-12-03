@@ -84,7 +84,6 @@
             $datosUsuario = $modeloUsuario->datosUsuario();
             $datosCompras = $modeloCompras->generarTablaUser($_SESSION["usuario"]);
 
-            // print_r($datosUsuario);
             require_once "php/Vista/paginaUsuario.php";
         }
 
